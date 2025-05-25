@@ -160,8 +160,6 @@ in {
     # Hyprpaper rotation script
     ".config/hyprpaper/rotate.sh".text = ''
       #!/usr/bin/env bash
-      MONITOR=$(hyprctl monitors \
-        | awk '/Monitor/ {print $2; exit}')
       WP_DIR="$HOME/Pictures/Wallpapers"
       if [ ! -d "$WP_DIR" ]; then
         echo "Wallpapers directory not found: $WP_DIR" >&2
@@ -173,9 +171,8 @@ in {
                  -print0 \
                | shuf -zn1 \
                | xargs -0)
-        hyprctl hyprpaper unload all
         hyprctl hyprpaper preload "$FILE"
-        hyprctl hyprpaper wallpaper "$MONITOR, $FILE"
+        hyprctl hyprpaper wallpaper ", $FILE"
         sleep 10
       done
     '';
