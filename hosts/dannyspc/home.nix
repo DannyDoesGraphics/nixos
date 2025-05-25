@@ -57,17 +57,6 @@ in {
       bind = $mainMod SHIFT, 9, movetoworkspace, 9
       bind = $mainMod SHIFT, 0, movetoworkspace, 10
 
-      # Resize window width/height
-      bind = $mainMod, left, resizeactive, -40 0
-      bind = $mainMod, right, resizeactive, 40 0
-      bind = $mainMod, up, resizeactive, 0 -40
-      bind = $mainMod, down, resizeactive, 0 40
-      # Resize window width/height with Shift for finer control
-      bind = $mainMod SHIFT, left, resizeactive, -10 0
-      bind = $mainMod SHIFT, right, resizeactive, 10 0
-      bind = $mainMod SHIFT, up, resizeactive, 0 -10
-      bind = $mainMod SHIFT, down, resizeactive, 0 10
-
       # Resize window width/height with vim keys (Super+Ctrl)
       bind = $mainMod CTRL, H, resizeactive, -40 0
       bind = $mainMod CTRL, L, resizeactive, 40 0
@@ -78,16 +67,11 @@ in {
       bind = $mainMod CTRL SHIFT, L, resizeactive, 10 0
       bind = $mainMod CTRL SHIFT, K, resizeactive, 0 -10
       bind = $mainMod CTRL SHIFT, J, resizeactive, 0 10
-      # Allow leaving empty space (Super+Ctrl+Super_R)
-      bind = $mainMod CTRL SUPERR, H, resizeactive, -40 0, exact
-      bind = $mainMod CTRL SUPERR, L, resizeactive, 40 0, exact
-      bind = $mainMod CTRL SUPERR, K, resizeactive, 0 -40, exact
-      bind = $mainMod CTRL SUPERR, J, resizeactive, 0 40, exact
-      # Finer control with empty space (Super+Ctrl+Shift+Super_R)
-      bind = $mainMod CTRL SHIFT SUPERR, H, resizeactive, -10 0, exact
-      bind = $mainMod CTRL SHIFT SUPERR, L, resizeactive, 10 0, exact
-      bind = $mainMod CTRL SHIFT SUPERR, K, resizeactive, 0 -10, exact
-      bind = $mainMod CTRL SHIFT SUPERR, J, resizeactive, 0 10, exact
+      # Allow leaving empty space (Super+Ctrl+Super_R) with UIOP instead of HJKL
+      bind = $mainMod CTRL SHIFT, U, resizeactive, -40 0, exact
+      bind = $mainMod CTRL SHIFT, I, resizeactive, 40 0, exact
+      bind = $mainMod CTRL SHIFT, O, resizeactive, 0 -40, exact
+      bind = $mainMod CTRL SHIFT, P, resizeactive, 0 40, exact
     '';
   };
 
