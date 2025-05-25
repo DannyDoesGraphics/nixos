@@ -153,7 +153,7 @@ in {
         splash_offset = 2.0;
         preload = [ "/home/danny/Pictures/Wallpapers/kobini.png" ];
         wallpaper = [
-          ",contain:,/home/danny/Pictures/Wallpapers/kobini.png"
+          ",contain:/home/danny/Pictures/Wallpapers/kobini.png"
         ];
       };
     };
@@ -161,4 +161,15 @@ in {
   
   programs.home-manager.enable = true;
   home.stateVersion = "25.05";
+
+  xdg = {
+    enable = true;
+    mime = {
+      enable = true;
+      defaultApplications = {
+        # Set yazi as the default file manager for directories
+        "inode/directory" = [ "yazi.desktop" ];
+      };
+    };
+  };
 }
