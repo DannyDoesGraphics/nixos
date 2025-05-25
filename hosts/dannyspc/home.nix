@@ -68,26 +68,26 @@ in {
       bind = $mainMod SHIFT, up, resizeactive, 0 -10
       bind = $mainMod SHIFT, down, resizeactive, 0 10
 
-      # Resize window width/height with vim keys (Super+Alt)
-      bind = $mainMod ALT, H, resizeactive, -40 0
-      bind = $mainMod ALT, L, resizeactive, 40 0
-      bind = $mainMod ALT, K, resizeactive, 0 -40
-      bind = $mainMod ALT, J, resizeactive, 0 40
-      # Finer control (Super+RAlt+Shift)
-      bind = $mainMod RALT SHIFT, H, resizeactive, -10 0
-      bind = $mainMod RALT SHIFT, L, resizeactive, 10 0
-      bind = $mainMod RALT SHIFT, K, resizeactive, 0 -10
-      bind = $mainMod RALT SHIFT, J, resizeactive, 0 10
-      # Allow leaving empty space (Super+LAlt)
-      bind = $mainMod LALT, H, resizeactive, -40 0, exact
-      bind = $mainMod LALT, L, resizeactive, 40 0, exact
-      bind = $mainMod LALT, K, resizeactive, 0 -40, exact
-      bind = $mainMod LALT, J, resizeactive, 0 40, exact
-      # Finer control with empty space (Super+LAlt+Shift)
-      bind = $mainMod LALT SHIFT, H, resizeactive, -10 0, exact
-      bind = $mainMod LALT SHIFT, L, resizeactive, 10 0, exact
-      bind = $mainMod LALT SHIFT, K, resizeactive, 0 -10, exact
-      bind = $mainMod LALT SHIFT, J, resizeactive, 0 10, exact
+      # Resize window width/height with vim keys (Super+Ctrl)
+      bind = $mainMod CTRL, H, resizeactive, -40 0
+      bind = $mainMod CTRL, L, resizeactive, 40 0
+      bind = $mainMod CTRL, K, resizeactive, 0 -40
+      bind = $mainMod CTRL, J, resizeactive, 0 40
+      # Finer control (Super+Ctrl+Shift)
+      bind = $mainMod CTRL SHIFT, H, resizeactive, -10 0
+      bind = $mainMod CTRL SHIFT, L, resizeactive, 10 0
+      bind = $mainMod CTRL SHIFT, K, resizeactive, 0 -10
+      bind = $mainMod CTRL SHIFT, J, resizeactive, 0 10
+      # Allow leaving empty space (Super+Ctrl+Super_R)
+      bind = $mainMod CTRL SUPERR, H, resizeactive, -40 0, exact
+      bind = $mainMod CTRL SUPERR, L, resizeactive, 40 0, exact
+      bind = $mainMod CTRL SUPERR, K, resizeactive, 0 -40, exact
+      bind = $mainMod CTRL SUPERR, J, resizeactive, 0 40, exact
+      # Finer control with empty space (Super+Ctrl+Shift+Super_R)
+      bind = $mainMod CTRL SHIFT SUPERR, H, resizeactive, -10 0, exact
+      bind = $mainMod CTRL SHIFT SUPERR, L, resizeactive, 10 0, exact
+      bind = $mainMod CTRL SHIFT SUPERR, K, resizeactive, 0 -10, exact
+      bind = $mainMod CTRL SHIFT SUPERR, J, resizeactive, 0 10, exact
     '';
   };
 
