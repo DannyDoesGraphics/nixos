@@ -60,6 +60,7 @@
     tree
     wezterm
     vscode
+    ffmpeg
     vulkan-loader
     vulkan-tools
     vulkan-validation-layers
@@ -74,6 +75,7 @@
     hyprland = {
       enable = true;
       package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     };
   };
   security.pam.services.login.enableGnomeKeyring = true;

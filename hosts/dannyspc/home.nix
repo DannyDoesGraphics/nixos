@@ -86,6 +86,7 @@ in {
     hyprcursor
     pkgs.rclone
     yazi
+    wireplumber
   ];
   services.gnome-keyring.enable = true;
   
