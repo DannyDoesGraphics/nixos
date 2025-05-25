@@ -64,7 +64,6 @@
     vulkan-loader
     vulkan-tools
     vulkan-validation-layers
-    polkit_gnome
   ];
   programs = {
     zsh = {
@@ -90,7 +89,7 @@
         after = [ "graphical-session.target" ];
         serviceConfig = {
           Type = "simple";
-          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          ExecStart = "${pkgs.hyprland}/bin/hyprpolkitagent";
           Restart = "on-failure";
           RestartSec = 1;
           TimeoutStopSec = 10;
