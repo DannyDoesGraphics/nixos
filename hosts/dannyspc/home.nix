@@ -64,8 +64,11 @@ in {
     vesktop
     bitwarden-desktop
     gcr
+    pkgs.rclone
   ];
   services.gnome-keyring.enable = true;
+  services.pass-secret-service.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
   programs = {
     firefox.enable = true;
     wezterm = {
