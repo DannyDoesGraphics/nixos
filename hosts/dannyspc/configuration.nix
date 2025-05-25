@@ -77,6 +77,7 @@
     };
   };
   security.polkit.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
 
   # Security
   systemd = {
