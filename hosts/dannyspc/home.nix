@@ -18,7 +18,6 @@ in {
         xx_color_management_v4 = true
       }
       # Set wallpaper using hyprland
-      exec-once = "~/.config/hyprpaper/rotate.sh" &
       monitor = DP-6,5120x1440@239.76,0x0,1,bitdepth,10,cm,srgb
       $mainMod = SUPER
       
@@ -177,6 +176,20 @@ in {
       done
     '';
     ".config/hyprpaper/rotate.sh".executable = true;
+  };
+  # Run hyprpaper
+  systemd.user.services.hyprpaper-rotate = {
+    Unit = {
+      Description = "Rotate Hyprpaper Wallpapers";
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "%h/.config/hyprpaper/rotate.sh";
+      Restart = "always";
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
   };
   
   programs.home-manager.enable = true;
