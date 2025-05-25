@@ -17,6 +17,8 @@ in {
       experimental {
         xx_color_management_v4 = true
       }
+      # Set wallpaper using hyprland
+      exec-once = ~/.local/bin/start-hyprpaper.sh &
       monitor = DP-6,5120x1440@239.76,0x0,1,bitdepth,10,cm,srgb
       $mainMod = SUPER
       
@@ -57,6 +59,25 @@ in {
     '';
   };
 
+  # Hyprpaper config: shuffle wallpapers every 90 seconds from ~/Pictures/Wallpapers
+  home.file.".config/hypr/hyprpaper.conf".text = ''
+    preload = ~/Pictures/Wallpapers/*
+    wallpaper = ,~/Pictures/Wallpapers/*
+    splash = false
+    ipc = on
+    shuffle = true
+    interval = 90
+  '';
+
+  # Script to launch hyprpaper (if not already autostarted by Hyprland)
+  home.file.".local/bin/start-hyprpaper.sh" = {
+    executable = true;
+    text = ''
+      #!/usr/bin/env bash
+      exec hyprpaper
+    '';
+  };
+
   # Packages weee
   home.packages = with pkgs; [
     vscode
@@ -64,6 +85,8 @@ in {
     vesktop
     bitwarden-desktop
     gcr
+    waybar
+    hyprpaper
     pkgs.rclone
   ];
   services.gnome-keyring.enable = true;
