@@ -164,7 +164,6 @@ in {
   home.stateVersion = "25.05";
 
   xdg = {
-    enable = true;
     mime = {
       enable = true;
       defaultApplications = {
