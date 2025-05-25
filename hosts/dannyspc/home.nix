@@ -19,7 +19,7 @@ in {
         xx_color_management_v4 = true
       }
       # Set wallpaper using hyprland
-      monitor = DP-6,5120x1440@239.76,0x0,1,bitdepth,10,cm,srgb
+      monitor = DP-6,5120x1440@239.76,0x0,1,bitdepth,8,cm,srgb
 
       $mainMod = SUPER
       
