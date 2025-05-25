@@ -1,0 +1,4 @@
+modules
+*.lock
+hardware-configuration.nix
+*.old
