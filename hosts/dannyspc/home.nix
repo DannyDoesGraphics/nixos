@@ -75,25 +75,6 @@ in {
     '';
   };
 
-  # Hyprpaper config: shuffle wallpapers every 90 seconds from ~/Pictures/Wallpapers
-  home.file.".config/hypr/hyprpaper.conf".text = ''
-    preload = ~/Pictures/Wallpapers/*
-    wallpaper = ,~/Pictures/Wallpapers/*,contain
-    splash = false
-    ipc = on
-    shuffle = true
-    interval = 90
-  '';
-
-  # Script to launch hyprpaper (if not already autostarted by Hyprland)
-  home.file.".local/bin/start-hyprpaper.sh" = {
-    executable = true;
-    text = ''
-      #!/usr/bin/env bash
-      exec hyprpaper
-    '';
-  };
-
   # Packages weee
   home.packages = with pkgs; [
     vscode
@@ -160,6 +141,15 @@ in {
           }
         }
       '';
+    };
+    hyprpaper = {
+      ipc = "on";
+      splash = true;
+      splash_offset = 2.0;
+      preload = [ "/home/danny/Pictures/Wallpapers/kobini.png" ];
+      wallpaper = [
+        ",/home/danny/Pictures/Wallpapers/kobini.png"
+      ];
     };
   };
   
