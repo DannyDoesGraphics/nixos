@@ -78,7 +78,7 @@ in {
   # Hyprpaper config: shuffle wallpapers every 90 seconds from ~/Pictures/Wallpapers
   home.file.".config/hypr/hyprpaper.conf".text = ''
     preload = ~/Pictures/Wallpapers/*
-    wallpaper = ,~/Pictures/Wallpapers/*
+    wallpaper = ,~/Pictures/Wallpapers/*,contain
     splash = false
     ipc = on
     shuffle = true
