@@ -142,6 +142,8 @@ in {
         }
       '';
     };
+  };
+  services = {
     hyprpaper = {
       ipc = "on";
       splash = true;
