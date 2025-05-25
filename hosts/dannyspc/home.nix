@@ -200,7 +200,7 @@ in {
 
   xdg = {
     portal = {
-      enable = tru ;
+      enable = true;
       xdgUseOpenPortal = true;
       config = {
         common.default = ["gtk"];
