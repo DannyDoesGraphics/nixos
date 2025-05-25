@@ -76,8 +76,8 @@
       package = inputs.hyprland.packages."${pkgs.system}".hyprland;
     };
   };
-  security.polkit.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
+  security.polkit.enable = true;
 
   # Security
   systemd = {
