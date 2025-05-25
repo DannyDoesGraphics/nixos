@@ -18,7 +18,7 @@ in {
         xx_color_management_v4 = true
       }
       # Set wallpaper using hyprland
-      exec-once = ~/.local/bin/start-hyprpaper.sh &
+      exec-once = "~/.config/hyprpaper/rotate.sh" &
       monitor = DP-6,5120x1440@239.76,0x0,1,bitdepth,10,cm,srgb
       $mainMod = SUPER
       
@@ -84,6 +84,7 @@ in {
     gcr
     waybar
     hyprpaper
+    hyprcursor
     pkgs.rclone
     yazi
   ];
@@ -149,14 +150,36 @@ in {
       enable = true;
       settings = {
         ipc = "on";
-        splash = true;
-        splash_offset = 2.0;
-        preload = [ "/home/danny/Pictures/Wallpapers/kobini.png" ];
-        wallpaper = [
-          ",contain:/home/danny/Pictures/Wallpapers/kobini.png"
-        ];
+        splash = false;
       };
     };
+  };
+
+  # Files
+  home.file = {
+    # Hyprpaper rotation script
+    ".config/hyprpaper/rotate.sh".text = ''
+      #!/usr/bin/env bash
+      MONITOR=$(hyprctl monitors \
+        | awk '/Monitor/ {print $2; exit}')
+      WP_DIR="$HOME/Pictures/Wallpapers"
+      if [ ! -d "$WP_DIR" ]; then
+        echo "Wallpapers directory not found: $WP_DIR" >&2
+        exit 1
+      fi
+      while true; do
+        FILE=$(find "$WP_DIR" -type f \
+                 \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \) \
+                 -print0 \
+               | shuf -zn1 \
+               | xargs -0)
+        hyprctl hyprpaper unload all
+        hyprctl hyprpaper preload "$FILE"
+        hyprctl hyprpaper wallpaper "$MONITOR, $FILE"
+        sleep 10
+      done
+    '';
+    ".config/hyprpaper/rotate.sh".executable = true;
   };
   
   programs.home-manager.enable = true;
