@@ -95,6 +95,9 @@
        };
     };
   };
+  nix.settings.trusted-users = [
+    "@wheel"
+  ];
 
   # user def
   user = {
