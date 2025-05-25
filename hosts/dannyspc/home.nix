@@ -86,6 +86,7 @@ in {
     hyprpaper
     pkgs.rclone
     yazi
+    xdg
   ];
   services.gnome-keyring.enable = true;
   
