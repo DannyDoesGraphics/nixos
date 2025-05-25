@@ -90,7 +90,6 @@ in {
     yazi
     wireplumber
     pipewire
-    pipewire-pulse
   ];
   services.gnome-keyring.enable = true;
   
