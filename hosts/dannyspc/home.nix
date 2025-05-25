@@ -145,13 +145,16 @@ in {
   };
   services = {
     hyprpaper = {
-      ipc = "on";
-      splash = true;
-      splash_offset = 2.0;
-      preload = [ "/home/danny/Pictures/Wallpapers/kobini.png" ];
-      wallpaper = [
-        ",/home/danny/Pictures/Wallpapers/kobini.png"
-      ];
+      enable = true;
+      settings = {
+        ipc = "on";
+        splash = true;
+        splash_offset = 2.0;
+        preload = [ "/home/danny/Pictures/Wallpapers/kobini.png" ];
+        wallpaper = [
+          ",/home/danny/Pictures/Wallpapers/kobini.png"
+        ];
+      };
     };
   };
   
