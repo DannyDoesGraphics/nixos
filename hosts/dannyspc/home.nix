@@ -89,6 +89,9 @@ in {
     pkgs.rclone
     yazi
     wireplumber
+    pipewire
+    pipewire-alsa
+    pipewire-pulse
   ];
   services.gnome-keyring.enable = true;
   
