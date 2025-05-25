@@ -3,5 +3,5 @@
 
 git add *
 git commit -m "Update"
-nixos-rebuild --flake /etc/nixos/#default
+nixos-rebuild build --flake /etc/nixos/#default
 
