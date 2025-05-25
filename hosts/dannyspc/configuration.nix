@@ -40,7 +40,7 @@
     sddm.wayland.enable = true;
     defaultSession = "hyprland";
   };
-  xdg = {
+  services.xdg = {
     portal = {
       enable = true;
       xdgOpenUsePortal = true;
