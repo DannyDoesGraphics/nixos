@@ -66,6 +66,7 @@
     vulkan-tools
     vulkan-validation-layers
     xdg-desktop-portal
+    webcord
   ];
   programs = {
     zsh = {
