@@ -161,7 +161,7 @@ in {
   # Files
   home.file = {
     # Hyprpaper rotation script with advanced shuffling
-    ".config/hyprpaper/rotate.sh".source = /etc/nixos/home/hyprpaper/rotate.sh;
+    ".config/hyprpaper/rotate.sh".source = ./home/hyprpaper/rotate.sh;
     ".config/hyprpaper/rotate.sh".executable = true;
   };
   # Run hyprpaper
