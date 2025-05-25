@@ -198,14 +198,4 @@ in {
   
   programs.home-manager.enable = true;
   home.stateVersion = "25.05";
-
-  xdg = {
-    mimeApps = {
-      enable = true;
-      defaultApplications = {
-        # Set yazi as the default file manager for directories
-        "inode/directory" = [ "yazi.desktop" ];
-      };
-    };
-  };
 }
