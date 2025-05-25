@@ -76,13 +76,14 @@
     vulkan-tools
     vulkan-validation-layers
     xdg-desktop-portal
-    webcord
+    gimp
   ];
   programs = {
     zsh = {
       enable = true;
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
+      enableCompletion = true;
     };
     hyprland = {
       enable = true;
