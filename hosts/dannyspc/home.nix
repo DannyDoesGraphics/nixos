@@ -15,6 +15,8 @@ in {
     enable = true;
     extraConfig = ''
       experimental {
+        hdr = true;
+        wide_color_gamut = true;
         xx_color_management_v4 = true
       }
       # Set wallpaper using hyprland
@@ -56,6 +58,17 @@ in {
       bind = $mainMod SHIFT, 8, movetoworkspace, 8
       bind = $mainMod SHIFT, 9, movetoworkspace, 9
       bind = $mainMod SHIFT, 0, movetoworkspace, 10
+
+      # Resize window width/height
+      bind = $mainMod, left, resizeactive, -40 0
+      bind = $mainMod, right, resizeactive, 40 0
+      bind = $mainMod, up, resizeactive, 0 -40
+      bind = $mainMod, down, resizeactive, 0 40
+      # Resize window width/height with Shift for finer control
+      bind = $mainMod SHIFT, left, resizeactive, -10 0
+      bind = $mainMod SHIFT, right, resizeactive, 10 0
+      bind = $mainMod SHIFT, up, resizeactive, 0 -10
+      bind = $mainMod SHIFT, down, resizeactive, 0 10
     '';
   };
 
