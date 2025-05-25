@@ -13,6 +13,7 @@ in {
   # Hyprland
   wayland.windowManager.hyprland = {
     enable = true;
+    xwayland.enable = true;
     extraConfig = ''
       experimental {
         xx_color_management_v4 = true
