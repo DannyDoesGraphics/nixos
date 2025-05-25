@@ -85,6 +85,7 @@ in {
     waybar
     hyprpaper
     pkgs.rclone
+    yazi
   ];
   services.gnome-keyring.enable = true;
   
