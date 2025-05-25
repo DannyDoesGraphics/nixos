@@ -29,6 +29,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
   };
   # Video
   services.xserver = {
@@ -44,7 +45,7 @@
     enable = true;
     xdgOpenUsePortal = true;
     config = {
-      common.default = ["gtk"];
+      common.default = ["*"];
       hyprland.default = ["gtk" "hyprland"];
     };
   };
