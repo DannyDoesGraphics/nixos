@@ -20,12 +20,6 @@ in {
       # Set wallpaper using hyprland
       monitor = DP-6,5120x1440@239.76,0x0,1,bitdepth,10,cm,srgb
 
-      windowrule = opacity 0.0 override, class:^(xwaylandvideobridge)$
-      windowrule = noanim, class:^(xwaylandvideobridge)$
-      windowrule = noinitialfocus, class:^(xwaylandvideobridge)$
-      windowrule = maxsize 1 1, class:^(xwaylandvideobridge)$
-      windowrule = noblur, class:^(xwaylandvideobridge)$
-      windowrule = nofocus, class:^(xwaylandvideobridge)$
       $mainMod = SUPER
       
       bind = $mainMod, Return, exec, wezterm
