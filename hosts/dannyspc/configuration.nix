@@ -50,6 +50,12 @@
   };
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true; # 32-bit backwards compatability
+  # Screen sharing
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+  };
+  services.dbus.enable = true;
 
   # Programs
   environment.systemPackages = with pkgs; [
@@ -64,6 +70,8 @@
     vulkan-loader
     vulkan-tools
     vulkan-validation-layers
+    xdg-desktop-portal
+    xdg-desktop-portal-hyprland
   ];
   programs = {
     zsh = {
