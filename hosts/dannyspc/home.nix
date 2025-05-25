@@ -152,7 +152,7 @@ in {
         splash_offset = 2.0;
         preload = [ "/home/danny/Pictures/Wallpapers/kobini.png" ];
         wallpaper = [
-          "contain:,/home/danny/Pictures/Wallpapers/kobini.png"
+          ",contain:,/home/danny/Pictures/Wallpapers/kobini.png"
         ];
       };
     };
