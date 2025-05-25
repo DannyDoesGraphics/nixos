@@ -201,7 +201,7 @@ in {
   xdg = {
     portal = {
       enable = true;
-      xdgOpenUsePortal = true;
+      xdgOpenUsePortalire = true;
       config = {
         common.default = ["gtk"];
         hyprland.default = ["gtk" "hyprland"];
