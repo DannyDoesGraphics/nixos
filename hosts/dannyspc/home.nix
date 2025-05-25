@@ -164,7 +164,7 @@ in {
   home.stateVersion = "25.05";
 
   xdg = {
-    mime = {
+    mimeApps = {
       enable = true;
       defaultApplications = {
         # Set yazi as the default file manager for directories
