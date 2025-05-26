@@ -174,6 +174,7 @@ in {
     };
     waybar = {
       enable = true;
+      settings = {};
     };
   };
   services = {
