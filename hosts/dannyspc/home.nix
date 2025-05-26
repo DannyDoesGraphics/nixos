@@ -133,6 +133,10 @@ in {
         }
 
         return {
+          -- set the font
+          font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" }),
+          font_size = 12.0,
+
           -- define a custom Nord-based color scheme
           enable_tab_bar = false;
           hide_tab_bar_if_only_one_tab = true;
