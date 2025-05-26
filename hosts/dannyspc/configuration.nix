@@ -5,9 +5,10 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/user.nix
-    ../../modules/hardware/gpus/nvidia.nix
-    ../../modules/hardware/gpus/opengl.nix
+    ../../modules/hardware/gpu/nvidia.nix
+    ../../modules/hardware/gpu/opengl.nix
     ../../modules/hardware/audio/default.nix
+    ../../modules/wm/hyprland/default.nix
     inputs.home-manager.nixosModules.default
   ];
   nixpkgs.config.allowUnfree = true;
@@ -30,24 +31,8 @@
   time.timeZone = "America/Toronto";
   i18n.defaultLocale = "en_CA.UTF-8";
   services.printing.enable = true;
-  # Video
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "nvidia" ];
-  };
-  services.displayManager = {
-    sddm.enable = true;
-    sddm.wayland.enable = true;
-    defaultSession = "hyprland";
-  };
-  xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = true;
-    config = {
-      common.default = ["*"];
-      hyprland.default = ["gtk" "hyprland"];
-    };
-  };
+  # Video (moved to hyprland/default.nix
+
   # GPU config
   nvidia.xserver = true;
 

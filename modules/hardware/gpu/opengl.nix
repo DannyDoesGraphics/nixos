@@ -1,4 +1,4 @@
-# /etc/nixos/modules/hardware/gpus/opengl.nix
+# /etc/nixos/modules/hardware/gpu/opengl.nix
 
 { config, pkgs, lib, ... }:
 {

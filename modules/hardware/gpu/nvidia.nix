@@ -1,4 +1,4 @@
-# /etc/nixos/modules/hardware/gpus/nvidia.nix
+# /etc/nixos/modules/hardware/gpu/nvidia.nix
 
 { config, pkgs, lib, ... }:
 {
