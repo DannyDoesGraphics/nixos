@@ -78,11 +78,13 @@
     tree
     wezterm
     vscode
+    firefox
     ffmpeg
     vulkan-loader
     vulkan-tools
     vulkan-validation-layers
     xdg-desktop-portal
+    xdg-utils
     unzip
     pavucontrol
     jetbrains.rust-rover
