@@ -182,6 +182,7 @@ in {
             "format-icons" = {
               default = [ "" "" "" ];
             };
+            on-click = "pavucontrol";
           };
         };
       };
