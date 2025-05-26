@@ -172,6 +172,30 @@ in {
         }
       '';
     };
+    waybar = {
+      enable = true;
+      settings = [{
+        layer = "top";
+        position = "top";
+        modules-left = [ "hyprland/workspaces" "hyprland/window" ];
+        modules-center = [ "clock" ];
+        modules-right = [ "cpu" "memory" "pulseaudio" "tray" ];
+        clock = {
+          format = "{:%a %b %d %H:%M}";
+        };
+        cpu = {
+          format = "CPU {usage}%";
+        };
+        memory = {
+          format = "RAM {used:0.1f}G/{total:0.1f}G";
+        };
+        pulseaudio = {
+          format = "{icon} {volume}%";
+          format-muted = " Mute";
+          format-icons.default = [ "" "" "" ];
+        };
+      }];
+    }
   };
   services = {
     hyprpaper = {
@@ -188,7 +212,7 @@ in {
     # Hyprpaper rotation script with advanced shuffling
     ".config/hyprpaper/rotate.sh".source = ./scripts/hyprland/rotate.sh;
     ".config/hyprpaper/rotate.sh".executable = true;
-    ".config/waybar".source = ./.config/waybar;
+    #".config/waybar".source = ./.config/waybar;
   };
   # Run hyprpaper
   systemd.user.services.hyprpaper-rotate = {
