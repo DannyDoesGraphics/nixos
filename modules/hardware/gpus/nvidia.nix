@@ -12,12 +12,13 @@
       enable = true;
       videoDrivers = [ "nvidia" ];
     };
+    nixpkgs.config.nvidia.acceptLicense = true;
+     hardware.nvidia = {
+       modesetting.enable = true;
+       nvidiaSettings = true;
+       open = false; # Use proprietary drivers
+       package = config.boot.kernelPackages.nvidiaPackages.production;
+    };
   };
-  nixpkgs.config.nvidia.acceptLicense = true;
-  hardware.nvidia = {
-    modesetting.enable = true;
-    nvidiaSettings = true;
-    open = false; # Use proprietary drivers
-    package = config.boot.kernelPackages.nvidiaPackages.production;
-  };
+
 }
