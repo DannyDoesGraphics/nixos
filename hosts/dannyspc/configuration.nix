@@ -5,6 +5,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/user.nix
+    ../../modules/hardware/gpus/nvidia.nix
+    ../../modules/hardware/gpus/opengl.nix
     inputs.home-manager.nixosModules.default
   ];
   nixpkgs.config.allowUnfree = true;
@@ -56,18 +58,6 @@
       hyprland.default = ["gtk" "hyprland"];
     };
   };
-
-  # GPU
-  nixpkgs.config.nvidia.acceptLicense = true;
-  hardware.nvidia = {
-    modesetting.enable = true;
-    nvidiaSettings = true;
-    open = false; # Use proprietary drivers
-    package = config.boot.kernelPackages.nvidiaPackages.production;
-  };
-  hardware.graphics.enable = true;
-  hardware.graphics.enable32Bit = true; # 32-bit backwards compatability
-  services.dbus.enable = true;
 
   # Programs
   environment.systemPackages = with pkgs; [
