@@ -118,6 +118,8 @@
   };
 
   # Security
+  hyprpolkitagent.enable = true;
+  hyprpolkitagent.package = inputs.hyprpolkitagent.packages."${pkgs.system}".hyprpolkitagent;
   systemd = {
       user.services.polkit-gnome-authentication-agent-1 = {
         description = "polkit-gnome-authentication-agent-1";
