@@ -95,7 +95,6 @@
       ohMyZsh = {
         enable = true;
         plugins = [ "git" ];
-        theme = "nord";
       };
     };
     hyprland = {
