@@ -101,6 +101,9 @@ in {
     xdg-utils
     cargo
     rustc
+    pavucontrol
+    jetbrains.rust-rover
+    code-cursor
   ];
   services.gnome-keyring.enable = true;
   

@@ -51,9 +51,6 @@
     xdg-desktop-portal
     xdg-utils
     unzip
-    pavucontrol
-    jetbrains.rust-rover
-    code-cursor
   ];
   programs = {
     zsh = {
