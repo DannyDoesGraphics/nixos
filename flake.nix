@@ -23,6 +23,11 @@
       inputs.nixpkgs.follows = "hyprland/nixpkgs";
       inputs.hyprutils.follows = "hyprutils";
     };
+    hyprcursor = {
+      url = "github:hyprwm/HyprCursor";
+      inputs.nixpkgs.follows = "hyprland/nixpkgs";
+      
+    };
     nil = {
       url = "github:oxalica/nil";
       inputs.nixpkgs.follows = "nixpkgs";
