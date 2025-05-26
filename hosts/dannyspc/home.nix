@@ -190,6 +190,17 @@ in {
       WantedBy = [ "graphical-session.target" ];
     };
   };
+  # Hyperpolkit agent
+  systemd.user.services.hyprpolkitagent = {
+    description = "Hyprland PolicyKit Authentication Agent";
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.hyprpolkitagent}/bin/hyprpolkitagent";
+      Restart   = "always";
+    };
+    install.WantedBy = [ "graphical-session.target" ];
+  };
+
   
   programs.home-manager.enable = true;
   home.stateVersion = "25.05";
