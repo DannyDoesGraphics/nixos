@@ -212,7 +212,9 @@ in {
         #pulseaudio.muted {
           color: ${config.ui.colors.palette.color8};
         }
-        #hyprland\\window,
+        #hyprland\\window {
+          background: ${config.ui.colors.palette.color2};
+        },
         #hyprland\\workspaces {
           background: ${config.ui.colors.palette.color2};
           color: ${config.ui.colors.palette.color6};
