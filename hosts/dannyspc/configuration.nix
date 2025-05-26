@@ -95,11 +95,8 @@
       ohMyZsh = {
         enable = true;
         plugins = [ "git" ];
-        theme = "robbyrussell";
+        theme = "nord";
       };
-      initExtra = ''
-        fastfetch
-      '';
     };
     hyprland = {
       enable = true;
