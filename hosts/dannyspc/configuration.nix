@@ -7,6 +7,9 @@
     ../../modules/nixos/user.nix
     inputs.home-manager.nixosModules.default
   ];
+
+  # Home Manager backup configuration
+  home-manager.backupFileExtension = "backup";
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   boot.loader.systemd-boot.enable = true;
