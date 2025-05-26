@@ -76,7 +76,6 @@
     vulkan-tools
     vulkan-validation-layers
     xdg-desktop-portal
-    gimp
     unzip
   ];
   programs = {

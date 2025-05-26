@@ -18,6 +18,9 @@ in {
       experimental {
         xx_color_management_v4 = true
       }
+      # Setup mouse
+      env = XCURSOR_THEME,Nordzy-cursors
+      env = XCURSOR_SIZE,24
       # Set wallpaper using hyprland
       monitor = DP-6,5120x1440@239.76,0x0,1,bitdepth,8,cm,srgb
 
@@ -90,6 +93,8 @@ in {
     yazi
     wireplumber
     pipewire
+    gimp
+    nordzy-cursor-theme
   ];
   services.gnome-keyring.enable = true;
   
