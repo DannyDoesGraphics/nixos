@@ -12,6 +12,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Multi-threaded
+  nix.settings = {
+    max-jobs = "auto";
+    cores = 0; # use all cores
+    build-cores = 0; # use all cores
+  };
+
   # Networking
   networking = {
     hostName = "dannyspc";
