@@ -186,6 +186,12 @@ in {
           };
         };
       };
+      style = ''
+        * {
+          font-family: JetBrainsMono Nerd Font, monospace;
+          font-size: 14px;
+        } 
+      '';
     };
   };
   services = {
