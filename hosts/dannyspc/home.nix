@@ -99,6 +99,8 @@ in {
     fastfetch
     nordzy-cursor-theme
     xdg-utils
+    cargo
+    rustc
   ];
   services.gnome-keyring.enable = true;
   
