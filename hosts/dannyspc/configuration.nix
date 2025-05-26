@@ -75,6 +75,9 @@
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
+    extraPortals = [
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
+    ];
   };
 
   # Security
