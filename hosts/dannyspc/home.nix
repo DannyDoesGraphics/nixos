@@ -174,11 +174,6 @@ in {
     };
     waybar = {
       enable = true;
-      settings = [{
-        layer = "top";
-        position = "top";
-        
-      }];
     };
   };
   services = {
