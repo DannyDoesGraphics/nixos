@@ -74,17 +74,6 @@
   };
   security.pam.services.login.enableGnomeKeyring = true;
   security.polkit.enable = true;
-  xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = true;
-    extraPortals = [
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-gtk
-    ];
-    config = {
-      common.default = [ "hyprland" "gtk" ];
-    };
-  };
 
   # Security
   systemd = {

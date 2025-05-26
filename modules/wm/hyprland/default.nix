@@ -11,7 +11,7 @@
     enable = true;
     xdgOpenUsePortal = true;
     config = {
-      common.default = ["*"];
+      common.default = ["hyprland" "gtk" ];
       hyprland.default = ["hyprland" "gtk"];
     };
   };
