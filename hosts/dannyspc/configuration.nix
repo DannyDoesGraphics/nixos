@@ -77,8 +77,6 @@
     git
     tree
     wezterm
-    vscode
-    firefox
     ffmpeg
     vulkan-loader
     vulkan-tools
