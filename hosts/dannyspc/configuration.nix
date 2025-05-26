@@ -59,7 +59,7 @@
     };
   };
   # GPU config
-  config.nvidia.xserver = true;
+  nvidia.xserver = true;
 
   # Programs
   environment.systemPackages = with pkgs; [
