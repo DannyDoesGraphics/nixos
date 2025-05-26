@@ -182,8 +182,7 @@ in {
             "format-icons" = {
               default = [ "" "" "" ];
             };
-            on-click = "pavucontrol";
-            on-click-right = "pgrep pavucontrol && pkill pavucontrol || pavucontrol &";
+            on-click = "pgrep pavucontrol && pkill pavucontrol || pavucontrol &";
           };
         };
       };
