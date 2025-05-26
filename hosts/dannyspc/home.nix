@@ -183,6 +183,7 @@ in {
               default = [ "" "" "" ];
             };
             on-click = "pavucontrol";
+            on-click-right = "pkill pavucontrol";
           };
         };
       };
