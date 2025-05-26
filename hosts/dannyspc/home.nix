@@ -204,7 +204,7 @@ in {
         #cpu,
         #memory,
         #pulseaudio,
-        #window
+        #window,
         #tray {
           background: ${config.ui.colors.palette.color1};
           color: ${config.ui.colors.palette.color6};
