@@ -192,13 +192,17 @@ in {
   };
   # Hyperpolkit agent
   systemd.user.services.hyprpolkitagent = {
-    description = "Hyprland PolicyKit Authentication Agent";
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
+    Unit = {
+      Description = "Hyprland PolicyKit Authentication Agent";
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
       ExecStart = "${pkgs.hyprpolkitagent}/bin/hyprpolkitagent";
       Restart   = "always";
     };
-    install.WantedBy = [ "graphical-session.target" ];
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
   };
 
   
