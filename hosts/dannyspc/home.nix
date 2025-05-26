@@ -134,7 +134,7 @@ in {
 
         return {
           -- set the font
-          font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" }),
+          font = wezterm.font("JetBrainsMono Nerd Font Mono", { weight = "Regular" }),
           font_size = 12.0,
 
           -- define a custom Nord-based color scheme
