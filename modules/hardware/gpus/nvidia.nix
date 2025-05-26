@@ -8,16 +8,16 @@
     description = "Enable X11 server and set NVIDIA as the video driver";
   };
   config = lib.mkIf config.nvidia.xserver {
-    services.xserver = lib.mkIf config.nvidia {
+    services.xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
     };
-  };
-  nixpkgs.config.nvidia.acceptLicense = true;
-  hardware.nvidia = {
-    modesetting.enable = true;
-    nvidiaSettings = true;
-    open = false; # Use proprietary drivers
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    nixpkgs.config.nvidia.acceptLicense = true;
+    hardware.nvidia = {
+      modesetting.enable = true;
+      nvidiaSettings = true;
+      open = false; # Use proprietary drivers
+      package = config.boot.kernelPackages.nvidiaPackages.production;
+    };
   };
 }
