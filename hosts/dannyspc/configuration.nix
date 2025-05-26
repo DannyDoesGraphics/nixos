@@ -131,7 +131,7 @@
 
   # Fonts
   fonts.packages = with pkgs; [
-    nerd-fonts.JetBrainsMono
+    nerd-fonts.jetbrains-mono
   ];
 
   # user def
