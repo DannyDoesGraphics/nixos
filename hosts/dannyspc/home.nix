@@ -247,7 +247,7 @@ in {
     # Wrapper for xdg-open to always launch Firefox
     ".local/bin/xdg-open".text = ''
       #!/usr/bin/env bash
-      exec firefox "${1@Q}"
+      exec firefox "$@"
     '';
     ".local/bin/xdg-open".executable = true;
   };
