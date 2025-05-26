@@ -214,6 +214,14 @@ in {
         #pulseaudio.muted {
           color: ${config.ui.colors.palette.color8};
         }
+        #workspaces .active {
+          background: ${config.ui.colors.palette.color2};
+          color: ${config.ui.colors.palette.color0};
+        }
+        #workspaces .inactive {
+          background: ${config.ui.colors.palette.color3};
+          color: ${config.ui.colors.palette.color0};
+        }
       '';
     };
   };
