@@ -194,6 +194,32 @@ in {
         window {
           background-color: transparent;
         }
+        #mainBar {
+          background: ${config.ui.colors.palette.color0};
+          color: ${config.ui.colors.palette.color6};
+        }
+        #clock,
+        #cpu,
+        #memory,
+        #pulseaudio,
+        #tray {
+          background: ${config.ui.colors.palette.color1};
+          color: ${config.ui.colors.palette.color6};
+          border-radius: 6px;
+          padding: 0 10px;
+          margin: 2px 4px;
+        }
+        #pulseaudio.muted {
+          color: ${config.ui.colors.palette.color8};
+        }
+        #hyprland\\window,
+        #hyprland\\workspaces {
+          background: ${config.ui.colors.palette.color2};
+          color: ${config.ui.colors.palette.color6};
+          border-radius: 6px;
+          padding: 0 10px;
+          margin: 2px 4px;
+        }
       '';
     };
   };
