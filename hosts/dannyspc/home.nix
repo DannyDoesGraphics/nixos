@@ -214,6 +214,10 @@ in {
         #pulseaudio.muted {
           color: ${config.ui.colors.palette.color8};
         }
+        #workspaces button {
+          background: transparent;
+          color: ${config.ui.colors.palette.color6};
+        }
         #workspaces button.active {
           background: ${config.ui.colors.palette.color2};
           color: ${config.ui.colors.palette.color0};
