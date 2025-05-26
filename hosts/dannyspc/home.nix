@@ -160,6 +160,7 @@ in {
     };
     waybar = {
       enable = true;
+      package = pkgs.waybar;
       settings = {
         mainBar = {
           layer = "top";
@@ -212,8 +213,7 @@ in {
         #pulseaudio.muted {
           color: ${config.ui.colors.palette.color8};
         }
-        #hyprland\\window,
-        #hyprland\\workspaces {
+        #hyprland/workspaces {
           background: ${config.ui.colors.palette.color2};
           color: ${config.ui.colors.palette.color6};
           border-radius: 6px;
