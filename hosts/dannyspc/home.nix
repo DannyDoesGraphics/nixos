@@ -10,14 +10,6 @@ in {
   home.homeDirectory = "/home/danny";
   nixpkgs.config.allowUnfree = true;
 
-  home.pointerCursor = {
-    gtk.enable = true;
-    x11.enable = true;
-    package = pkgs.nordzy-cursor-theme;
-    name = "Nordzy-cursors";
-    size = 24; # or your preferred size
-  };
-
   # Hyprland
   wayland.windowManager.hyprland = {
     enable = true;

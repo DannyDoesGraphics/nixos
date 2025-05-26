@@ -27,19 +27,6 @@
       url = "github:hyprwm/HyprCursor";
       inputs.nixpkgs.follows = "hyprland/nixpkgs";
     };
-    nordzy-cursor-theme-latest = {
-      pname = "nordzy-cursor-theme";
-      version = "latest";
-      src = prev.fetchFromGitHub {
-        owner = "guillaumeboehm";
-        repo = "Nordzy-cursors";
-        rev = "main";
-      };
-      installPhase = ''
-        mkdir -p $out/share/icons
-        cp -r Nordzy-cursors $out/share/icons/
-      '';
-    };
     nil = {
       url = "github:oxalica/nil";
       inputs.nixpkgs.follows = "nixpkgs";
