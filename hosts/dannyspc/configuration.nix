@@ -124,6 +124,7 @@
     T_QPA_PLATFORM     = "wayland";
     GDK_BACKEND        = "wayland";
     WLR_NO_HARDWARE_CURSORS = "1";
+    BROWSER           = "firefox";
   };
 
   # Security

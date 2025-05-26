@@ -98,6 +98,7 @@ in {
     gimp
     fastfetch
     nordzy-cursor-theme
+    xdg-utils
   ];
   services.gnome-keyring.enable = true;
   
@@ -243,6 +244,12 @@ in {
     ".config/hyprpaper/rotate.sh".source = ./scripts/hyprland/rotate.sh;
     ".config/hyprpaper/rotate.sh".executable = true;
     ".zshrc".source = ./.config/.zshrc;
+    # Wrapper for xdg-open to always launch Firefox
+    ".local/bin/xdg-open".text = ''
+      #!/usr/bin/env bash
+      exec firefox "${1@Q}"
+    '';
+    ".local/bin/xdg-open".executable = true;
   };
   # Run hyprpaper
   systemd.user.services.hyprpaper-rotate = {
