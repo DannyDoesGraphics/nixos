@@ -129,6 +129,11 @@
     "@wheel"
   ];
 
+  # Fonts
+  fonts.packages = with pkgs; [
+    JetBrainsMono
+  ];
+
   # user def
   user = {
     enable = true;
