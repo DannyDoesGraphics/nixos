@@ -29,7 +29,7 @@ in {
       # Setup mouse
       env = XCURSOR_THEME,Nordzy-cursors
       env = XCURSOR_SIZE,24
-      exec-once = waybar
+      exec-once = "pkill waybar; waybar &"
       # Set wallpaper using hyprland
       monitor = DP-6,5120x1440@239.76,0x0,1,bitdepth,8,cm,srgb
 
