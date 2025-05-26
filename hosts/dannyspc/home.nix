@@ -241,7 +241,7 @@ in {
     # Hyprpaper rotation script with advanced shuffling
     ".config/hyprpaper/rotate.sh".source = ./scripts/hyprland/rotate.sh;
     ".config/hyprpaper/rotate.sh".executable = true;
-    ".zshrc".source = ./scripts/.zshrc;
+    ".zshrc".source = ./.config/.zshrc;
   };
   # Run hyprpaper
   systemd.user.services.hyprpaper-rotate = {
