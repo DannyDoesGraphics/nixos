@@ -72,6 +72,10 @@
   };
   security.pam.services.login.enableGnomeKeyring = true;
   security.polkit.enable = true;
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+  };
 
   # Security
   systemd = {
