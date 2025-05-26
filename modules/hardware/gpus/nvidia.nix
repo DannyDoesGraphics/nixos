@@ -7,8 +7,8 @@
     default = false;
     description = "Enable X11 server and set NVIDIA as the video driver";
   };
-  config = lib.mkIf config.nvidia.xserver {
-    services.xserver = {
+  config =  {
+    services.xserver = lib.mkIf config.nvidia.xserver {
       enable = true;
       videoDrivers = [ "nvidia" ];
     };
@@ -20,5 +20,4 @@
        package = config.boot.kernelPackages.nvidiaPackages.production;
     };
   };
-
 }
