@@ -183,7 +183,7 @@ in {
               default = [ "" "" "" ];
             };
             on-click = "pavucontrol";
-            on-click-right = "pkill pavucontrol";
+            on-click-right = "pgrep pavucontrol && pkill pavucontrol || pavucontrol &";
           };
         };
       };
