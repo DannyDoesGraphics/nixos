@@ -29,6 +29,7 @@ in {
       # Setup mouse
       env = XCURSOR_THEME,Nordzy-cursors
       env = XCURSOR_SIZE,24
+      exec-once = waybar
       # Set wallpaper using hyprland
       monitor = DP-6,5120x1440@239.76,0x0,1,bitdepth,8,cm,srgb
 
@@ -80,20 +81,6 @@ in {
       bind = $mainMod SHIFT, o, resizeactive, 0 -40, exact
       bind = $mainMod SHIFT, i, resizeactive, 0 40, exact
     '';
-  };
-  # Waybar
-  systemd.user.services.waybar = {
-    Unit = {
-      Description = "Hyprland PolicyKit Authentication Agent";
-      After = [ "graphical-session.target" ];
-    };
-    Service = {
-      ExecStart = "${pkgs.waybar}/bin/waybar";
-      Restart   = "always";
-    };
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
   };
 
   # Packages weee
