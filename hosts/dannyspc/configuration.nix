@@ -110,22 +110,6 @@
   };
   security.pam.services.login.enableGnomeKeyring = true;
   security.polkit.enable = true;
-  # Env vars
-  environment.variables = {
-    XDG_CURRENT_DESKTOP = "Hyprland";
-    XDG_SESSION_DESKTOP = "Hyprland";
-    XDG_SESSION_TYPE    = "wayland";
-    BROWSER             = "firefox";
-  };
-
-  environment.sessionVariables = {
-    MOZ_ENABLE_WAYLAND = "1";
-    NIXOS_OZONE_WL     = "1";
-    T_QPA_PLATFORM     = "wayland";
-    GDK_BACKEND        = "wayland";
-    WLR_NO_HARDWARE_CURSORS = "1";
-    BROWSER           = "firefox";
-  };
 
   # Security
   systemd = {
@@ -151,13 +135,6 @@
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
-
-  xdg.mime.enable = true;
-  xdg.mime.defaultApplications = {
-    "text/html"               = "firefox";
-    "x-scheme-handler/http"   = "firefox";
-    "x-scheme-handler/https"  = "firefox";
-  };
 
   # user def
   user = {
