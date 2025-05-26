@@ -79,7 +79,7 @@
       pkgs.xdg-desktop-portal-wlr
     ];
     config = {
-      common.default = [ "wlr" ];
+      common.default = [ "*" ];
     };
   };
 
