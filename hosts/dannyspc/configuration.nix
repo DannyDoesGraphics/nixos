@@ -31,7 +31,7 @@
   time.timeZone = "America/Toronto";
   i18n.defaultLocale = "en_CA.UTF-8";
   services.printing.enable = true;
-  # Video (moved to hyprland/default.nix
+  # Video (moved to hyprland/default.nix)
 
   # GPU config
   nvidia.xserver = true;
