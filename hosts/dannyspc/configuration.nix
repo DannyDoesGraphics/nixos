@@ -49,6 +49,7 @@
     vulkan-tools
     vulkan-validation-layers
     xdg-desktop-portal
+    xdg-desktop-portal-wlr
     xdg-desktop-portal-gtk
     xdg-utils
     unzip
@@ -77,11 +78,11 @@
     enable = true;
     xdgOpenUsePortal = true;
     extraPortals = [
-      pkgs.xdg-desktop-portal-wlr
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal-gtk
     ];
     config = {
-      common.default = [ "*" ];
+      common.default = [ "hyprland" "gtk" ];
     };
   };
 
