@@ -9,8 +9,10 @@
   };
   config = lib.mkMerge [
     (lib.mkIf config.nvidia.xserver {
-      enable = true;
-      videoDrivers = [ "nvidia" ];
+      services.xserver = {
+        enable = true;
+        videoDrivers = [ "nvidia" ];
+      };
     })
     {
       nixpkgs.config.nvidia.acceptLicense = true;
