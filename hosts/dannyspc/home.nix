@@ -29,7 +29,6 @@ in {
       # Setup mouse
       env = XCURSOR_THEME,Nordzy-cursors
       env = XCURSOR_SIZE,24
-      exec-once = "pkill waybar; waybar &"
       # Set wallpaper using hyprland
       monitor = DP-6,5120x1440@239.76,0x0,1,bitdepth,8,cm,srgb
 
@@ -161,7 +160,29 @@ in {
     };
     waybar = {
       enable = true;
-      settings = {};
+      settings = {
+        layer = "top";
+        position = "top";
+        "modules-left" = [ "hyprland/workspaces" "hyprland/window" ];
+        "modules-center" = [ "clock" ];
+        "modules-right" = [ "cpu" "memory" "pulseaudio" "tray" ];
+        clock = {
+          format = "{:%a %b %d %H:%M}";
+        };
+        cpu = {
+          format = "CPU {usage}%";
+        };
+        memory = {
+          format = "RAM {used:0.1f}G/{total:0.1f}G";
+        };
+        pulseaudio = {
+          format = "{icon} {volume}%";
+          "format-muted" = "󰝟 Mute";
+          "format-icons" = {
+            default = [ "" "" "" ];
+          };
+        };
+      };
     };
   };
   services = {
@@ -203,6 +224,19 @@ in {
     Service = {
       ExecStart = "${pkgs.hyprpolkitagent}/bin/hyprpolkitagent";
       Restart   = "always";
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
+  systemd.user.services.waybar = {
+    Unit = {
+      Description = "Waybar status bar";
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.waybar}/bin/waybar";
+      Restart = "on-failure";
     };
     Install = {
       WantedBy = [ "graphical-session.target" ];
