@@ -286,6 +286,7 @@ in {
     };
   };
   xdg.mimeApps = {
+    xdg.configFile."mimeapps.list".force = true;
     enable = true;
     defaultApplications = {
       "text/html" = "firefox.desktop";
