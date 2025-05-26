@@ -285,6 +285,11 @@ in {
       WantedBy = [ "graphical-session.target" ];
     };
   };
+  xdg.mime.defaultApplications = {
+    "text/html" = "firefox.desktop";
+    "x-scheme-handler/http"   = "firefox.desktop";
+    "x-scheme-handler/https"  = "firefox.desktop";
+  };
 
   
   programs.home-manager.enable = true;
