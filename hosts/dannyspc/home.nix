@@ -191,7 +191,7 @@ in {
           font-family: JetBrainsMono Nerd Font, monospace;
           font-size: 14px;
         }
-        window {
+        #mainBar window {
           background-color: transparent;
         }
         #mainBar {
