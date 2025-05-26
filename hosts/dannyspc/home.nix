@@ -69,16 +69,16 @@ in {
       bind = $mainMod SHIFT, 9, movetoworkspace, 9
       bind = $mainMod SHIFT, 0, movetoworkspace, 10
 
-      # Resize window width/height with vim keys (Super+Ctrl)
-      bind = $mainMod, [, resizeactive, -40 0
-      bind = $mainMod, ], resizeactive, 40 0
-      bind = $mainMod, -, resizeactive, 0 -40
-      bind = $mainMod, =, resizeactive, 0 40
-      # Finer control (Super+Ctrl+Shift)
-      bind = $mainMod SHIFT, [, resizeactive, -40 0, exact
-      bind = $mainMod SHIFT, ], resizeactive, 40 0, exact
-      bind = $mainMod SHIFT, -, resizeactive, 0 -40, exact
-      bind = $mainMod SHIFT, =, resizeactive, 0 40, exact
+      # Resize window width/height with vim keys remapped: u/i/o/p
+      bind = $mainMod, u, resizeactive, -40 0
+      bind = $mainMod, p, resizeactive, 40 0
+      bind = $mainMod, o, resizeactive, 0 -40
+      bind = $mainMod, i, resizeactive, 0 40
+      # Finer control (Super+Shift)
+      bind = $mainMod SHIFT, u, resizeactive, -40 0, exact
+      bind = $mainMod SHIFT, p, resizeactive, 40 0, exact
+      bind = $mainMod SHIFT, o, resizeactive, 0 -40, exact
+      bind = $mainMod SHIFT, i, resizeactive, 0 40, exact
     '';
   };
 
