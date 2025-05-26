@@ -21,7 +21,7 @@
       pkgs.xdg-desktop-portal-gtk
     ];
     config.common.default = "*";
-    common."org.freedesktop.impl.portal.OpenURI" = [ "hyprland" ];
+    config.common."org.freedesktop.impl.portal.OpenURI" = [ "hyprland" ];
     config.hyprland.default = ["hyprland" "gtk"];
   };
 }
