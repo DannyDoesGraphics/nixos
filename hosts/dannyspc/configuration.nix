@@ -154,9 +154,9 @@
 
   xdg.mime.enable = true;
   xdg.mime.defaultApplications = {
-    "text/html"               = "firefox.desktop";
-    "x-scheme-handler/http"   = "firefox.desktop";
-    "x-scheme-handler/https"  = "firefox.desktop";
+    "text/html"               = "firefox";
+    "x-scheme-handler/http"   = "firefox";
+    "x-scheme-handler/https"  = "firefox";
   };
 
   # user def
