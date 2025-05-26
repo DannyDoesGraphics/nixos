@@ -190,7 +190,10 @@ in {
         * {
           font-family: JetBrainsMono Nerd Font, monospace;
           font-size: 14px;
-        } 
+        }
+        window {
+          background-color: transparent;
+        }
       '';
     };
   };
