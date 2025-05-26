@@ -70,15 +70,15 @@ in {
       bind = $mainMod SHIFT, 0, movetoworkspace, 10
 
       # Resize window width/height with vim keys (Super+Ctrl)
-      bind = $mainMod CTRL, [, resizeactive, -40 0
-      bind = $mainMod CTRL, ], resizeactive, 40 0
-      bind = $mainMod CTRL, -, resizeactive, 0 -40
-      bind = $mainMod CTRL, =, resizeactive, 0 40
+      bind = $mainMod, [, resizeactive, -40 0
+      bind = $mainMod, ], resizeactive, 40 0
+      bind = $mainMod, -, resizeactive, 0 -40
+      bind = $mainMod, =, resizeactive, 0 40
       # Finer control (Super+Ctrl+Shift)
-      bind = $mainMod CTRL SHIFT, [, resizeactive, -40 0, exact
-      bind = $mainMod CTRL SHIFT, ], resizeactive, 40 0, exact
-      bind = $mainMod CTRL SHIFT, -, resizeactive, 0 -40, exact
-      bind = $mainMod CTRL SHIFT, +, resizeactive, 0 40, exact
+      bind = $mainMod, [, resizeactive, -40 0, exact
+      bind = $mainMod, ], resizeactive, 40 0, exact
+      bind = $mainMod, -, resizeactive, 0 -40, exact
+      bind = $mainMod, +, resizeactive, 0 40, exact
     '';
   };
 
