@@ -203,7 +203,8 @@ in {
         #cpu,
         #memory,
         #pulseaudio,
-        #tray {
+        #tray,
+        window#waybar {
           background: ${config.ui.colors.palette.color1};
           color: ${config.ui.colors.palette.color6};
           border-radius: 6px;
