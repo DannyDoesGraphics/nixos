@@ -141,7 +141,6 @@ in {
           -- define a custom Nord-based color scheme
           enable_tab_bar = false;
           hide_tab_bar_if_only_one_tab = true;
-          color_scheme = "nord-from-nix";
           window_background_opacity = 0.9;
           
           colors = {
