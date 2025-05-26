@@ -96,6 +96,7 @@ in {
     wireplumber
     pipewire
     gimp
+    fastfetch
     nordzy-cursor-theme
   ];
   services.gnome-keyring.enable = true;
