@@ -75,10 +75,10 @@ in {
       bind = $mainMod, -, resizeactive, 0 -40
       bind = $mainMod, =, resizeactive, 0 40
       # Finer control (Super+Ctrl+Shift)
-      bind = $mainMod, [, resizeactive, -40 0, exact
-      bind = $mainMod, ], resizeactive, 40 0, exact
-      bind = $mainMod, -, resizeactive, 0 -40, exact
-      bind = $mainMod, +, resizeactive, 0 40, exact
+      bind = $mainMod SHIFT, [, resizeactive, -40 0, exact
+      bind = $mainMod SHIFT, ], resizeactive, 40 0, exact
+      bind = $mainMod SHIFT, -, resizeactive, 0 -40, exact
+      bind = $mainMod SHIFT, +, resizeactive, 0 40, exact
     '';
   };
 
