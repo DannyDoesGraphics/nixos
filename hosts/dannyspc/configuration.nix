@@ -58,6 +58,8 @@
       hyprland.default = ["gtk" "hyprland"];
     };
   };
+  # GPU config
+  config.nvidia.xserver = true;
 
   # Programs
   environment.systemPackages = with pkgs; [
