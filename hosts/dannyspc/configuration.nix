@@ -7,6 +7,7 @@
     ../../modules/nixos/user.nix
     ../../modules/hardware/gpus/nvidia.nix
     ../../modules/hardware/gpus/opengl.nix
+    ../../modules/hardware/audio/default.nix
     inputs.home-manager.nixosModules.default
   ];
   nixpkgs.config.allowUnfree = true;
@@ -29,17 +30,6 @@
   time.timeZone = "America/Toronto";
   i18n.defaultLocale = "en_CA.UTF-8";
   services.printing.enable = true;
-
-  # Audio
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    wireplumber.enable = true;
-  };
   # Video
   services.xserver = {
     enable = true;
