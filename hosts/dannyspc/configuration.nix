@@ -87,6 +87,20 @@
     pavucontrol
   ];
   programs = {
+    zsh = {
+      enable = true;
+      autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
+      enableCompletion = true;
+      ohMyZsh = {
+        enable = true;
+        plugins = [ "git" ];
+        theme = "robbyrussell";
+      };
+      initExtra = ''
+        fastfetch
+      '';
+    };
     hyprland = {
       enable = true;
       package = inputs.hyprland.packages."${pkgs.system}".hyprland;

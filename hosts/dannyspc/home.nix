@@ -226,17 +226,6 @@ in {
         }
       '';
     };
-    zsh = {
-      enable = true;
-      ohMyZsh = {
-        enable = true;
-        plugins = [ "git" ];
-        theme = "robbyrussell";
-      };
-      initExtra = ''
-        fastfetch
-      '';
-    };
   };
   services = {
     hyprpaper = {
