@@ -19,5 +19,4 @@
       hyprland.default = ["hyprland" "gtk"];
     };
   };
-  wlr.enable = true;
 }
