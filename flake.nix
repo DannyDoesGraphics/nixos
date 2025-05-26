@@ -27,7 +27,7 @@
       url = "github:hyprwm/HyprCursor";
       inputs.nixpkgs.follows = "hyprland/nixpkgs";
     };
-    nordzy-cursor-theme-latest = prev.stdenv.mkDerivation {
+    nordzy-cursor-theme-latest = {
       pname = "nordzy-cursor-theme";
       version = "latest";
       src = prev.fetchFromGitHub {
