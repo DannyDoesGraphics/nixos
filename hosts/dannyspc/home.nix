@@ -203,8 +203,7 @@ in {
         #cpu,
         #memory,
         #pulseaudio,
-        #tray,
-        window#waybar {
+        #tray {
           background: ${config.ui.colors.palette.color1};
           color: ${config.ui.colors.palette.color6};
           border-radius: 6px;
@@ -214,6 +213,10 @@ in {
         #pulseaudio.muted {
           color: ${config.ui.colors.palette.color8};
         }
+        window#waybar {
+          background: ${config.ui.colors.palette.color0};
+          color: ${config.ui.colors.palette.color6};
+        };
       '';
     };
   };
