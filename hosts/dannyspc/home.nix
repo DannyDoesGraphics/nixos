@@ -213,13 +213,6 @@ in {
         #pulseaudio.muted {
           color: ${config.ui.colors.palette.color8};
         }
-        hyprland/workspaces {
-          background: ${config.ui.colors.palette.color2};
-          color: ${config.ui.colors.palette.color6};
-          border-radius: 6px;
-          padding: 0 10px;
-          margin: 2px 4px;
-        }
       '';
     };
   };
