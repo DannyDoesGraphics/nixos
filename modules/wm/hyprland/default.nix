@@ -15,8 +15,7 @@
       xdg-desktop-portal-wlr
     ];
     config = {
-      common.default = ["hyprland" "gtk" ];
-      hyprland.default = ["hyprland" "gtk"];
+      common.default = [ "*" ];
     };
   };
 }
