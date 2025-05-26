@@ -77,6 +77,7 @@
     vulkan-validation-layers
     xdg-desktop-portal
     unzip
+    pavucontrol
   ];
   programs = {
     zsh = {
