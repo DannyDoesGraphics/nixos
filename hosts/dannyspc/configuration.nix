@@ -49,6 +49,7 @@
     vulkan-tools
     vulkan-validation-layers
     xdg-desktop-portal
+    xdg-desktop-portal-gtk
     xdg-utils
     unzip
   ];
