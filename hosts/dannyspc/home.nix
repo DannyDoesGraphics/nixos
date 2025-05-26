@@ -213,10 +213,6 @@ in {
         #pulseaudio.muted {
           color: ${config.ui.colors.palette.color8};
         }
-        window#waybar {
-          background: ${config.ui.colors.palette.color0};
-          color: ${config.ui.colors.palette.color6};
-        };
       '';
     };
   };
