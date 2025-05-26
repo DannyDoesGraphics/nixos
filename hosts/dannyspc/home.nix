@@ -81,6 +81,20 @@ in {
       bind = $mainMod SHIFT, i, resizeactive, 0 40, exact
     '';
   };
+  # Waybar
+  systemd.user.services.waybar = {
+    Unit = {
+      Description = "Hyprland PolicyKit Authentication Agent";
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.waybar}/bin/waybar";
+      Restart   = "always";
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
 
   # Packages weee
   home.packages = with pkgs; [
@@ -89,7 +103,6 @@ in {
     vesktop
     bitwarden-desktop
     gcr
-    waybar
     hyprpaper
     hyprcursor
     pkgs.rclone
@@ -175,6 +188,7 @@ in {
     # Hyprpaper rotation script with advanced shuffling
     ".config/hyprpaper/rotate.sh".source = ./scripts/hyprland/rotate.sh;
     ".config/hyprpaper/rotate.sh".executable = true;
+    ".config/waybar".source = ./config/waybar;
   };
   # Run hyprpaper
   systemd.user.services.hyprpaper-rotate = {
