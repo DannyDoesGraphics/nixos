@@ -149,6 +149,13 @@
     nerd-fonts.jetbrains-mono
   ];
 
+  xdg.mime.enable = true;
+  xdg.mime.defaultApplications = {
+    "text/html"               = "firefox.desktop";
+    "x-scheme-handler/http"   = "firefox.desktop";
+    "x-scheme-handler/https"  = "firefox.desktop";
+  };
+
   # user def
   user = {
     enable = true;

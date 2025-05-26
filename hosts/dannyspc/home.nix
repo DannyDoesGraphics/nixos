@@ -285,15 +285,6 @@ in {
       WantedBy = [ "graphical-session.target" ];
     };
   };
-  xdg.mimeApps = {
-    xdg.configFile."mimeapps.list".force = true;
-    enable = true;
-    defaultApplications = {
-      "text/html" = "firefox.desktop";
-      "x-scheme-handler/http"   = "firefox.desktop";
-      "x-scheme-handler/https"  = "firefox.desktop";
-    };
-  };
 
   
   programs.home-manager.enable = true;
