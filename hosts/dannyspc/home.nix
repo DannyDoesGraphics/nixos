@@ -199,6 +199,7 @@ in {
           background: ${config.ui.colors.palette.color0};
           color: ${config.ui.colors.palette.color6};
         }
+        #workspaces,
         #clock,
         #cpu,
         #memory,
