@@ -177,23 +177,7 @@ in {
       settings = [{
         layer = "top";
         position = "top";
-        modules-left = [ "hyprland/workspaces" "hyprland/window" ];
-        modules-center = [ "clock" ];
-        modules-right = [ "cpu" "memory" "pulseaudio" "tray" ];
-        clock = {
-          format = "{:%a %b %d %H:%M}";
-        };
-        cpu = {
-          format = "CPU {usage}%";
-        };
-        memory = {
-          format = "RAM {used:0.1f}G/{total:0.1f}G";
-        };
-        pulseaudio = {
-          format = "{icon} {volume}%";
-          format-muted = " Mute";
-          format-icons.default = [ "" "" "" ];
-        };
+        
       }];
     };
   };
