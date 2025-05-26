@@ -77,8 +77,8 @@ in {
       # Finer control (Super+Ctrl+Shift)
       bind = $mainMod SHIFT, [, resizeactive, -40 0, exact
       bind = $mainMod SHIFT, ], resizeactive, 40 0, exact
-      bind = $mainMod SHIFT, -, resizeactive, 0 -40, exact
-      bind = $mainMod SHIFT, +, resizeactive, 0 40, exact
+      bind = $mainMod SHIFT, _, resizeactive, 0 -40, exact
+      bind = $mainMod SHIFT, =, resizeactive, 0 40, exact
     '';
   };
 
