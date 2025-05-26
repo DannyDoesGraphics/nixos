@@ -195,7 +195,7 @@ in {
           format-icons.default = [ "" "" "" ];
         };
       }];
-    }
+    };
   };
   services = {
     hyprpaper = {
