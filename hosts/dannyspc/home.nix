@@ -214,11 +214,11 @@ in {
         #pulseaudio.muted {
           color: ${config.ui.colors.palette.color8};
         }
-        #workspaces .active {
+        #workspaces button.active {
           background: ${config.ui.colors.palette.color2};
           color: ${config.ui.colors.palette.color0};
         }
-        #workspaces .inactive {
+        #workspaces button.inactive {
           background: ${config.ui.colors.palette.color3};
           color: ${config.ui.colors.palette.color0};
         }
