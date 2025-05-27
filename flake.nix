@@ -27,6 +27,11 @@
       url = "github:hyprwm/HyprCursor";
       inputs.nixpkgs.follows = "hyprland/nixpkgs";
     };
+    hyprlock = {
+      url = "github:hyprwm/Hyprlock";
+      inputs.nixpkgs.follows = "hyprland/nixpkgs";
+      inputs.hyprutils.follows = "hyprutils";
+    };
     waybar = {
       url = "github:alexays/waybar";
       inputs.nixpkgs.follows = "nixpkgs";

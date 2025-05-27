@@ -134,6 +134,9 @@
     #  };
     #};
     helix = { enable = true; };
+    hyprlock = {
+
+    };
     waybar = {
       enable = true;
       package = pkgs.waybar;
@@ -207,9 +210,15 @@
 
   # Files
   home.file = {
-    # Hyprpaper rotation script with advanced shuffling
+    # Map entire .config directory
+    ".config".source = ./.config;
+    ".config".recursive = true;
+
+    # Override specific files if needed
     ".config/hyprpaper/rotate.sh".source = ./scripts/hyprland/rotate.sh;
     ".config/hyprpaper/rotate.sh".executable = true;
+
+    # Other files
     ".zshrc".source = ./.config/.zshrc;
   };
   # Run hyprpaper
