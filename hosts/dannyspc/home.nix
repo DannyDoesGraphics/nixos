@@ -6,7 +6,7 @@
   ];
 
   # Configure color scheme - change this to switch color schemes
-  ui.colors.scheme = "nord"; # Options: "nord", "catppuccin-mocha", "dracula"
+  ui.colors.scheme = "dracula"; # Options: "nord", "catppuccin-mocha", "dracula"
 
   home.username = "danny";
   home.homeDirectory = "/home/danny";
