@@ -21,9 +21,5 @@ quotes=(
   "Poverty is not socialism. To be rich is glorious. - Deng Xiaoping"
 )
 
-# Pick one at random and print it
-print_quote() {
-  # $RANDOM gives 0–32767; modulo the number of quotes
-  local idx=$(( RANDOM % ${#quotes[@]} ))
-  echo "\n\n${quotes[$idx]}\n"
-}
+local idx=$(( RANDOM % ${#quotes[@]} ))
+echo "\n\n${quotes[$idx]}\n"
