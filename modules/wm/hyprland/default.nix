@@ -7,7 +7,7 @@
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     xwayland.enable = true;
-    systemd.enable = true;
+    withUWSM = true;
   };
   services.displayManager = {
     sddm.enable = true;
@@ -18,7 +18,6 @@
     enable = true;
     xdgOpenUsePortal = true;
     extraPortals = [
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal-gtk
     ];
     config.common.default = "*";
