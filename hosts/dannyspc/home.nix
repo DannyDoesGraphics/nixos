@@ -261,7 +261,6 @@ in {
     ".config/hyprpaper/rotate.sh".source = ./scripts/hyprland/rotate.sh;
     ".config/hyprpaper/rotate.sh".executable = true;
     ".zshrc".source = ./.config/.zshrc;
-    ".local/bin/xdg-open".executable = true;
   };
   # Run hyprpaper
   systemd.user.services.hyprpaper-rotate = {
