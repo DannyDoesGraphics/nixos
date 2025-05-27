@@ -26,32 +26,79 @@ get_wallpaper_files() {
   )
 }
 
-# function to update counts when files change
-update_counts_for_files() {
+# function to update reservoir when files change
+update_reservoir_for_files() {
   local -n current_files=$1
-  local -n count_array=$2
+  local -n reservoir_array=$2
   
-  # create a temporary associative array for new counts
-  declare -A new_counts
-  
-  # preserve counts for files that still exist
-  for f in "${current_files[@]}"; do
-    if [[ -v count_array["$f"] ]]; then
-      new_counts["$f"]=${count_array["$f"]}
-    else
-      new_counts["$f"]=0
-    fi
+  # remove files from reservoir that no longer exist
+  local temp_reservoir=()
+  for f in "${reservoir_array[@]}"; do
+    # check if file still exists in current files
+    for current_f in "${current_files[@]}"; do
+      if [[ "$f" == "$current_f" ]]; then
+        temp_reservoir+=("$f")
+        break
+      fi
+    done
   done
   
-  # replace the original counts array
-  count_array=()
-  for f in "${current_files[@]}"; do
-    count_array["$f"]=${new_counts["$f"]}
-  done
+  # update reservoir with filtered list
+  reservoir_array=("${temp_reservoir[@]}")
 }
 
-# declare associative array for counts (no cache persistence)
-declare -A counts
+# reservoir sampling selection
+select_wallpaper_reservoir() {
+  local -n current_files=$1
+  local -n reservoir_array=$2
+  local reservoir_size=$3
+  
+  # if reservoir is not full, pick from unused files first
+  if (( ${#reservoir_array[@]} < reservoir_size )); then
+    # find files not in reservoir
+    local unused_files=()
+    for f in "${current_files[@]}"; do
+      local in_reservoir=false
+      for r in "${reservoir_array[@]}"; do
+        if [[ "$f" == "$r" ]]; then
+          in_reservoir=true
+          break
+        fi
+      done
+      [[ "$in_reservoir" == false ]] && unused_files+=("$f")
+    done
+    
+    # if we have unused files, pick one randomly
+    if (( ${#unused_files[@]} > 0 )); then
+      echo "${unused_files[RANDOM % ${#unused_files[@]}]}"
+      return
+    fi
+  fi
+  
+  # reservoir is full or no unused files, use reservoir sampling
+  # pick a random file from all files
+  local selected="${current_files[RANDOM % ${#current_files[@]}]}"
+  
+  # with probability k/n, replace a random item in reservoir
+  local k=${#reservoir_array[@]}
+  local n=${#current_files[@]}
+  
+  if (( k < reservoir_size && RANDOM % n < reservoir_size )); then
+    # reservoir not full, just add
+    reservoir_array+=("$selected")
+  elif (( RANDOM % n < k )); then
+    # replace random item in reservoir
+    local replace_idx=$((RANDOM % k))
+    reservoir_array[replace_idx]="$selected"
+  fi
+  
+  echo "$selected"
+}
+
+# declare reservoir array for recently used wallpapers
+declare -a reservoir
+# reservoir size as percentage of total files (minimum 5, maximum 50)
+reservoir_size=10
 
 # wait for hyprpaper to be ready
 wait_for_hyprpaper
@@ -67,40 +114,22 @@ while true; do
     continue
   fi
   
-  # update counts for current file list
-  update_counts_for_files files counts
-  # recompute Cmax
-  Cmax=0
-  for cnt in "${counts[@]}"; do
-    (( cnt > Cmax )) && Cmax=$cnt
-  done
-
-  # build weights
-  weights=()
-  for f in "${files[@]}"; do
-    # weight = (Cmax - Ci) + 1
-    weights+=( $(( (Cmax - counts["$f"]) + 1 )) )
-  done
-
-  # pick one by weighted random
-  total=0
-  for w in "${weights[@]}"; do (( total += w )); done
-  pick=$(( RANDOM % total ))
-
-  for i in "${!files[@]}"; do
-    (( pick < weights[i] )) && {
-      next="${files[i]}"
-      break
-    }
-    (( pick -= weights[i] ))
-  done
+  # adjust reservoir size based on number of files
+  local adaptive_reservoir_size=$((${#files[@]} / 3))
+  (( adaptive_reservoir_size < 5 )) && adaptive_reservoir_size=5
+  (( adaptive_reservoir_size > 50 )) && adaptive_reservoir_size=50
+  reservoir_size=$adaptive_reservoir_size
+  
+  # update reservoir for current file list
+  update_reservoir_for_files files reservoir
+  
+  # select wallpaper using reservoir sampling
+  next=$(select_wallpaper_reservoir files reservoir "$reservoir_size")
 
   # apply wallpaper with error handling
   if hyprctl hyprpaper preload "$next" 2>/dev/null && \
      hyprctl hyprpaper wallpaper ", $next" 2>/dev/null; then
-    # update count only if wallpaper was successfully applied
-    (( counts["$next"]++ ))
-    echo "Applied wallpaper: $(basename "$next")"
+    echo "Applied wallpaper: $(basename "$next") [Reservoir size: ${#reservoir[@]}/$reservoir_size]"
   else
     echo "Failed to apply wallpaper, hyprpaper may not be available" >&2
     # wait for hyprpaper to be available again
