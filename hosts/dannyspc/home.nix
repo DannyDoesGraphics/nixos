@@ -112,7 +112,7 @@ in {
   
   programs = {
     firefox.enable = true;
-    zen_browser = {
+    zen-browser = {
       enable = true;
       policies = {
         DisableAppUpdate = true;
