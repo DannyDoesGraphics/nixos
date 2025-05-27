@@ -150,12 +150,23 @@
           path = "screenshot";
         };
 
-        label = [{
-          monitor = "";
-          text = ''cmd[update:1000] echo -e "$(date +"%A, %B %d")"'';
-          font_size = 28;
-          font_family = "JetBrainsMono Nerd Font Mono";
-        }];
+        label = [
+          {
+            monitor = "";
+            text = ''cmd[update:1000] echo -e "$(date +"%A, %B %d")"'';
+            font_size = 28;
+            font_family = "JetBrainsMono Nerd Font Mono Bold";
+          }
+          {
+            monitor = "";
+            text = ''cmd[update:1000] echo "<span>$(date +"%I:%M")</span>"'';
+            font_size = 160;
+            font_family = "JetBrainsMono Nerd Font Mono";
+            position = "0, 370";
+            halign = "center";
+            valign = "center";
+          }
+        ];
 
         input-field = lib.mkForce {
           monitor = "";
