@@ -30,15 +30,16 @@ $bg-color: $nord0;
 window.Bar {
     background: transparent;
     color: $fg-color;
-    font-weight: bold;
-    font-size: 13px;
+    font-family: "JetBrainsMono Nerd Font Mono";
+    font-weight: normal;
+    font-size: 14px;
 
     >centerbox {
-        background: $nord1;
-        border-radius: 10px;
-        margin: 8px;
+        background: transparent;
+        border-radius: 0;
+        margin: 0;
         padding: 4px 12px;
-        border: 1px solid $nord3;
+        border: none;
     }
 
     .left {
@@ -52,34 +53,24 @@ window.Bar {
     // Workspace styling
     .workspaces {
         background: $nord1;
-        border-radius: 8px;
-        padding: 2px;
-        border: 1px solid $nord3;
-        display: flex;
+        border-radius: 6px;
+        padding: 1px;
+        border: none;
         
         .workspace {
             background: transparent;
             border: none;
             border-radius: 0;
-            padding: 8px 12px;
+            padding: 4px 8px;
             margin: 0;
-            min-width: 32px;
+            min-width: 24px;
             color: $nord4;
             transition: all 200ms ease;
-            font-weight: 500;
-            flex: 1;
-            text-align: center;
-
-            &:first-child {
-                border-radius: 6px 0 0 6px;
-            }
-
-            &:last-child {
-                border-radius: 0 6px 6px 0;
-            }
+            font-weight: normal;
+            font-size: 14px;
 
             &:only-child {
-                border-radius: 6px;
+                border-radius: 5px;
             }
 
             &:hover {
@@ -90,7 +81,6 @@ window.Bar {
             &.active {
                 background: $nord10;
                 color: $nord6;
-                font-weight: bold;
             }
         }
     }
@@ -100,7 +90,8 @@ window.Bar {
         padding: 4px 8px;
         border-radius: 6px;
         background: $nord2;
-        border: 1px solid $nord3;
+        border: none;
+        min-width: 120px;
         
         label {
             color: $nord5;
@@ -110,14 +101,11 @@ window.Bar {
 
     // Clock styling
     .clock {
-        font-family: "JetBrains Mono", "Fira Code", monospace;
-        font-size: 14px;
-        font-weight: bold;
         color: $nord6;
         padding: 4px 8px;
         border-radius: 6px;
         background: $nord2;
-        border: 1px solid $nord7;
+        border: none;
     }
 
     // System info styling
@@ -129,18 +117,16 @@ window.Bar {
 
             label:first-child {
                 color: $nord4;
-                font-size: 11px;
             }
 
             label:last-child {
                 color: $nord6;
-                font-weight: bold;
             }
         }
 
         .cpu {
             background: $nord2;
-            border: 1px solid $nord14;
+            border: none;
             
             label:last-child {
                 color: $nord14;
@@ -149,7 +135,7 @@ window.Bar {
 
         .memory {
             background: $nord2;
-            border: 1px solid $nord13;
+            border: none;
             
             label:last-child {
                 color: $nord13;
@@ -160,19 +146,17 @@ window.Bar {
             padding: 4px 8px;
             border-radius: 6px;
             background: $nord2;
-            border: 1px solid $nord15;
+            border: none;
             transition: all 200ms ease;
 
             &:hover {
                 background: $nord3;
-                transform: scale(1.02);
                 border-color: $nord8;
             }
 
             box {
                 label:first-child {
                     color: $nord4;
-                    font-size: 11px;
                 }
 
                 label:last-child {
@@ -184,14 +168,39 @@ window.Bar {
     }
 
     button {
-        border-radius: 4px;
+        border-radius: 2px;
         margin: 0;
         border: none;
         background: transparent;
         transition: all 200ms ease;
+        outline: none;
+        box-shadow: none;
+        
+        &:not(:focus) {
+            color: $nord3;
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
         
         &:hover {
-            transform: scale(1.02);
+            outline: none;
         }
+        
+        &:active {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+}
+
+// Wallpaper styling
+window.Wallpaper {
+    background: $nord0;
+    
+    .wallpaper-container {
+        transition: all 1s ease-in-out;
     }
 }

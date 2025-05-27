@@ -20,7 +20,7 @@ const time = Variable("").poll(10, () => {
 })
 
 // Active workspace
-const activeWorkspace = Variable(1).poll(1000, () => {
+const activeWorkspace = Variable(1).poll(100, () => {
     try {
         const output = exec("hyprctl activeworkspace -j")
         return JSON.parse(output).id
@@ -34,22 +34,39 @@ const workspacesWithWindows = Variable<number[]>([]).poll(1000, () => {
     try {
         const output = exec("hyprctl workspaces -j")
         const workspaces = JSON.parse(output)
+        
+        // Get active workspace
+        const activeOutput = exec("hyprctl activeworkspace -j")
+        const activeWs = JSON.parse(activeOutput).id
+        
         // Filter workspaces that have windows and sort by id
-        return workspaces
+        const workspacesWithWins = workspaces
             .filter((ws: any) => ws.windows > 0)
             .map((ws: any) => ws.id)
-            .sort((a: number, b: number) => a - b)
+        
+        // Always include the active workspace even if it has no windows
+        const allWorkspaces = [...new Set([...workspacesWithWins, activeWs])]
+        
+        return allWorkspaces.sort((a: number, b: number) => a - b)
     } catch {
         return [1] // Default to workspace 1 if error
     }
 })
 
 // Active window
-const activeWindow = Variable("Desktop").poll(100, () => {
+const activeWindow = Variable("").poll(100, () => {
     try {
         const output = exec("hyprctl activewindow -j")
         const window = JSON.parse(output)
-        return window.title || window.class || "Desktop"
+        
+        // If there's no active window or it's empty, show workspace info
+        if (!window || !window.title) {
+            const workspaceOutput = exec("hyprctl activeworkspace -j")
+            const workspace = JSON.parse(workspaceOutput)
+            return `Workspace ${workspace.id}`
+        }
+        
+        return window.title || window.class || `Workspace ${JSON.parse(exec("hyprctl activeworkspace -j")).id}`
     } catch {
         return "Desktop"
     }
@@ -116,19 +133,31 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
                     </box>
                 }
                 centerWidget={
-                    <button 
+                    <label 
                         halign={Gtk.Align.CENTER} 
                         className="clock"
-                        child={<label label={bind(time)} />}
+                        label={bind(time)}
                     />
                 }
                 endWidget={
-                    <box halign={Gtk.Align.END} spacing={8}>
-                        <label label={bind(cpuUsage).as(cpu => `CPU: ${cpu}`)} />
-                        <label label={bind(memoryUsage).as(mem => `MEM: ${mem}`)} />
+                    <box halign={Gtk.Align.END} spacing={8} className="right system-info">
+                        <box className="cpu">
+                            <label label="CPU " />
+                            <label label={bind(cpuUsage)} />
+                        </box>
+                        <box className="memory">
+                            <label label="MEM " />
+                            <label label={bind(memoryUsage)} />
+                        </box>
                         <button 
+                            className="audio"
                             onClicked={() => execAsync("pavucontrol")}
-                            child={<label label={bind(audioVolume)} />}
+                            child={
+                                <box>
+                                    <label label="" />
+                                    <label label={bind(audioVolume).as(vol => vol.replace("VOL: ", ""))} />
+                                </box>
+                            }
                         />
                     </box>
                 }

@@ -29,6 +29,7 @@
           -- set the font
           font = wezterm.font("JetBrainsMono Nerd Font Mono", { weight = "Regular" }),
           font_size = 12.0,
+          max_faps = 240,
 
           -- define a custom Nord-based color scheme
           enable_tab_bar = false;
