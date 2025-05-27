@@ -62,6 +62,27 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
+      packages.${system}.default = pkgs.stdenvNoCC.mkDerivation rec {
+        name = "my-shell";
+        src = ./.;
+        nativeBuildInputs = [
+          ags.packages.${system}.default
+          pkgs.wrapGAppsHook
+          pkgs.gobject-introspection
+        ];
+
+        buildInputs = with astal.packages.${system}; [
+          astal4
+          io
+          # any other package
+        ];
+
+        installPhase = ''
+          mkdir -p $out/bin
+          ags bundle app.ts $out/bin/${name}
+        '';
+      };
+
       nixosConfigurations = {
         default = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
