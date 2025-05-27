@@ -156,7 +156,7 @@
             monitor = "";
             text = ''cmd[update:1000] echo -e "$(date +"%A, %B %d")"'';
             font_size = 28;
-            font_family = "JetBrainsMono Nerd Font Mono Bold";
+            font_family = "JetBrainsMono Nerd Font Mono";
           }
           # time
           {
@@ -177,7 +177,7 @@
             dots_spacing = 0.2; # Scale of dots' absolute size, 0.0 - 1.0
             dots_center = true;
             font_size = 18;
-            font_family = "JetBrainsMono Nerd Font Bold";
+            font_family = "JetBrainsMono Nerd Font";
             position = "0, -180";
             halign = "center";
             valign = "center";
