@@ -53,6 +53,7 @@
     xdg-desktop-portal-gtk
     xdg-utils
     unzip
+    nixfmt
   ];
   programs = {
     zsh = {
