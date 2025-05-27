@@ -147,14 +147,14 @@
           monitor = "";
           blur_passes = 0;
           contrast = 0.25;
-          font_size = 28;
-          font_family = "JetBrainsMono Nerd Font Mono";
           path = "screenshot";
         };
 
         label = [{
           monitor = "";
           text = ''cmd[update:1000] echo -e "$(date +"%A, %B %d")"'';
+          font_size = 28;
+          font_family = "JetBrainsMono Nerd Font Mono";
         }];
       };
     };
