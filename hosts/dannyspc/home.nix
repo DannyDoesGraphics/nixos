@@ -145,9 +145,8 @@
 
         background = {
           monitor = "";
-          blur_passes = 2;
-          contrast = 0.25;
-          path = "screenshot";
+          blur_passes = 0;
+          path = "~/.config/hypr/lock.jpg";
         };
 
         label = [
