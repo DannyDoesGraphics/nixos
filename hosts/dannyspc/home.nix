@@ -163,7 +163,7 @@
           {
             monitor = "";
             text = ''
-              cmd[update:1:1] sec=$(date +%s); if [ $((sec % 4)) -eq 0 ]; then fg="red"; else fg="white"; fi; printf "<span foreground=\"%s\">%s</span>" "$fg" "$(date +%H:%M:%S.%6N)"'';
+              cmd[update:1:1] sec=$(date +%s); if [ $((sec % 3)) -eq 0 ]; then fg="red"; else fg="white"; fi; printf "<span foreground=\"%s\">%s</span>" "$fg" "$(date +%H:%M:%S.%6N)"'';
             font_size = 28;
             font_family = "JetBrainsMono Nerd Font Mono";
             halign = "center";
