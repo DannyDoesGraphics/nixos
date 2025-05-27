@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 let
   colorsModule = import ../../modules/colors/nord.nix { inherit config pkgs lib; };
 in {
