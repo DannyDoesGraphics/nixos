@@ -133,6 +133,7 @@
     #    DisableTelemetry = true;
     #  };
     #};
+    helix = { enable = true; };
     waybar = {
       enable = true;
       package = pkgs.waybar;
