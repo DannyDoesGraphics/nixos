@@ -163,19 +163,10 @@
           {
             monitor = "";
             text = ''
-              cmd[update:1:1] sh -c '
-              # Get current epoch seconds
-              sec=$(date +%s)
-              # If (sec % 4) is 0 or 1 → red; else → white
-              if [ $((sec % 4)) -lt 2 ]; then
-                  fg="red"
-              else
-                  fg="white"
-              fi
-              # Print clock with microseconds, colored via Pango
-              printf "<span foreground=\"%s\">%s</span>" \
-                    "$fg" "$(date +'%H:%M:%S.%6N')"'
-            '';
+              cmd[update:1:1] \
+                      sec=$(date +%s); \
+                      if [ $((sec % 4)) -lt 2 ]; then fg="red"; else fg="white"; fi; \
+                      printf "<span foreground=\"%s\">%s</span>" "$fg" "$(date +\"%H:%M:%S.%6N\")"'';
             font_size = 28;
             font_family = "JetBrainsMono Nerd Font Mono";
             halign = "center";
