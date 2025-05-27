@@ -155,16 +155,16 @@
           {
             monitor = "";
             text = ''cmd[update:1000] echo -e "$(date +"%A, %B %d")"'';
-            font_size = 28;
+            font_size = 160;
+            position = "0, 370";
             font_family = "JetBrainsMono Nerd Font Mono";
           }
           # time
           {
             monitor = "";
-            text = ''cmd[update:1000] echo "<span>$(date +"%I:%M")</span>"'';
-            font_size = 160;
+            text = ''cmd[update:1] echo "<span>$(date +"%I:%M:%S:%N")</span>"'';
+            font_size = 28;
             font_family = "JetBrainsMono Nerd Font Mono";
-            position = "0, 370";
             halign = "center";
             valign = "center";
           }
