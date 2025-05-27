@@ -146,7 +146,7 @@
         background = {
           monitor = "";
           blur_passes = 1;
-          path = screenshot;
+          path = "screenshot";
         };
 
         label = [{
