@@ -134,9 +134,7 @@
     #  };
     #};
     helix = { enable = true; };
-    hyprlock = {
-
-    };
+    hyprlock = { enable = true; };
     waybar = {
       enable = true;
       package = pkgs.waybar;
