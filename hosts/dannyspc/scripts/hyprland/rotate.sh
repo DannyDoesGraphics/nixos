@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
 
 WP_DIR="$HOME/Pictures/Wallpapers"
 CACHE="$HOME/.cache/wallpaper-counts.db"
