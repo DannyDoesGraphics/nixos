@@ -148,6 +148,11 @@
           blur_passes = 1;
           contrast = 0.5;
         };
+
+        label = [{
+          monitor = "";
+          text = ''cmd[update:1000] echo -e "$(date +"%A, %B %d")"'';
+        }];
       };
     };
     waybar = {
