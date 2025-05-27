@@ -1,5 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
-{
+{ config, pkgs, lib, inputs, ... }: {
   imports = [
     ../../modules/colors/default.nix
     ../../home/wezterm/default.nix
