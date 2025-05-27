@@ -9,7 +9,6 @@
     xwayland.enable = true;
     withUWSM = true;
   };
-  wayland.windowManager.hyprland.systemd.enable = false;
   services.displayManager = {
     sddm.enable = true;
     sddm.wayland.enable = true;
