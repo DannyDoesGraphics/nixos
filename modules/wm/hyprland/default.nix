@@ -1,5 +1,5 @@
 # /etc/nixos/modules/wm/hyprland/default.nix
-
+# IMPORTANT: This module expects a conflicting systemd service to shut off: 
 { pkgs, libs, inputs, config, ... }: {
   programs.hyprland = {
     enable = true;
