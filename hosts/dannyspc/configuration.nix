@@ -10,6 +10,7 @@
     ../../modules/hardware/audio/default.nix
     ../../modules/wm/hyprland/default.nix
     inputs.home-manager.nixosModules.default
+    inputs.zen-browser.packages.${pkgs.system}.default
   ];
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

@@ -107,7 +107,6 @@ in {
     pavucontrol
     jetbrains.rust-rover
     code-cursor
-    inputs.zen-browser.packages.${pkgs.system}.default
   ];
   services.gnome-keyring.enable = true;
   
