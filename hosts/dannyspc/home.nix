@@ -167,7 +167,7 @@
             color = "${config.ui.colors.palette.color6}";
             font_size = 28;
             font_family = "JetBrainsMono Nerd Font Mono";
-            halign = "center";
+            halign = "left";
             valign = "center";
           }
           # user
@@ -182,7 +182,7 @@
             font_size = 18;
             font_family = "JetBrainsMono Nerd Font";
             position = "0, -180";
-            halign = "center";
+            halign = "left";
             valign = "center";
           }
         ];
