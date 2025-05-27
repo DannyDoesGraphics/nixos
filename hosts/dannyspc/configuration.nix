@@ -9,6 +9,8 @@
     ../../modules/hardware/audio/default.nix
     ../../modules/wm/hyprland/default.nix
     ../../modules/colors/default.nix
+    ../../modules/system/autoupgrade.nix
+    ../../modules/system/gc.nix
     inputs.home-manager.nixosModules.default
   ];
 
