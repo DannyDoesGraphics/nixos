@@ -8,8 +8,12 @@
     ../../modules/hardware/gpu/opengl.nix
     ../../modules/hardware/audio/default.nix
     ../../modules/wm/hyprland/default.nix
+    ../../modules/colors/default.nix
     inputs.home-manager.nixosModules.default
   ];
+
+  # Configure color scheme at system level
+  ui.colors.scheme = "nord"; # Options: "nord", "catppuccin-mocha", "dracula"
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   boot.loader.systemd-boot.enable = true;

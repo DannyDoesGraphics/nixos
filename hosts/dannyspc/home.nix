@@ -1,14 +1,13 @@
 { config, pkgs, lib, inputs, ... }:
-let
-  colorsModule =
-    import ../../modules/colors/nord.nix { inherit config pkgs lib; };
-  #zenModule = inputs.zen-browser.homeModules.beta;
-in {
+{
   imports = [
-    colorsModule
+    ../../modules/colors/default.nix
     ../../home/wezterm/default.nix
     #zenModule
   ];
+
+  # Configure color scheme - change this to switch color schemes
+  ui.colors.scheme = "nord"; # Options: "nord", "catppuccin-mocha", "dracula"
 
   home.username = "danny";
   home.homeDirectory = "/home/danny";
