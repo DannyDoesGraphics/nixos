@@ -134,7 +134,43 @@
     #  };
     #};
     helix = { enable = true; };
-    hyprlock = { enable = true; };
+    hyprlock = {
+      enable = true;
+      settings = {
+        "$font" = "JetBrainsMono Nerd Font Mono";
+        general = { hide_cursor = false; };
+        animations = {
+          enable = true;
+          bezier = "linear, 1, 1, 0, 0";
+          animation = "fadeIn, 1, 5, linear";
+          animation = "fadeOut, 1, 5, linear";
+          animation = "inputFieldDots, 1, 2, linear";
+        };
+        background = [{
+          monitor = "";
+          path = screenshot;
+          blur_passes = 1;
+        }];
+
+        input-field = [{
+          monitor = "";
+          size = "20%, 5%";
+          outline_thickness = 2;
+          inner_color = "rgba(0, 0, 0, 0.0)";
+          font_color = "rgb(143, 143, 143)";
+          fade_on_empty = false
+          rounding = 15
+
+          font_family = "$font"
+          placeholder_text = "Input password..."
+          fail_text = "$PAMFAIL"
+          dots_spacing = 0.3
+          position = 0, -20
+          halign = center
+          valign = center
+        }];
+      };
+    };
     waybar = {
       enable = true;
       package = pkgs.waybar;
