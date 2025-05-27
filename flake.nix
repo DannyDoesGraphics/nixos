@@ -57,7 +57,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, astal, ... }@inputs:
+  outputs = { self, nixpkgs, astal, ags, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
