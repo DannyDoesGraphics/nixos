@@ -109,18 +109,19 @@ in {
     pavucontrol
     jetbrains.rust-rover
     code-cursor
+    inputs.zen-browser.homeModules.beta
   ];
   services.gnome-keyring.enable = true;
   
   programs = {
     firefox.enable = true;
-    zen-browser = {
-      enable = true;
-      policies = {
-        DisableAppUpdate = true;
-        DisableTelemetry = true;
-      };
-    };
+    #zen-browser = {
+    #  enable = true;
+    #  policies = {
+    #    DisableAppUpdate = true;
+    #    DisableTelemetry = true;
+    #  };
+    #};
     wezterm = {
       enable = true;
 
