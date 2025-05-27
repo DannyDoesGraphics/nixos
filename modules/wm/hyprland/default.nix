@@ -20,8 +20,7 @@
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
     ];
-    config.common.default = "*";
-    config.common."org.freedesktop.impl.portal.OpenURI" = [ "hyprland" ];
-    config.hyprland.default = ["hyprland" "gtk"];
+    config.common.default = ["gtk"];
+    config.hyprland.default = ["gtk" "hyprland"];
   };
 }
