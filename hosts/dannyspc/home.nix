@@ -109,7 +109,7 @@ in {
     pkgs.pavucontrol
     pkgs.jetbrains.rust-rover
     pkgs.code-cursor
-    inputs.zen-browser.packages."x86_64-linux".default
+    #inputs.zen-browser.packages."x86_64-linux".default
   ];
   services.gnome-keyring.enable = true;
   
