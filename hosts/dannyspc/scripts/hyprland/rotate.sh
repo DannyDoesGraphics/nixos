@@ -2,7 +2,7 @@
 
 WP_DIR="$HOME/Pictures/Wallpapers"
 CACHE="$HOME/.cache/wallpaper-counts.db"
-INTERVAL=10   # seconds between changes
+INTERVAL=60   # seconds between changes
 
 # ensure directory exists
 [[ -d "$WP_DIR" ]] || {
