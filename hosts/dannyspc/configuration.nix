@@ -53,7 +53,6 @@
     xdg-desktop-portal-gtk
     xdg-utils
     unzip
-    dbus-cxx
   ];
   programs = {
     zsh = {
