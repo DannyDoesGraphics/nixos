@@ -1,5 +1,6 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
 import { Variable, exec, execAsync, bind } from "astal"
+import Hyprland from "gi://AstalHyprland"
 
 
 // Time with microsecond precision  
@@ -18,6 +19,7 @@ const time = Variable("").poll(60 * 1000, () => {
 })
 
 // Active workspace
+const hyprland = Hyprland.get_default()
 const activeWorkspace = Variable(1).poll(100, () => {
     console.log("asdasd");
     try {

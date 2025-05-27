@@ -74,8 +74,8 @@
         buildInputs = with astal.packages.${system}; [
           astal3
           io
-          hyprland
-          astal4
+          astal-hyprland
+          astal-4
           # any other package
         ];
 
