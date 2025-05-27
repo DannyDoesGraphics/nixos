@@ -1,13 +1,9 @@
 import { App } from "astal/gtk3"
+import Bar from "./widget/Bar"
 
-function Bar(gdkmonitor) {
-    return <window gdkmonitor={gdkmonitor} />
-}
-
-function main() {
-    for (const monitor of App.get_monitors()) {
-        Bar(monitor)
-    }
-}
-
-App.start({ main })
+App.start({
+    main() {
+        Bar(0)
+        Bar(1) // instantiate for each monitor
+    },
+})
