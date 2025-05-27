@@ -148,20 +148,6 @@
           blur_passes = 0;
           contrast = 0.5;
         };
-
-        label = [
-          # Day-Month-Date
-          {
-            monitor = "";
-            text = ''cmd[update:1000] echo -e "$(date + "%A %B %d")"'';
-            font = "JetBrainsMono Nerd Font Mono";
-            size = 28;
-            font_family = "JetBrainsMono Nerd Font Mono Bold";
-            position = "0, 490";
-            halign = "center";
-            valign = "center";
-          }
-        ];
       };
     };
     waybar = {
