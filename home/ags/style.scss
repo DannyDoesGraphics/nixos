@@ -1,20 +1,197 @@
-// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
-$fg-color: #{"@theme_fg_color"};
-$bg-color: #{"@theme_bg_color"};
+// Nord Color Palette
+// Polar Night
+$nord0: #2e3440;
+$nord1: #3b4252;
+$nord2: #434c5e;
+$nord3: #4c566a;
+
+// Snow Storm
+$nord4: #d8dee9;
+$nord5: #e5e9f0;
+$nord6: #eceff4;
+
+// Frost
+$nord7: #8fbcbb;
+$nord8: #88c0d0;
+$nord9: #81a1c1;
+$nord10: #5e81ac;
+
+// Aurora
+$nord11: #bf616a; // red
+$nord12: #d08770; // orange
+$nord13: #ebcb8b; // yellow
+$nord14: #a3be8c; // green
+$nord15: #b48ead; // purple
+
+// Theme colors using Nord palette
+$fg-color: $nord6;
+$bg-color: $nord0;
 
 window.Bar {
     background: transparent;
     color: $fg-color;
     font-weight: bold;
+    font-size: 13px;
 
     >centerbox {
-        background: $bg-color;
+        background: $nord1;
         border-radius: 10px;
         margin: 8px;
+        padding: 4px 12px;
+        border: 1px solid $nord3;
+    }
+
+    .left {
+        margin-right: 12px;
+    }
+
+    .right {
+        margin-left: 12px;
+    }
+
+    // Workspace styling
+    .workspaces {
+        background: $nord1;
+        border-radius: 8px;
+        padding: 2px;
+        border: 1px solid $nord3;
+        display: flex;
+        
+        .workspace {
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 8px 12px;
+            margin: 0;
+            min-width: 32px;
+            color: $nord4;
+            transition: all 200ms ease;
+            font-weight: 500;
+            flex: 1;
+            text-align: center;
+
+            &:first-child {
+                border-radius: 6px 0 0 6px;
+            }
+
+            &:last-child {
+                border-radius: 0 6px 6px 0;
+            }
+
+            &:only-child {
+                border-radius: 6px;
+            }
+
+            &:hover {
+                background: rgba(216, 222, 233, 0.15);
+                color: $nord6;
+            }
+
+            &.active {
+                background: $nord10;
+                color: $nord6;
+                font-weight: bold;
+            }
+        }
+    }
+
+    // Active window styling
+    .active-window {
+        padding: 4px 8px;
+        border-radius: 6px;
+        background: $nord2;
+        border: 1px solid $nord3;
+        
+        label {
+            color: $nord5;
+            font-style: italic;
+        }
+    }
+
+    // Clock styling
+    .clock {
+        font-family: "JetBrains Mono", "Fira Code", monospace;
+        font-size: 14px;
+        font-weight: bold;
+        color: $nord6;
+        padding: 4px 8px;
+        border-radius: 6px;
+        background: $nord2;
+        border: 1px solid $nord7;
+    }
+
+    // System info styling
+    .system-info {
+        .cpu, .memory {
+            padding: 4px 6px;
+            border-radius: 4px;
+            background: $nord2;
+
+            label:first-child {
+                color: $nord4;
+                font-size: 11px;
+            }
+
+            label:last-child {
+                color: $nord6;
+                font-weight: bold;
+            }
+        }
+
+        .cpu {
+            background: $nord2;
+            border: 1px solid $nord14;
+            
+            label:last-child {
+                color: $nord14;
+            }
+        }
+
+        .memory {
+            background: $nord2;
+            border: 1px solid $nord13;
+            
+            label:last-child {
+                color: $nord13;
+            }
+        }
+
+        .audio {
+            padding: 4px 8px;
+            border-radius: 6px;
+            background: $nord2;
+            border: 1px solid $nord15;
+            transition: all 200ms ease;
+
+            &:hover {
+                background: $nord3;
+                transform: scale(1.02);
+                border-color: $nord8;
+            }
+
+            box {
+                label:first-child {
+                    color: $nord4;
+                    font-size: 11px;
+                }
+
+                label:last-child {
+                    color: $nord15;
+                    font-weight: bold;
+                }
+            }
+        }
     }
 
     button {
-        border-radius: 8px;
-        margin: 2px;
+        border-radius: 4px;
+        margin: 0;
+        border: none;
+        background: transparent;
+        transition: all 200ms ease;
+        
+        &:hover {
+            transform: scale(1.02);
+        }
     }
 }

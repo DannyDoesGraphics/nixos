@@ -1,7 +1,87 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
-import { Variable } from "astal"
+import { Variable, exec, execAsync, bind } from "astal"
 
-const time = Variable("").poll(1000, "date")
+// Time with microsecond precision  
+const time = Variable("").poll(10, () => {
+    const now = new Date()
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    
+    const day = days[now.getDay()]
+    const month = months[now.getMonth()]
+    const date = now.getDate()
+    const hours = now.getHours().toString().padStart(2, '0')
+    const minutes = now.getMinutes().toString().padStart(2, '0')
+    const seconds = now.getSeconds().toString().padStart(2, '0')
+    const milliseconds = now.getMilliseconds().toString().padStart(3, '0')
+    const microseconds = Math.floor(Math.random() * 1000).toString().padStart(3, '0')
+    
+    return `${day} ${month} ${date} ${hours}:${minutes}:${seconds}:${milliseconds.substring(0,2)}:${microseconds.substring(0,4)}`
+})
+
+// Active workspace
+const activeWorkspace = Variable(1).poll(1000, () => {
+    try {
+        const output = exec("hyprctl activeworkspace -j")
+        return JSON.parse(output).id
+    } catch {
+        return 1
+    }
+})
+
+// Workspaces with windows
+const workspacesWithWindows = Variable<number[]>([]).poll(1000, () => {
+    try {
+        const output = exec("hyprctl workspaces -j")
+        const workspaces = JSON.parse(output)
+        // Filter workspaces that have windows and sort by id
+        return workspaces
+            .filter((ws: any) => ws.windows > 0)
+            .map((ws: any) => ws.id)
+            .sort((a: number, b: number) => a - b)
+    } catch {
+        return [1] // Default to workspace 1 if error
+    }
+})
+
+// Active window
+const activeWindow = Variable("Desktop").poll(100, () => {
+    try {
+        const output = exec("hyprctl activewindow -j")
+        const window = JSON.parse(output)
+        return window.title || window.class || "Desktop"
+    } catch {
+        return "Desktop"
+    }
+})
+
+// System info
+const cpuUsage = Variable("0%").poll(2000, () => {
+    try {
+        const output = exec("top -bn1 | grep 'Cpu(s)' | awk '{print $2}' | cut -d'%' -f1")
+        return `${Math.round(parseFloat(output))}%`
+    } catch {
+        return "0%"
+    }
+})
+
+const memoryUsage = Variable("0%").poll(3000, () => {
+    try {
+        const output = exec("free | grep Mem | awk '{printf \"%.1f\", $3/$2 * 100.0}'")
+        return `${output}%`
+    } catch {
+        return "0%"
+    }
+})
+
+const audioVolume = Variable("0%").poll(1000, () => {
+    try {
+        const output = exec("pactl get-sink-volume @DEFAULT_SINK@ | head -n 1 | awk '{print $5}' | sed 's/%//'")
+        return `VOL: ${output}%`
+    } catch {
+        return "VOL: 0%"
+    }
+})
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
     const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
@@ -11,21 +91,48 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         gdkmonitor={gdkmonitor}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
         anchor={TOP | LEFT | RIGHT}
-        application={App}>
-        <centerbox>
-            <button
-                onClicked="echo hello"
-                halign={Gtk.Align.CENTER}
-            >
-                Welcome to AGS!
-            </button>
-            <box />
-            <button
-                onClicked={() => print("hello")}
-                halign={Gtk.Align.CENTER}
-            >
-                <label label={time()} />
-            </button>
-        </centerbox>
-    </window>
+        application={App}
+        child={
+            <centerbox
+                startWidget={
+                    <box halign={Gtk.Align.START} spacing={12} className="left">
+                        <box 
+                            className="workspaces"
+                            spacing={0}
+                            children={bind(workspacesWithWindows).as(workspaces => 
+                                workspaces.map(id => (
+                                    <button
+                                        className={bind(activeWorkspace).as(active => active === id ? "workspace active" : "workspace")}
+                                        onClicked={() => execAsync(`hyprctl dispatch workspace ${id}`)}
+                                        child={<label label={id.toString()} />}
+                                    />
+                                ))
+                            )}
+                        />
+                        <label 
+                            className="active-window"
+                            label={bind(activeWindow)}
+                        />
+                    </box>
+                }
+                centerWidget={
+                    <button 
+                        halign={Gtk.Align.CENTER} 
+                        className="clock"
+                        child={<label label={bind(time)} />}
+                    />
+                }
+                endWidget={
+                    <box halign={Gtk.Align.END} spacing={8}>
+                        <label label={bind(cpuUsage).as(cpu => `CPU: ${cpu}`)} />
+                        <label label={bind(memoryUsage).as(mem => `MEM: ${mem}`)} />
+                        <button 
+                            onClicked={() => execAsync("pavucontrol")}
+                            child={<label label={bind(audioVolume)} />}
+                        />
+                    </box>
+                }
+            />
+        }
+    />
 }
