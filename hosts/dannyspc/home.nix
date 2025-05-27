@@ -112,13 +112,6 @@ in {
   
   programs = {
     firefox.enable = true;
-    zen-browser = {
-      enable = true;
-      policies = {
-        DisableAppUpdate = true;
-        DisableTelemetry = true;
-      };
-    };
     wezterm = {
       enable = true;
 
