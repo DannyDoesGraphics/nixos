@@ -59,6 +59,9 @@
     unzip
     nixfmt
     time
+    # SDDM themes (optional)
+    libsForQt5.sddm-kcm # SDDM configuration module
+    nordzy-cursor-theme # Your cursor theme
   ];
   programs = {
     zsh = {
