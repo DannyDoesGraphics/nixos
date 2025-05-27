@@ -13,7 +13,7 @@
   ];
 
   # Configure color scheme at system level
-  ui.colors.scheme = "nord"; # Options: "nord", "catppuccin-mocha", "dracula"
+  ui.colors.scheme = "dracula"; # Options: "nord", "catppuccin-mocha", "dracula"
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   boot.loader.systemd-boot.enable = true;
