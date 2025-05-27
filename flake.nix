@@ -72,7 +72,7 @@
         ];
 
         buildInputs = with astal.packages.${system}; [
-          astal4
+          astal3
           io
           # any other package
         ];
