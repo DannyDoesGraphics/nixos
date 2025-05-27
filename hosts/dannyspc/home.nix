@@ -121,7 +121,7 @@
     pkgs.pavucontrol
     pkgs.jetbrains.rust-rover
     pkgs.code-cursor
-    #inputs.astal.packages.${pkgs.system}.default
+    inputs.ags.packages.${pkgs.system}.default
     #inputs.zen-browser.packages."x86_64-linux".default
   ];
   services.gnome-keyring.enable = true;
@@ -254,6 +254,24 @@
     Service = {
       ExecStart = "%h/.config/hyprpaper/rotate.sh";
       Restart = "always";
+    };
+    Install = { WantedBy = [ "graphical-session.target" ]; };
+  };
+
+  # AGS Bar Service
+  systemd.user.services.ags = {
+    Unit = {
+      Description = "AGS Bar";
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${inputs.ags.packages.${pkgs.system}.default}/bin/ags";
+      ExecReload =
+        "${inputs.ags.packages.${pkgs.system}.default}/bin/ags quit; ${
+          inputs.ags.packages.${pkgs.system}.default
+        }/bin/ags";
+      Restart = "on-failure";
+      WorkingDirectory = "/etc/nixos";
     };
     Install = { WantedBy = [ "graphical-session.target" ]; };
   };

@@ -1,0 +1,13 @@
+/* AGS Bar Styling */
+.Bar {
+    background-color: rgba(46, 52, 64, 0.9); /* Nord dark background */
+    color: #eceff4; /* Nord light text */
+    padding: 8px;
+    border: none;
+    border-radius: 0;
+}
+
+.Bar box {
+    background-color: transparent;
+    padding: 4px 8px;
+}
