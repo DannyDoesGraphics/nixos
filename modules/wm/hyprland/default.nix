@@ -12,7 +12,7 @@
   services.displayManager = {
     sddm.enable = true;
     sddm.wayland.enable = true;
-    defaultSession = "hyprland";
+    defaultSession = "hyprland-uwsm";
   };
   xdg.portal = {
     enable = true;
