@@ -34,10 +34,6 @@
     enable = true;
     plugins = [ pkgs.ccid ];
   };
-  security.pam.services = {
-    login.u2fAuth = true;
-    sudo.u2fAuth = true;
-  };
 
   # Add udev rules for FIDO2 devices
   services.udev.packages = with pkgs; [ libu2f-host yubikey-personalization ];
