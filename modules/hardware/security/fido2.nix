@@ -24,7 +24,7 @@
     libfido2
     yubikey-manager
     yubikey-personalization
-    yubikey-manager-qt # GUI for YubiKey management
+    yubioath-flutter
     yubico-piv-tool # PIV (smart card) functionality
   ];
 
