@@ -156,17 +156,20 @@
             text = ''cmd[update:1000] echo -e "$(date +"%A, %B %d")"'';
             color = "${config.ui.colors.palette.color6}";
             font_size = 160;
-            position = "0, 370";
+            position = "50, 370";
             font_family = "JetBrainsMono Nerd Font Mono";
+            halign = "left";
+            valign = "center";
           }
           # time
           {
             monitor = "";
-            text = "cmd[update:1000] date +%H:%M:%S:%6N";
+            text = "cmd[update:100] date +%H:%M:%S:%6N";
             color = "${config.ui.colors.palette.color11}";
             font_size = 28;
             font_family = "JetBrainsMono Nerd Font Mono";
-            halign = "center";
+            position = "50, 200";
+            halign = "left";
             valign = "center";
           }
           # user
@@ -180,8 +183,8 @@
             dots_center = true;
             font_size = 18;
             font_family = "JetBrainsMono Nerd Font";
-            position = "0, -180";
-            halign = "center";
+            position = "50, -180";
+            halign = "left";
             valign = "center";
           }
         ];
@@ -200,8 +203,8 @@
           dots_center = true;
           font_family = "JetBrainsMono Nerd Font Mono";
           hide_input = false;
-          position = "0, -250";
-          halign = "center";
+          position = "50, -250";
+          halign = "left";
           valign = "center";
         };
       };
