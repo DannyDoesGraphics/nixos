@@ -4,6 +4,7 @@ let
 in {
   imports = [
     colorsModule
+    inputs.zen-browser.homeModules.beta
   ];
 
   home.username= "danny";
@@ -112,6 +113,13 @@ in {
   
   programs = {
     firefox.enable = true;
+    zen-browser = {
+      enable = true;
+      policies = {
+        DisableAppUpdate = true;
+        DisableTelemetry = true;
+      };
+    };
     wezterm = {
       enable = true;
 
