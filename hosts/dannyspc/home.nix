@@ -4,7 +4,6 @@ let
 in {
   imports = [
     colorsModule
-    inputs.zen-browser.packages.${pkgs.system}.default
   ];
 
   home.username= "danny";
@@ -108,6 +107,7 @@ in {
     pavucontrol
     jetbrains.rust-rover
     code-cursor
+    inputs.zen-browser.packages.${pkgs.system}.default
   ];
   services.gnome-keyring.enable = true;
   
