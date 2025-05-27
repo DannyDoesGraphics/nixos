@@ -58,6 +58,7 @@
     xdg-utils
     unzip
     nixfmt
+    time
   ];
   programs = {
     zsh = {
