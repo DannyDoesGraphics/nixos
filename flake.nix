@@ -64,7 +64,7 @@
     in {
       packages.${system}.default = pkgs.stdenvNoCC.mkDerivation rec {
         name = "my-shell";
-        src = ./.;
+        src = ./home/ags;
         nativeBuildInputs = [
           ags.packages.${system}.default
           pkgs.wrapGAppsHook
