@@ -66,6 +66,13 @@
         plugins = [ "git" ];
       };
     };
+    zen-browser = {
+      enable = true;
+      policies = {
+        DisableAppUpdate = true;
+        DisableTelemetry = true;
+      };
+    };
   };
   security.pam.services.login.enableGnomeKeyring = true;
   security.polkit.enable = true;
