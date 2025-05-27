@@ -1,6 +1,7 @@
 { config, pkgs, lib, inputs, ... }:
 let
-  colorsModule = import ../../modules/colors/nord.nix { inherit config pkgs lib; };
+  colorsModule =
+    import ../../modules/colors/nord.nix { inherit config pkgs lib; };
   #zenModule = inputs.zen-browser.homeModules.beta;
 in {
   imports = [
@@ -8,7 +9,7 @@ in {
     #zenModule
   ];
 
-  home.username= "danny";
+  home.username = "danny";
   home.homeDirectory = "/home/danny";
   nixpkgs.config.allowUnfree = true;
 
@@ -38,7 +39,7 @@ in {
       monitor = DP-6,5120x1440@239.76,0x0,1,bitdepth,8,cm,srgb
 
       $mainMod = SUPER
-      
+
       bind = $mainMod, Return, exec, wezterm
       # Movement
       bind = $mainMod, H, movefocus, l
@@ -112,7 +113,7 @@ in {
     #inputs.zen-browser.packages."x86_64-linux".default
   ];
   services.gnome-keyring.enable = true;
-  
+
   programs = {
     firefox.enable = true;
     #zen-browser = {
@@ -187,22 +188,15 @@ in {
           "modules-left" = [ "hyprland/workspaces" "hyprland/window" ];
           "modules-center" = [ "clock" ];
           "modules-right" = [ "cpu" "memory" "pulseaudio" "tray" ];
-          clock = {
-            format = "{:%a %b %d %H:%M}";
-          };
-          cpu = {
-            format = "CPU {usage}%";
-          };
-          memory = {
-            format = "RAM {used:0.1f}G/{total:0.1f}G";
-          };
+          clock = { format = "{:%a %b %d %H:%M}"; };
+          cpu = { format = "CPU {usage}%"; };
+          memory = { format = "RAM {used:0.1f}G/{total:0.1f}G"; };
           pulseaudio = {
             format = "{icon} {volume}%";
             "format-muted" = "󰝟 Mute";
-            "format-icons" = {
-              default = [ "" "" "" ];
-            };
-            on-click = "pgrep pavucontrol && pkill pavucontrol || pavucontrol &";
+            "format-icons" = { default = [ "" "" "" ]; };
+            on-click =
+              "pgrep pavucontrol && pkill pavucontrol || pavucontrol &";
           };
         };
       };
@@ -272,9 +266,7 @@ in {
       ExecStart = "%h/.config/hyprpaper/rotate.sh";
       Restart = "always";
     };
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
+    Install = { WantedBy = [ "graphical-session.target" ]; };
   };
   # Hyperpolkit agent
   systemd.user.services.hyprpolkitagent = {
@@ -284,11 +276,9 @@ in {
     };
     Service = {
       ExecStart = "${pkgs.hyprpolkitagent}/bin/hyprpolkitagent";
-      Restart   = "always";
+      Restart = "always";
     };
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
+    Install = { WantedBy = [ "graphical-session.target" ]; };
   };
   systemd.user.services.waybar = {
     Unit = {
@@ -299,9 +289,7 @@ in {
       ExecStart = "${pkgs.waybar}/bin/waybar";
       Restart = "on-failure";
     };
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
+    Install = { WantedBy = [ "graphical-session.target" ]; };
   };
   xdg.mimeApps = {
     enable = true;
@@ -314,7 +302,6 @@ in {
     };
   };
 
-  
   programs.home-manager.enable = true;
   home.stateVersion = "25.05";
 }

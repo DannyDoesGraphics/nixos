@@ -1,7 +1,6 @@
 # /etc/nixos/modules/user.nix
 
-{ lib, pkgs, config, ... }:
-{
+{ lib, pkgs, config, ... }: {
   options = {
     user = {
       enable = lib.mkEnableOption "This user";
@@ -15,7 +14,7 @@
       };
       extra_groups = lib.mkOption {
         type = lib.types.listOf lib.types.str;
-        default = ["wheel" "networkmanager" "audio"];
+        default = [ "wheel" "networkmanager" "audio" ];
         description = "Extra groups to add to the user";
       };
       home_file = lib.mkOption {

@@ -1,11 +1,11 @@
 # /etc/nixos/modules/wm/hyprland/default.nix
 
-{ pkgs, libs, inputs, config, ... }:
-{
+{ pkgs, libs, inputs, config, ... }: {
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     xwayland.enable = true;
     withUWSM = true;
   };
@@ -17,10 +17,8 @@
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-    ];
-    config.common.default = ["gtk"];
-    config.hyprland.default = ["gtk" "hyprland"];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = [ "gtk" ];
+    config.hyprland.default = [ "gtk" "hyprland" ];
   };
 }

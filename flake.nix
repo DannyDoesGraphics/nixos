@@ -40,10 +40,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, ... } @ inputs: {
+  outputs = { self, nixpkgs, ... }@inputs: {
     nixosConfigurations = {
       default = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs; };
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/dannyspc/configuration.nix
           inputs.home-manager.nixosModules.default

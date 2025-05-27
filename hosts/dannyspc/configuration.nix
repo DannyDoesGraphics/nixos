@@ -1,7 +1,6 @@
 # /etc/nixos/hosts/dannyspc/configuration.nix
 
-{ pkgs, libs, inputs, config, ... }:
-{
+{ pkgs, libs, inputs, config, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/user.nix
@@ -72,28 +71,24 @@
 
   # Security
   systemd = {
-      user.services.polkit-gnome-authentication-agent-1 = {
-        description = "polkit-gnome-authentication-agent-1";
-        wantedBy = [ "graphical-session.target" ];
-        wants = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig = {
-          Type = "simple";
-          ExecStart = "${pkgs.hyprland}/bin/hyprpolkitagent";
-          Restart = "on-failure";
-          RestartSec = 1;
-          TimeoutStopSec = 10;
-       };
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.hyprland}/bin/hyprpolkitagent";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
     };
   };
-  nix.settings.trusted-users = [
-    "@wheel"
-  ];
+  nix.settings.trusted-users = [ "@wheel" ];
 
   # Fonts
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
+  fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
   # user def
   user = {

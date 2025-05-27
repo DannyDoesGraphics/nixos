@@ -1,7 +1,6 @@
 # /etc/nixos/modules/hardware/gpu/nvidia.nix
 
-{ config, pkgs, lib, ... }:
-{
+{ config, pkgs, lib, ... }: {
   options.nvidia.xserver = lib.mkOption {
     type = lib.types.bool;
     default = false;
