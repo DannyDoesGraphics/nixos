@@ -147,6 +147,8 @@
           monitor = "";
           blur_passes = 0;
           contrast = 0.25;
+          font_size = 28;
+          font_family = "JetBrainsMono Nerd Font Mono";
           path = "screenshot";
         };
 
