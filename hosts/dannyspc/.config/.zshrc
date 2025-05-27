@@ -7,7 +7,7 @@ quotes=(
   "Nothing can harm you as much as your own thoughts unguarded. - Siddhartha Gautama"
   "Three things cannot be long hidden: the sun, the moon, and the truth. - Siddhartha Gautama"
   "You catch fish with both hands. - Vietnamese Proverb"
-  "A hundred skills are not worth a well-practiced hand. - Vietnamese Proverb”
+  "A hundred skills are not worth a well-practiced hand. - Vietnamese Proverb"
   "Remember that the storm is a good opportunity for the pine and the cypress to show their strength and their stability. - Hồ Chí Minh"
   "A revolution is not a dinner party, or writing an essay, or painting a picture, or doing embroidery; it cannot be so refined, so leisurely and gentle… - Mao Zedong"
   "Politics is war without bloodshed, while war is politics with bloodshed. - Mao Zedong"
