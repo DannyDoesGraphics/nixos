@@ -21,9 +21,7 @@
 
   # Install necessary packages for FIDO2 support
   environment.systemPackages = with pkgs; [
-    libfido2
     yubikey-manager
-    yubikey-personalization
     yubioath-flutter
     yubico-piv-tool # PIV (smart card) functionality
   ];
