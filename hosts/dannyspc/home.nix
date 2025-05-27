@@ -246,17 +246,18 @@
     ".zshrc".source = ./.config/.zshrc;
   };
   # Run hyprpaper
-  systemd.user.services.hyprpaper-rotate = {
-    Unit = {
-      Description = "Rotate Hyprpaper Wallpapers";
-      After = [ "graphical-session.target" ];
-    };
-    Service = {
-      ExecStart = "%h/.config/hyprpaper/rotate.sh";
-      Restart = "always";
-    };
-    Install = { WantedBy = [ "graphical-session.target" ]; };
-  };
+  #
+  #systemd.user.services.hyprpaper-rotate = {
+  #  Unit = {
+  #    Description = "Rotate Hyprpaper Wallpapers";
+  #    After = [ "graphical-session.target" ];
+  #  };
+  #  Service = {
+  #    ExecStart = "%h/.config/hyprpaper/rotate.sh";
+  #    Restart = "always";
+  #  };
+  #  Install = { WantedBy = [ "graphical-session.target" ]; };
+  #};
 
   # AGS Bar Service
   systemd.user.services.ags = {

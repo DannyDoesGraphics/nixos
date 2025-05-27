@@ -1,8 +1,9 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
 import { Variable, exec, execAsync, bind } from "astal"
 
+
 // Time with microsecond precision  
-const time = Variable("").poll(10, () => {
+const time = Variable("").poll(60 * 1000, () => {
     const now = new Date()
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -12,15 +13,13 @@ const time = Variable("").poll(10, () => {
     const date = now.getDate()
     const hours = now.getHours().toString().padStart(2, '0')
     const minutes = now.getMinutes().toString().padStart(2, '0')
-    const seconds = now.getSeconds().toString().padStart(2, '0')
-    const milliseconds = now.getMilliseconds().toString().padStart(3, '0')
-    const microseconds = Math.floor(Math.random() * 1000).toString().padStart(3, '0')
-    
-    return `${day} ${month} ${date} ${hours}:${minutes}:${seconds}:${milliseconds.substring(0,2)}:${microseconds.substring(0,4)}`
+
+    return `${day} ${month} ${date} ${hours}:${minutes}`
 })
 
 // Active workspace
 const activeWorkspace = Variable(1).poll(100, () => {
+    console.log("asdasd");
     try {
         const output = exec("hyprctl activeworkspace -j")
         return JSON.parse(output).id
@@ -73,7 +72,7 @@ const activeWindow = Variable("").poll(100, () => {
 })
 
 // System info
-const cpuUsage = Variable("0%").poll(2000, () => {
+const cpuUsage = Variable("0%").poll(1000, () => {
     try {
         const output = exec("top -bn1 | grep 'Cpu(s)' | awk '{print $2}' | cut -d'%' -f1")
         return `${Math.round(parseFloat(output))}%`
@@ -82,7 +81,7 @@ const cpuUsage = Variable("0%").poll(2000, () => {
     }
 })
 
-const memoryUsage = Variable("0%").poll(3000, () => {
+const memoryUsage = Variable("0%").poll(1000, () => {
     try {
         const output = exec("free | grep Mem | awk '{printf \"%.1f\", $3/$2 * 100.0}'")
         return `${output}%`
@@ -91,12 +90,25 @@ const memoryUsage = Variable("0%").poll(3000, () => {
     }
 })
 
-const audioVolume = Variable("0%").poll(1000, () => {
+const audioVolume = Variable({icon: "", volume: "0%"}).poll(100, () => {
     try {
         const output = exec("pactl get-sink-volume @DEFAULT_SINK@ | head -n 1 | awk '{print $5}' | sed 's/%//'")
-        return `VOL: ${output}%`
+        const volumeNumber = parseInt(output)
+        
+        let icon = ""
+        if (volumeNumber === 0) {
+            icon = "" // No volume
+        } else if (volumeNumber <= 33) {
+            icon = "" // Low volume
+        } else if (volumeNumber <= 66) {
+            icon = "" // Medium volume
+        } else {
+            icon = "" // High volume
+        }
+        
+        return {icon: icon, volume: `${output}%`}
     } catch {
-        return "VOL: 0%"
+        return {icon: "", volume: "ERR%"}
     }
 })
 
@@ -154,8 +166,8 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
                             onClicked={() => execAsync("pavucontrol")}
                             child={
                                 <box>
-                                    <label label="" />
-                                    <label label={bind(audioVolume).as(vol => vol.replace("VOL: ", ""))} />
+                                    <label label={bind(audioVolume).as(audio => audio.icon)} />
+                                    <label label={bind(audioVolume).as(audio => ` ${audio.volume}`)} />
                                 </box>
                             }
                         />

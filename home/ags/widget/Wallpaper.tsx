@@ -10,6 +10,8 @@ interface ImageSample {
 class WeightedImageSampler {
     private images: Map<string, ImageSample> = new Map()
     private totalSamples: number = 0
+    private isLoaded: boolean = false
+    private onLoadedCallbacks: (() => void)[] = []
     
     constructor() {
         this.loadImages()
@@ -18,7 +20,7 @@ class WeightedImageSampler {
     private async loadImages() {
         try {
             // Get home directory first
-            const homeDir = await execAsync("echo $HOME")
+            const homeDir = await execAsync("sh -c 'echo $HOME'")
             const wallpaperDir = `${homeDir.trim()}/Pictures/Wallpapers`
             
             // Check if directory exists first
@@ -44,8 +46,22 @@ class WeightedImageSampler {
             }
             
             console.log(`Loaded ${this.images.size} wallpaper images`)
+            this.isLoaded = true
+            
+            // Trigger callbacks when loaded
+            this.onLoadedCallbacks.forEach(callback => callback())
+            this.onLoadedCallbacks = []
+            
         } catch (error) {
             console.error("Error loading wallpaper images:", error)
+        }
+    }
+    
+    public onLoaded(callback: () => void) {
+        if (this.isLoaded) {
+            callback()
+        } else {
+            this.onLoadedCallbacks.push(callback)
         }
     }
     
@@ -98,10 +114,22 @@ class WeightedImageSampler {
 // Global sampler instance
 const imageSampler = new WeightedImageSampler()
 
-// Current wallpaper path - change every 30 seconds
-const currentWallpaper = Variable<string>("").poll(30000, async () => {
+// Initialize with the first wallpaper immediately, then poll for changes
+const currentWallpaper = Variable<string>("")
+
+// Set initial wallpaper as soon as images are loaded
+imageSampler.onLoaded(() => {
+    const initialImage = imageSampler.sampleNext()
+    if (initialImage) {
+        currentWallpaper.set(initialImage)
+        console.log(`Initial wallpaper set: ${initialImage}`)
+    }
+})
+
+// Poll for wallpaper changes every 60 seconds
+currentWallpaper.poll(60 * 1000, async () => {
     const nextImage = imageSampler.sampleNext()
-    return nextImage || ""
+    return nextImage || currentWallpaper.get()
 })
 
 // Refresh images periodically (check for new files every 5 minutes)
