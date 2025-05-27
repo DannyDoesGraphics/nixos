@@ -1,8 +1,8 @@
-import { App } from "astal/gtk3";
+import Bar from "./widget/Bar"
 
 App.start({
     main() {
-        // you will instantiate Widgets here
-        // and setup anything else if you need
-    }
+        Bar(0)
+        Bar(1) // instantiate for each monitor
+    },
 })
