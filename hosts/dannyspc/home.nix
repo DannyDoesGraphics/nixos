@@ -4,7 +4,7 @@ let
 in {
   imports = [
     colorsModule
-    inputs.zen-browser.homeModules.beta
+    inputs.zen-browser."${system}".default
   ];
 
   home.username= "danny";
