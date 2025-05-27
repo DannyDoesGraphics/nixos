@@ -174,7 +174,7 @@
               fi
               # Print clock with microseconds, colored via Pango
               printf "<span foreground=\"%s\">%s</span>" \
-                    "$fg" "$(date +'%H:%M:%S.%6N')" 
+                    "$fg" "$(date +'%H:%M:%S.%6N')"'
             '';
             font_size = 28;
             font_family = "JetBrainsMono Nerd Font Mono";
