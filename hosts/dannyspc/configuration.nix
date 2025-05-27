@@ -68,7 +68,6 @@
   };
   security.pam.services.login.enableGnomeKeyring = true;
   security.polkit.enable = true;
-  wayland.windowManager.hyprland.systemd.enable = false;
 
   # Security
   systemd = {
