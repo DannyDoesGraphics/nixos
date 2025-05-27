@@ -163,7 +163,7 @@
           {
             monitor = "";
             text = ''
-              cmd[update:1:1] sec=$(date +%s); if [ $((sec % 3)) -eq 0 ]; then fg='${config.ui.colors.palette.color11}'; else fg='${config.ui.colors.palette.color6}'; fi; printf '<span foreground="%s">%s</span>' "$fg" "$(date +'%H:%M:%S.%6N')"'';
+              cmd[update:1:1] sec=$(date +%s); if [ $((sec % 3)) -eq 0 ]; then fg=${config.ui.colors.palette.color11}; else fg=${config.ui.colors.palette.color6}; fi; printf "<span foreground=\"%s\">%s</span>" "$fg" "$(date +%H:%M:%S.%6N)"'';
             color = "${config.ui.colors.palette.color6}";
             font_size = 28;
             font_family = "JetBrainsMono Nerd Font Mono";
