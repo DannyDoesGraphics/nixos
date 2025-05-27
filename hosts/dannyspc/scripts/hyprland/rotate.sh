@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 WP_DIR="$HOME/Pictures/Wallpapers"
-INTERVAL=60   # seconds between changes
+INTERVAL=1   # seconds between changes
 
 # wait for hyprpaper to be available
 wait_for_hyprpaper() {
