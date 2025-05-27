@@ -24,7 +24,6 @@
     libfido2
     yubikey-manager
     yubikey-personalization
-    pamu2fcfg # Tool to configure U2F for PAM
     yubikey-manager-qt # GUI for YubiKey management
     yubico-piv-tool # PIV (smart card) functionality
   ];
