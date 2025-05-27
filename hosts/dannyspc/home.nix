@@ -164,7 +164,6 @@
           dots_size = 0.2;
           dots_spacing = 0.2;
           dots_center = true;
-          font_color = foreground;
           fade_on_empty = false;
           font_family = "JetBrainsMono Nerd Font Mono";
           hide_input = false;
