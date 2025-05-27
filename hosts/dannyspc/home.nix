@@ -26,6 +26,14 @@
     enable = true;
     xwayland.enable = true;
     extraConfig = ''
+      decoration {
+        blur {
+          enabled = false   # master toggle
+          size    = 0       # (ignored when disabled)
+          passes  = 0
+          # you can also tweak noise, contrast, brightness, etc.
+        }
+      }
       experimental {
         xx_color_management_v4 = true
       }
