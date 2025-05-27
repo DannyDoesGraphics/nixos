@@ -145,7 +145,8 @@
 
         background = {
           monitor = "";
-          blur_passes = 1;
+          blur_passes = 0;
+          contrast = 0.25;
           path = "screenshot";
         };
 
