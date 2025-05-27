@@ -94,7 +94,7 @@
       bind = $mainMod SHIFT, i, resizeactive, 0 40, exact
 
       # Close window
-      bind = $mainMod, Q, closeactive
+      bind = $mainMod, Q, killactive
     '';
   };
 
