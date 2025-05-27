@@ -137,12 +137,12 @@ while true; do
     # update count only if wallpaper was successfully applied
     (( counts["$next"]++ ))
     echo "Applied wallpaper: $(basename "$next") [Count: ${counts["$next"]}, Total files: ${#files[@]}]"
+    sleep "$INTERVAL"
   else
     echo "Failed to apply wallpaper, hyprpaper may not be available" >&2
     # wait for hyprpaper to be available again
     wait_for_hyprpaper
+    sleep 2
   fi
-
-  sleep "$INTERVAL"
 done
 
