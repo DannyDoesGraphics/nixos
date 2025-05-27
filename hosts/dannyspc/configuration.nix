@@ -7,6 +7,7 @@
     ../../modules/hardware/gpu/nvidia.nix
     ../../modules/hardware/gpu/opengl.nix
     ../../modules/hardware/audio/default.nix
+    ../../modules/hardware/security/fido2.nix
     ../../modules/wm/hyprland/default.nix
     ../../modules/colors/default.nix
     ../../modules/system/autoupgrade.nix
