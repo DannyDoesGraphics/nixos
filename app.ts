@@ -6,9 +6,7 @@ function Bar(gdkmonitor) {
 
 function main() {
     for (const monitor of App.get_monitors()) {
-        if (monitor.model == "your-desired-model") {
-            Bar(monitor)
-        }
+        Bar(monitor)
     }
 }
 
