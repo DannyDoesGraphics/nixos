@@ -199,7 +199,6 @@
           dots_size = 0.2;
           dots_spacing = 0.2;
           dots_center = true;
-          fade_on_empty = false;
           font_family = "JetBrainsMono Nerd Font Mono";
           hide_input = false;
           position = "0, -250";
