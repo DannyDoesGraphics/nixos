@@ -164,7 +164,7 @@
           # time
           {
             monitor = "";
-            text = "cmd[update:100] date +%H:%M:%S:%6N";
+            text = "cmd[update:10] date +%H:%M:%S:%6N";
             color = "${config.ui.colors.palette.color11}";
             font_size = 28;
             font_family = "JetBrainsMono Nerd Font Mono";
@@ -197,12 +197,22 @@
           inner_color = "${config.ui.colors.palette.color0}";
           font_color = "${config.ui.colors.palette.color6}";
           fade_on_empty = false;
+          fade_timeout = 0;
           placeholder_text = "<i>Password...</i>";
-          dots_size = 0.2;
-          dots_spacing = 0.2;
-          dots_center = true;
+          dots_size = 0;
+          dots_spacing = 0;
+          dots_center = false;
+          dots_rounding = -1;
           font_family = "JetBrainsMono Nerd Font Mono";
-          hide_input = false;
+          hide_input = true;
+          rounding = 6;
+          check_color = "${config.ui.colors.palette.color11}";
+          fail_color = "${config.ui.colors.palette.color9}";
+          capslock_color = "${config.ui.colors.palette.color13}";
+          numlock_color = "${config.ui.colors.palette.color13}";
+          bothlock_color = "${config.ui.colors.palette.color13}";
+          invert_numlock = false;
+          swap_font_color = false;
           position = "50, -250";
           halign = "left";
           valign = "center";
