@@ -37,7 +37,7 @@
     };
     zen_browser = {
       url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs"
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs = { self, nixpkgs, ... } @ inputs: {
