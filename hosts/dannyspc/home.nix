@@ -154,6 +154,7 @@
           {
             monitor = "";
             text = ''cmd[update:1000] echo -e "$(date +"%A, %B %d")"'';
+            color = "${config.ui.colors.palette.color6}";
             font_size = 160;
             position = "0, 370";
             font_family = "JetBrainsMono Nerd Font Mono";
@@ -162,7 +163,8 @@
           {
             monitor = "";
             text = ''
-              cmd[update:1:1] sec=$(date +%s); if [ $((sec % 3)) -eq 0 ]; then fg="red"; else fg="white"; fi; printf "<span foreground=\"%s\">%s</span>" "$fg" "$(date +%H:%M:%S.%6N)"'';
+              cmd[update:1:1] sec=$(date +%s); if [ $((sec % 3)) -eq 0 ]; then fg="${config.ui.colors.palette.color11}"; else fg="${config.ui.colors.palette.color6}"; fi; printf "<span foreground=\"%s\">%s</span>" "$fg" "$(date +%H:%M:%S.%6N)"'';
+            color = "${config.ui.colors.palette.color6}";
             font_size = 28;
             font_family = "JetBrainsMono Nerd Font Mono";
             halign = "center";
@@ -172,6 +174,7 @@
           {
             monitor = "";
             text = "$USER";
+            color = "${config.ui.colors.palette.color8}";
             outline_thickness = 2;
             dots_size = 0.2; # Scale of input-field height, 0.2 - 0.8
             dots_spacing = 0.2; # Scale of dots' absolute size, 0.0 - 1.0
@@ -188,6 +191,11 @@
           monitor = "";
           size = "300, 60";
           outline_thickness = 2;
+          outer_color = "${config.ui.colors.palette.color2}";
+          inner_color = "${config.ui.colors.palette.color0}";
+          font_color = "${config.ui.colors.palette.color6}";
+          fade_on_empty = false;
+          placeholder_text = "<i>Password...</i>";
           dots_size = 0.2;
           dots_spacing = 0.2;
           dots_center = true;
