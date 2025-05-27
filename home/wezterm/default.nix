@@ -33,7 +33,7 @@
           -- define a custom Nord-based color scheme
           enable_tab_bar = false;
           hide_tab_bar_if_only_one_tab = true;
-          window_background_opacity = 0.1;
+          window_background_opacity = 0.9;
           
           colors = {
             foreground = palette.color6;
