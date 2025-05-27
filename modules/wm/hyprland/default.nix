@@ -14,19 +14,6 @@
       enable = true;
       wayland.enable = true;
       theme = "breeze"; # You can change this to other themes
-      settings = {
-        General = {
-          Background =
-            "/home/danny/.config/hypr/lock.jpg"; # Use same wallpaper as lock screen
-          CursorTheme = "Nordzy-cursors";
-          Font = "JetBrainsMono Nerd Font Mono";
-        };
-        Theme = {
-          Current = "breeze";
-          CursorTheme = "Nordzy-cursors";
-          Font = "JetBrainsMono Nerd Font Mono,10,-1,0,50,0,0,0,0,0";
-        };
-      };
     };
     defaultSession = "hyprland-uwsm";
   };
