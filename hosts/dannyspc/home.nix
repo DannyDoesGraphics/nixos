@@ -121,7 +121,7 @@
     pkgs.pavucontrol
     pkgs.jetbrains.rust-rover
     pkgs.code-cursor
-    inputs.astal.packages.${pkgs.system}.default
+    #inputs.astal.packages.${pkgs.system}.default
     #inputs.zen-browser.packages."x86_64-linux".default
   ];
   services.gnome-keyring.enable = true;
