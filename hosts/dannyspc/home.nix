@@ -5,7 +5,7 @@ let
 in {
   imports = [
     colorsModule
-    zenModule
+    #zenModule
   ];
 
   home.username= "danny";
