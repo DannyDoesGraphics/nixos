@@ -1,10 +1,11 @@
 { config, pkgs, lib, inputs, ... }:
 let
-  #colorsModule = import ../../modules/colors/nord.nix { inherit config pkgs lib; };
+  colorsModule = import ../../modules/colors/nord.nix { inherit config pkgs lib; };
+  zenModule = inputs.zen-browser.homeModules.beta;
 in {
   imports = [
-    ../../modules/colors/nord.nix 
-    inputs.zen-browser.homeModules.beta
+    colorsModule
+    zenModule
   ];
 
   home.username= "danny";
