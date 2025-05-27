@@ -8,7 +8,6 @@
   # Install necessary packages for FIDO2 support
   environment.systemPackages = with pkgs; [
     libfido2
-    pamu2fcfg
     yubikey-manager
     yubikey-personalization
   ];
