@@ -162,7 +162,8 @@
           # time
           {
             monitor = "";
-            text = ''cmd[update:1] echo "<span>$(date +"%I:%M:%S:%N")</span>"'';
+            text =
+              ''cmd[update:1] echo "<span>$(date +"%I:%M:%S:%GN")</span>"'';
             font_size = 28;
             font_family = "JetBrainsMono Nerd Font Mono";
             halign = "center";
