@@ -156,6 +156,22 @@
           font_size = 28;
           font_family = "JetBrainsMono Nerd Font Mono";
         }];
+
+        input-field = lib.mkForce {
+          monitor = "";
+          size = "300, 60";
+          outline_thickness = 2;
+          dots_size = 0.2;
+          dots_spacing = = 0.2;
+          dots_center = true;
+          font_color = foreground;
+          fade_on_empty = false;
+          font_family = "JetBrainsMono Nerd Font Mono";
+          hide_input = false;
+          position = "0, -250";
+          halign = "center";
+          valign = "center";
+        };
       };
     };
     waybar = {
