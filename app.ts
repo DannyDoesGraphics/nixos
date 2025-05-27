@@ -1,4 +1,5 @@
 import Bar from "./widget/Bar"
+import { App } from "astal/gtk3"
 
 App.start({
     main() {
