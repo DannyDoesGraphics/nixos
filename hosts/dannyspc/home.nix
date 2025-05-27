@@ -145,7 +145,7 @@
 
         background = {
           monitor = "";
-          blur_passes = 0;
+          blur_passes = 1;
           contrast = 0.5;
         };
       };
