@@ -5,4 +5,4 @@ App.start({
         Bar(0)
         Bar(1) // instantiate for each monitor
     },
-})
+});

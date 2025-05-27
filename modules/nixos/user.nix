@@ -1,6 +1,6 @@
 # /etc/nixos/modules/user.nix
 
-{ lib, pkgs, config, ... }: {
+{ lib, pkgs, config, inputs, ... }: {
   options = {
     user = {
       enable = lib.mkEnableOption "This user";
@@ -36,6 +36,11 @@
       extraGroups = config.user.extra_groups;
       shell = config.user.shell;
     };
-    home-manager.users.${config.user.namespace} = import config.user.home_file;
+    home-manager.users.${config.user.namespace} = import config.user.home_file {
+      inherit inputs;
+      inherit lib;
+      inherit pkgs;
+      inherit config;
+    };
   };
 }
