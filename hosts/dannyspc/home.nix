@@ -88,27 +88,27 @@ in {
   };
 
   # Packages weee
-  home.packages = with pkgs; [
-    vscode
-    ncspot
-    vesktop
-    bitwarden-desktop
-    gcr
-    hyprpaper
-    hyprcursor
+  home.packages = [
+    pkgs.vscode
+    pkgs.ncspot
+    pkgs.vesktop
+    pkgs.bitwarden-desktop
+    pkgs.gcr
+    pkgs.hyprpaper
+    pkgs.hyprcursor
     pkgs.rclone
-    yazi
-    wireplumber
-    pipewire
-    gimp
-    fastfetch
-    nordzy-cursor-theme
-    xdg-utils
-    cargo
-    rustc
-    pavucontrol
-    jetbrains.rust-rover
-    code-cursor
+    pkgs.yazi
+    pkgs.wireplumber
+    pkgs.pipewire
+    pkgs.gimp
+    pkgs.fastfetch
+    pkgs.nordzy-cursor-theme
+    pkgs.xdg-utils
+    pkgs.cargo
+    pkgs.rustc
+    pkgs.pavucontrol
+    pkgs.jetbrains.rust-rover
+    pkgs.code-cursor
     inputs.zen-browser.packages."x86_64-linux".default
   ];
   services.gnome-keyring.enable = true;
