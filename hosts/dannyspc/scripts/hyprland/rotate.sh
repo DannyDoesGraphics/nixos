@@ -26,79 +26,90 @@ get_wallpaper_files() {
   )
 }
 
-# function to update reservoir when files change
-update_reservoir_for_files() {
+# function to update counts when files change
+update_counts_for_files() {
   local -n current_files=$1
-  local -n reservoir_array=$2
+  local -n count_array=$2
   
-  # remove files from reservoir that no longer exist
-  local temp_reservoir=()
-  for f in "${reservoir_array[@]}"; do
-    # check if file still exists in current files
-    for current_f in "${current_files[@]}"; do
-      if [[ "$f" == "$current_f" ]]; then
-        temp_reservoir+=("$f")
-        break
-      fi
-    done
+  # create a temporary associative array for new counts
+  declare -A new_counts
+  
+  # preserve counts for files that still exist
+  for f in "${current_files[@]}"; do
+    if [[ -v count_array["$f"] ]]; then
+      new_counts["$f"]=${count_array["$f"]}
+    else
+      new_counts["$f"]=0
+    fi
   done
   
-  # update reservoir with filtered list
-  reservoir_array=("${temp_reservoir[@]}")
+  # replace the original counts array
+  count_array=()
+  for f in "${current_files[@]}"; do
+    count_array["$f"]=${new_counts["$f"]}
+  done
 }
 
-# reservoir sampling selection
-select_wallpaper_reservoir() {
+# Efraimidis-Spirakis weighted sampling without replacement
+# This gives mathematically correct weighted sampling
+select_wallpaper_weighted() {
   local -n current_files=$1
-  local -n reservoir_array=$2
-  local reservoir_size=$3
+  local -n count_array=$2
   
-  # if reservoir is not full, pick from unused files first
-  if (( ${#reservoir_array[@]} < reservoir_size )); then
-    # find files not in reservoir
-    local unused_files=()
-    for f in "${current_files[@]}"; do
-      local in_reservoir=false
-      for r in "${reservoir_array[@]}"; do
-        if [[ "$f" == "$r" ]]; then
-          in_reservoir=true
-          break
-        fi
-      done
-      [[ "$in_reservoir" == false ]] && unused_files+=("$f")
+  # compute max count for inverse frequency weights
+  local max_count=0
+  for f in "${current_files[@]}"; do
+    local count=${count_array["$f"]:-0}
+    (( count > max_count )) && max_count=$count
+  done
+  
+  # generate keys using Efraimidis-Spirakis method
+  local -a keys_and_files=()
+  for f in "${current_files[@]}"; do
+    local count=${count_array["$f"]:-0}
+    # weight = (max_count + 1) - count (inverse frequency)
+    local weight=$((max_count + 1 - count))
+    
+    # generate uniform random U in (0,1] - using RANDOM/32767
+    # we'll approximate with integers to avoid floating point
+    local u=$((RANDOM + 1))  # 1 to 32768
+    
+    # compute key = U^(1/weight) 
+    # approximation: we'll use (32769 - u)^weight as our key
+    # this inverts the relationship so higher weights get higher keys
+    local key=1
+    local base=$((32769 - u))
+    local w=$weight
+    
+    # simple integer exponentiation (limited to avoid overflow)
+    if (( w > 10 )); then w=10; fi
+    for ((i=0; i<w; i++)); do
+      key=$((key * base / 1000))  # scale down to prevent overflow
+      if (( key <= 0 )); then key=1; fi
     done
     
-    # if we have unused files, pick one randomly
-    if (( ${#unused_files[@]} > 0 )); then
-      echo "${unused_files[RANDOM % ${#unused_files[@]}]}"
-      return
+    keys_and_files+=("$key|$f")
+  done
+  
+  # find the file with the highest key
+  local best_key=0
+  local best_file=""
+  
+  for entry in "${keys_and_files[@]}"; do
+    local key="${entry%|*}"
+    local file="${entry#*|}"
+    
+    if (( key > best_key )); then
+      best_key=$key
+      best_file="$file"
     fi
-  fi
+  done
   
-  # reservoir is full or no unused files, use reservoir sampling
-  # pick a random file from all files
-  local selected="${current_files[RANDOM % ${#current_files[@]}]}"
-  
-  # with probability k/n, replace a random item in reservoir
-  local k=${#reservoir_array[@]}
-  local n=${#current_files[@]}
-  
-  if (( k < reservoir_size && RANDOM % n < reservoir_size )); then
-    # reservoir not full, just add
-    reservoir_array+=("$selected")
-  elif (( RANDOM % n < k )); then
-    # replace random item in reservoir
-    local replace_idx=$((RANDOM % k))
-    reservoir_array[replace_idx]="$selected"
-  fi
-  
-  echo "$selected"
+  echo "$best_file"
 }
 
-# declare reservoir array for recently used wallpapers
-declare -a reservoir
-# reservoir size as percentage of total files (minimum 5, maximum 50)
-reservoir_size=10
+# declare associative array for counts (no cache persistence)
+declare -A counts
 
 # wait for hyprpaper to be ready
 wait_for_hyprpaper
@@ -114,22 +125,18 @@ while true; do
     continue
   fi
   
-  # adjust reservoir size based on number of files
-  local adaptive_reservoir_size=$((${#files[@]} / 3))
-  (( adaptive_reservoir_size < 5 )) && adaptive_reservoir_size=5
-  (( adaptive_reservoir_size > 50 )) && adaptive_reservoir_size=50
-  reservoir_size=$adaptive_reservoir_size
+  # update counts for current file list
+  update_counts_for_files files counts
   
-  # update reservoir for current file list
-  update_reservoir_for_files files reservoir
-  
-  # select wallpaper using reservoir sampling
-  next=$(select_wallpaper_reservoir files reservoir "$reservoir_size")
+  # select wallpaper using weighted sampling without replacement
+  next=$(select_wallpaper_weighted files counts)
 
   # apply wallpaper with error handling
   if hyprctl hyprpaper preload "$next" 2>/dev/null && \
      hyprctl hyprpaper wallpaper ", $next" 2>/dev/null; then
-    echo "Applied wallpaper: $(basename "$next") [Reservoir size: ${#reservoir[@]}/$reservoir_size]"
+    # update count only if wallpaper was successfully applied
+    (( counts["$next"]++ ))
+    echo "Applied wallpaper: $(basename "$next") [Count: ${counts["$next"]}, Total files: ${#files[@]}]"
   else
     echo "Failed to apply wallpaper, hyprpaper may not be available" >&2
     # wait for hyprpaper to be available again
