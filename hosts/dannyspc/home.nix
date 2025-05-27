@@ -151,18 +151,34 @@
         };
 
         label = [
+          # date
           {
             monitor = "";
             text = ''cmd[update:1000] echo -e "$(date +"%A, %B %d")"'';
             font_size = 28;
             font_family = "JetBrainsMono Nerd Font Mono Bold";
           }
+          # time
           {
             monitor = "";
             text = ''cmd[update:1000] echo "<span>$(date +"%I:%M")</span>"'';
             font_size = 160;
             font_family = "JetBrainsMono Nerd Font Mono";
             position = "0, 370";
+            halign = "center";
+            valign = "center";
+          }
+          # user
+          {
+            monitor = "";
+            text = "$USER";
+            outline_thickness = 2;
+            dots_size = 0.2; # Scale of input-field height, 0.2 - 0.8
+            dots_spacing = 0.2; # Scale of dots' absolute size, 0.0 - 1.0
+            dots_center = true;
+            font_size = 18;
+            font_family = "JetBrainsMono Nerd Font Bold";
+            position = "0, -180";
             halign = "center";
             valign = "center";
           }
