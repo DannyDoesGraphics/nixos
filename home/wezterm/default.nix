@@ -1,3 +1,4 @@
+# /etc/nixos/home/wezterm/default.nix
 { lib, ... }: {
   packages.wezterm = {
     enable = true;
