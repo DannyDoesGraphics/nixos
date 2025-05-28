@@ -4,10 +4,6 @@ import Hyprland from "gi://AstalHyprland"
 
 const hyprland = Hyprland.get_default()
 
-for (const client of hyprland.get_clients()) {
-    print(client.title)
-}
-
 // Time with microsecond precision  
 const time = Variable("").poll(60 * 1000, () => {
     const now = new Date()
@@ -23,48 +19,64 @@ const time = Variable("").poll(60 * 1000, () => {
     return `${day} ${month} ${date} ${hours}:${minutes}`
 })
 
-// Workspaces with windows
-const workspacesWithWindows = Variable<number[]>([]).poll(1000, () => {
-    try {
-        const output = exec("hyprctl workspaces -j")
-        const workspaces = JSON.parse(output)
-        
-        // Get active workspace
-        const activeOutput = exec("hyprctl activeworkspace -j")
-        const activeWs = JSON.parse(activeOutput).id
-        
-        // Filter workspaces that have windows and sort by id
-        const workspacesWithWins = workspaces
-            .filter((ws: any) => ws.windows > 0)
-            .map((ws: any) => ws.id)
-        
-        // Always include the active workspace even if it has no windows
-        const allWorkspaces = [...new Set([...workspacesWithWins, activeWs])]
-        
-        return allWorkspaces.sort((a: number, b: number) => a - b)
-    } catch {
-        return [1] // Default to workspace 1 if error
+// Active workspace using Hyprland API
+const activeWorkspace = Variable(hyprland.get_focused_workspace()?.get_id() || 1)
+
+// Update active workspace when it changes
+hyprland.connect("workspace-changed", () => {
+    const workspace = hyprland.get_focused_workspace()
+    if (workspace) {
+        activeWorkspace.set(workspace.get_id())
     }
 })
 
-// Active window
-const activeWindow = Variable("").poll(100, () => {
-    try {
-        const output = exec("hyprctl activewindow -j")
-        const window = JSON.parse(output)
-        
-        // If there's no active window or it's empty, show workspace info
-        if (!window || !window.title) {
-            const workspaceOutput = exec("hyprctl activeworkspace -j")
-            const workspace = JSON.parse(workspaceOutput)
-            return `Workspace ${workspace.id}`
-        }
-        
-        return window.title || window.class || `Workspace ${JSON.parse(exec("hyprctl activeworkspace -j")).id}`
-    } catch {
-        return "Desktop"
+// Workspaces with windows using Hyprland API
+const workspacesWithWindows = Variable<number[]>([])
+
+function updateWorkspaces() {
+    const workspaces = hyprland.get_workspaces()
+    const activeWs = hyprland.get_focused_workspace()?.get_id() || 1
+    
+    // Get workspaces that have windows
+    const workspacesWithWins = workspaces
+        .filter((ws: any) => ws.get_clients().length > 0)
+        .map((ws: any) => ws.get_id())
+    
+    // Always include the active workspace even if it has no windows
+    const allWorkspaces = [...new Set([...workspacesWithWins, activeWs])]
+    
+    workspacesWithWindows.set(allWorkspaces.sort((a: number, b: number) => a - b))
+}
+
+// Initial update
+updateWorkspaces()
+
+// Update workspaces when they change
+hyprland.connect("workspace-added", updateWorkspaces)
+hyprland.connect("workspace-removed", updateWorkspaces)
+hyprland.connect("client-added", updateWorkspaces)
+hyprland.connect("client-removed", updateWorkspaces)
+hyprland.connect("workspace-changed", updateWorkspaces)
+
+// Active window using Hyprland API
+const activeWindow = Variable("")
+
+function updateActiveWindow() {
+    const client = hyprland.get_focused_client()
+    if (client && client.get_title()) {
+        activeWindow.set(client.get_title())
+    } else {
+        const workspace = hyprland.get_focused_workspace()
+        activeWindow.set(`Workspace ${workspace?.get_id() || 1}`)
     }
-})
+}
+
+// Initial update
+updateActiveWindow()
+
+// Update active window when it changes
+hyprland.connect("client-changed", updateActiveWindow)
+hyprland.connect("workspace-changed", updateActiveWindow)
 
 // System info
 const cpuUsage = Variable("0%").poll(1000, () => {
@@ -127,7 +139,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
                                 workspaces.map(id => (
                                     <button
                                         className={bind(activeWorkspace).as(active => active === id ? "workspace active" : "workspace")}
-                                        onClicked={() => execAsync(`hyprctl dispatch workspace ${id}`)}
+                                        onClicked={() => hyprland.dispatch("workspace", id.toString())}
                                         child={<label label={id.toString()} />}
                                     />
                                 ))

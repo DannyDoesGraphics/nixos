@@ -276,7 +276,13 @@
       Restart = "on-failure";
       WorkingDirectory = "/etc/nixos/home/ags";
       Environment = [
-        "GI_TYPELIB_PATH=${inputs.astal.packages.${pkgs.system}.hyprland}/lib/girepository-1.0:${inputs.astal.packages.${pkgs.system}.astal4}/lib/girepository-1.0:${inputs.astal.packages.${pkgs.system}.io}/lib/girepository-1.0"
+        "GI_TYPELIB_PATH=${
+          inputs.astal.packages.${pkgs.system}.hyprland
+        }/lib/girepository-1.0:${
+          inputs.astal.packages.${pkgs.system}.astal4
+        }/lib/girepository-1.0:${
+          inputs.astal.packages.${pkgs.system}.io
+        }/lib/girepository-1.0"
       ];
     };
     Install = { WantedBy = [ "graphical-session.target" ]; };
