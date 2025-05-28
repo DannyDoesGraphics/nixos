@@ -33,5 +33,7 @@ window.Wallpaper {
     
     .wallpaper-container {
         background: $nord0; // Simple solid color background
+        min-width: 0;  // Let it fill available space
+        min-height: 0; // Let it fill available space
     }
 }

@@ -34,6 +34,11 @@
     enable = true;
     xwayland.enable = true;
     extraConfig = ''
+      # Disable title bars globally
+      windowrulev2 = noblur,class:.*
+      windowrulev2 = noshadow,class:.*
+      windowrulev2 = noborder,class:.*
+
       decoration {
         blur {
           enabled = false   # master toggle
@@ -41,7 +46,18 @@
           passes  = 0
           # you can also tweak noise, contrast, brightness, etc.
         }
+        rounding = 0
+        drop_shadow = false
+        shadow_range = 0
+        shadow_render_power = 0
       }
+
+      general {
+        border_size = 0
+        gaps_in = 0
+        gaps_out = 0
+      }
+
       experimental {
         xx_color_management_v4 = true
       }
