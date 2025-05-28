@@ -129,6 +129,7 @@
     pkgs.nordzy-cursor-theme
     pkgs.xdg-utils
     pkgs.cargo
+    pkgs.clippy
     pkgs.rustc
     pkgs.pavucontrol
     pkgs.jetbrains.rust-rover
@@ -320,7 +321,9 @@
       After = [ "graphical-session.target" ];
     };
     Service = {
-      ExecStart = "${pkgs.hyprpolkitagent}/bin/hyprpolkitagent";
+      ExecStart = "${
+          inputs.hyprpolkitagent.packages.${pkgs.system}.default
+        }/bin/hyprpolkitagent";
       Restart = "always";
     };
     Install = { WantedBy = [ "graphical-session.target" ]; };
