@@ -4,8 +4,8 @@
     home.packages = [ pkgs.mako pkgs.libnotify ];
     services.mako = { enable = true; };
     home.file.".config/mako/config".text = ''
-      background-color = #FFFFFF
-      border-color = #FFFFFF
+      background-color=#FFFFFF
+      border-color=#FFFFFF
     '';
   };
 }
