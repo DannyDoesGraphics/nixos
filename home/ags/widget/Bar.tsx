@@ -3,6 +3,7 @@ import { Variable, exec, execAsync, bind } from "astal"
 import Hyprland from "gi://AstalHyprland"
 import Wp from "gi://AstalWp"
 import Gtk4LayerShell from "gi://Gtk4LayerShell"
+import GLib from "gi://GLib"
 
 const hyprland = Hyprland.get_default()
 const audio = Wp.get_default()
@@ -173,17 +174,47 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         anchor={TOP | LEFT | RIGHT}
         application={App}
         setup={(self) => {
-            // Initialize layer shell for this window
-            if (Gtk4LayerShell.is_supported()) {
-                console.log("Initializing layer shell for window")
-                Gtk4LayerShell.init_for_window(self)
-                Gtk4LayerShell.set_layer(self, Gtk4LayerShell.Layer.TOP)
-                Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.TOP, true)
-                Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.LEFT, true)
-                Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.RIGHT, true)
-                Gtk4LayerShell.set_exclusive_zone(self, 30) // Height of the bar
-            } else {
-                console.log("Layer shell not supported, window will be regular")
+            // Debug environment information
+            console.log("WAYLAND_DISPLAY:", GLib.getenv("WAYLAND_DISPLAY"));
+            console.log("GDK_BACKEND:", GLib.getenv("GDK_BACKEND"));
+            console.log("Display backend:", self.get_display().get_name());
+            console.log("Window surface type:", self.get_surface()?.constructor.name);
+            
+            // Check if we're running on Wayland
+            const display = self.get_display();
+            console.log("Display type:", display.constructor.name);
+            console.log("Display name:", display.get_name());
+            
+            // More detailed layer shell debugging
+            console.log("GTK4LayerShell object:", typeof Gtk4LayerShell);
+            console.log("GTK4LayerShell.is_supported function:", typeof Gtk4LayerShell.is_supported);
+            
+            try {
+                const isSupported = Gtk4LayerShell.is_supported();
+                console.log("GTK4LayerShell.is_supported() result:", isSupported);
+                
+                if (isSupported) {
+                    console.log("Initializing layer shell for window")
+                    Gtk4LayerShell.init_for_window(self)
+                    Gtk4LayerShell.set_layer(self, Gtk4LayerShell.Layer.TOP)
+                    Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.TOP, true)
+                    Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.LEFT, true)
+                    Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.RIGHT, true)
+                    Gtk4LayerShell.set_exclusive_zone(self, 30) // Height of the bar
+                    console.log("Layer shell initialized successfully");
+                } else {
+                    console.log("Layer shell not supported, window will be regular")
+                    // Try to initialize anyway to see what happens
+                    try {
+                        console.log("Attempting to force init layer shell...");
+                        Gtk4LayerShell.init_for_window(self);
+                        console.log("Force init succeeded!");
+                    } catch (error: any) {
+                        console.log("Force init failed:", error.message);
+                    }
+                }
+            } catch (error: any) {
+                console.log("Error calling GTK4LayerShell.is_supported():", error.message);
             }
         }}
         child={
