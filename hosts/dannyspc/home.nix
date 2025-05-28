@@ -140,6 +140,7 @@
     inputs.astal.packages.${pkgs.system}.astal4
     inputs.astal.packages.${pkgs.system}.hyprland
     inputs.astal.packages.${pkgs.system}.wireplumber
+    inputs.swww.packages.${pkgs.system}.swww
     #inputs.zen-browser.packages."x86_64-linux".default
   ];
   services.gnome-keyring.enable = true;
