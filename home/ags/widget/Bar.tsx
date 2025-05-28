@@ -2,6 +2,7 @@ import { App, Astal, Gtk, Gdk } from "astal/gtk4"
 import { Variable, exec, execAsync, bind } from "astal"
 import Hyprland from "gi://AstalHyprland"
 import Wp from "gi://AstalWp"
+import Gtk4LayerShell from "gi://Gtk4LayerShell"
 
 const hyprland = Hyprland.get_default()
 const audio = Wp.get_default()
@@ -164,12 +165,27 @@ const audioVolume = Variable({icon: "", volume: "0%"}).poll(100, () => {
 export default function Bar(gdkmonitor: Gdk.Monitor) {
     const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
-    return <window
+    // Create window and setup layer shell
+    const window = <window
         className="Bar"
         gdkmonitor={gdkmonitor}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
         anchor={TOP | LEFT | RIGHT}
         application={App}
+        setup={(self) => {
+            // Initialize layer shell for this window
+            if (Gtk4LayerShell.is_supported()) {
+                console.log("Initializing layer shell for window")
+                Gtk4LayerShell.init_for_window(self)
+                Gtk4LayerShell.set_layer(self, Gtk4LayerShell.Layer.TOP)
+                Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.TOP, true)
+                Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.LEFT, true)
+                Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.RIGHT, true)
+                Gtk4LayerShell.set_exclusive_zone(self, 30) // Height of the bar
+            } else {
+                console.log("Layer shell not supported, window will be regular")
+            }
+        }}
         child={
             <centerbox
                 startWidget={
@@ -225,4 +241,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             />
         }
     />
+    
+    return window
+}
 }
