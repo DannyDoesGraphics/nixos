@@ -79,8 +79,7 @@
 
         extraPackages = with astal.packages.${system};
           [
-            hyprland
-
+            # hyprland package moved to home.nix for CLI access
           ];
 
         installPhase = ''

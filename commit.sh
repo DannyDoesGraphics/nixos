@@ -1,4 +1,4 @@
-#!/user/bin/env bash
+#!/usr/bin/env bash
 # Commit stuff
 cd /etc/nixos/
 git add -A

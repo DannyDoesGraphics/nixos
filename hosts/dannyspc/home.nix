@@ -123,6 +123,7 @@
     pkgs.code-cursor
     inputs.ags.packages.${pkgs.system}.default
     inputs.astal.packages.${pkgs.system}.default
+    inputs.astal.packages.${pkgs.system}.hyprland
     #inputs.zen-browser.packages."x86_64-linux".default
   ];
   services.gnome-keyring.enable = true;
