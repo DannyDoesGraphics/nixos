@@ -118,7 +118,6 @@
     pkgs.ncspot
     pkgs.vesktop
     pkgs.bitwarden-desktop
-    pkgs.gcr
     # pkgs.hyprpaper  # Disabled wallpaper
     pkgs.hyprcursor
     pkgs.rclone
