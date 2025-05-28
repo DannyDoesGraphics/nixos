@@ -285,8 +285,7 @@
   systemd.user.services.swww-rotate = {
     Unit = {
       Description = "SWWW Wallpaper Rotation";
-      After = [ "swww.service" "hyprland-session.target" ];
-      Wants = [ "swww.service" ];
+      After = [ "graphical-session.target" ];
     };
     Service = {
       ExecStart =
@@ -294,7 +293,7 @@
       Restart = "always";
       RestartSec = 5;
     };
-    Install = { WantedBy = [ "hyprland-session.target" ]; };
+    Install = { WantedBy = [ "graphical-session.target" ]; };
   };
 
   # AGS Bar Service
