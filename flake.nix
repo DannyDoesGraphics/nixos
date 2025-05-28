@@ -28,6 +28,11 @@
       inputs.nixpkgs.follows = "hyprland/nixpkgs";
       inputs.hyprutils.follows = "hyprutils";
     };
+    hypridle = {
+      url = "github:hyprwm/HyprIdle";
+      inputs.nixpkgs.follows = "hyprland/nixpkgs";
+      inputs.hyprutils.follows = "hyprutils";
+    };
     #waybar = {
     #  url = "github:alexays/waybar";
     #  inputs.nixpkgs.follows = "nixpkgs";
