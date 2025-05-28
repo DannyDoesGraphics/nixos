@@ -123,6 +123,7 @@
     pkgs.code-cursor
     inputs.ags.packages.${pkgs.system}.default
     inputs.astal.packages.${pkgs.system}.default
+    inputs.astal.packages.${pkgs.system}.astal4
     inputs.astal.packages.${pkgs.system}.hyprland
     inputs.astal.packages.${pkgs.system}.wireplumber
     #inputs.zen-browser.packages."x86_64-linux".default
@@ -271,7 +272,7 @@
         "GI_TYPELIB_PATH=${
           inputs.astal.packages.${pkgs.system}.hyprland
         }/lib/girepository-1.0:${
-          inputs.astal.packages.${pkgs.system}.astal4
+          inputs.astal.packages.${pkgs.system}.default
         }/lib/girepository-1.0:${
           inputs.astal.packages.${pkgs.system}.io
         }/lib/girepository-1.0:${

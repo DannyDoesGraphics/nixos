@@ -78,20 +78,6 @@
   security.polkit.enable = true;
 
   # Security
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.hyprland}/bin/hyprpolkitagent";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
-  };
   nix.settings.trusted-users = [ "@wheel" ];
 
   # Fonts

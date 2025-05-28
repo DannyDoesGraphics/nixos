@@ -1,4 +1,4 @@
-import { App, Astal, Gtk, Gdk } from "astal/gtk3"
+import { App, Astal, Gtk, Gdk } from "astal/gtk4"
 import { Variable, exec, execAsync, bind } from "astal"
 import Hyprland from "gi://AstalHyprland"
 import Wp from "gi://AstalWp"
@@ -126,7 +126,7 @@ const cpuUsage = Variable("0%").poll(1000, () => {
         const output = exec("top -bn1 | grep 'Cpu(s)' | awk '{print $2}' | cut -d'%' -f1")
         return `${Math.round(parseFloat(output))}%`
     } catch {
-        return "0%"
+        return "ERR%"
     }
 })
 
@@ -135,7 +135,7 @@ const memoryUsage = Variable("0%").poll(1000, () => {
         const output = exec("free | grep Mem | awk '{printf \"%.1f\", $3/$2 * 100.0}'")
         return `${output}%`
     } catch {
-        return "0%"
+        return "ERR%"
     }
 })
 
