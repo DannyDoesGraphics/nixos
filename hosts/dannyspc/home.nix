@@ -268,7 +268,18 @@
   #  };
   #  Install = { WantedBy = [ "graphical-session.target" ]; };
   #};
-
+  # Swww wallpaper service
+  systemd.user.services.swww = {
+    Unit = {
+      Description = "SWWW Wallpaper Service";
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${inputs.swww.packages.${pkgs.system}.swww}/bin/swww-daemon";
+      Restart = "always";
+    };
+    Install = { WantedBy = [ "graphical-session.target" ]; };
+  };
   # AGS Bar Service
   systemd.user.services.ags = {
     Unit = {
