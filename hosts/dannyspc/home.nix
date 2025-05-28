@@ -268,13 +268,16 @@
       After = [ "graphical-session.target" ];
     };
     Service = {
-      ExecStart = "${inputs.ags.packages.${pkgs.system}.default}/bin/ags";
+      ExecStart = "${inputs.ags.packages.${pkgs.system}.default}/bin/ags run .";
       ExecReload =
         "${inputs.ags.packages.${pkgs.system}.default}/bin/ags quit; ${
           inputs.ags.packages.${pkgs.system}.default
-        }/bin/ags";
+        }/bin/ags run .";
       Restart = "on-failure";
-      WorkingDirectory = "/etc/nixos";
+      WorkingDirectory = "/etc/nixos/home/ags";
+      Environment = [
+        "GI_TYPELIB_PATH=${inputs.astal.packages.${pkgs.system}.hyprland}/lib/girepository-1.0:${inputs.astal.packages.${pkgs.system}.astal4}/lib/girepository-1.0:${inputs.astal.packages.${pkgs.system}.io}/lib/girepository-1.0"
+      ];
     };
     Install = { WantedBy = [ "graphical-session.target" ]; };
   };
