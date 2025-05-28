@@ -1,8 +1,10 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
 import { Variable, exec, execAsync, bind } from "astal"
 import Hyprland from "gi://AstalHyprland"
+import Wp from "gi://AstalWp"
 
 const hyprland = Hyprland.get_default()
+const audio = Wp.get_default()
 
 // Time with microsecond precision  
 const time = Variable("").poll(60 * 1000, () => {
@@ -139,7 +141,7 @@ const memoryUsage = Variable("0%").poll(1000, () => {
 
 const audioVolume = Variable({icon: "", volume: "0%"}).poll(100, () => {
     try {
-        const output = exec("pactl get-sink-volume @DEFAULT_SINK@ | head -n 1 | awk '{print $5}' | sed 's/%//'")
+        const output = audio.default_speaker.volume
         const volumeNumber = parseInt(output)
         
         let icon = ""
