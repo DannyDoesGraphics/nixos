@@ -1,5 +1,5 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk4"
-import { Variable, exec, execAsync, bind } from "astal"
+import { Variable, exec, execAsync, bind, writeFile } from "astal"
 
 interface ImageSample {
     path: string
@@ -117,11 +117,54 @@ const imageSampler = new WeightedImageSampler()
 // Initialize with the first wallpaper immediately, then poll for changes
 const currentWallpaper = Variable<string>("")
 
+// Function to update wallpaper by applying CSS directly to the App
+const updateWallpaperCSS = async (path: string) => {
+    const css = path ? `
+        window.Wallpaper .wallpaper-container {
+            background: #2e3440 url('file://${path}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    ` : `
+        window.Wallpaper .wallpaper-container {
+            background: #2e3440;
+        }
+    `
+    
+    try {
+        // Apply CSS directly to the App instance
+        // Since we don't know the exact method name, let's try the most common ones
+        if (App && typeof (App as any).apply_css === 'function') {
+            (App as any).apply_css(css)
+            console.log(`Applied wallpaper CSS directly for: ${path}`)
+        } else if (App && typeof (App as any).addCss === 'function') {
+            (App as any).addCss(css)
+            console.log(`Added wallpaper CSS for: ${path}`)
+        } else if (App && typeof (App as any).css === 'function') {
+            (App as any).css(css)
+            console.log(`Set wallpaper CSS for: ${path}`)
+        } else {
+            // Fallback: log available methods for debugging
+            console.log(`App object keys:`, Object.keys(App))
+            console.log(`App prototype keys:`, Object.getOwnPropertyNames(Object.getPrototypeOf(App)))
+            
+            // Write CSS to a temporary file as fallback
+            const tmpCssFile = `/tmp/ags-wallpaper-${Date.now()}.css`
+            await writeFile(tmpCssFile, css)
+            console.log(`Wrote wallpaper CSS to temp file for: ${path}`)
+        }
+    } catch (error) {
+        console.error("Failed to update wallpaper CSS:", error)
+    }
+}
+
 // Set initial wallpaper as soon as images are loaded
-imageSampler.onLoaded(() => {
+imageSampler.onLoaded(async () => {
     const initialImage = imageSampler.sampleNext()
     if (initialImage) {
         currentWallpaper.set(initialImage)
+        await updateWallpaperCSS(initialImage)
         console.log(`Initial wallpaper set: ${initialImage}`)
     }
 })
@@ -129,7 +172,9 @@ imageSampler.onLoaded(() => {
 // Poll for wallpaper changes every 60 seconds
 currentWallpaper.poll(60 * 1000, async () => {
     const nextImage = imageSampler.sampleNext()
-    return nextImage || currentWallpaper.get()
+    const newWallpaper = nextImage || currentWallpaper.get()
+    await updateWallpaperCSS(newWallpaper)
+    return newWallpaper
 })
 
 // Refresh images periodically (check for new files every 5 minutes)
@@ -142,7 +187,7 @@ export default function Wallpaper(gdkmonitor: Gdk.Monitor) {
     const { TOP, LEFT, RIGHT, BOTTOM } = Astal.WindowAnchor
 
     return <window
-        className="Wallpaper"
+        cssName="Wallpaper"
         gdkmonitor={gdkmonitor}
         exclusivity={Astal.Exclusivity.IGNORE}
         anchor={TOP | LEFT | RIGHT | BOTTOM}
@@ -150,16 +195,7 @@ export default function Wallpaper(gdkmonitor: Gdk.Monitor) {
         keymode={Astal.Keymode.NONE}
         child={
             <box
-                className="wallpaper-container"
-                css={bind(currentWallpaper).as(path => {
-                    if (!path) return "background: #2e3440;"
-                    return `
-                        background-image: url('file://${path}');
-                        background-size: cover;
-                        background-position: center;
-                        background-repeat: no-repeat;
-                    `
-                })}
+                cssName="wallpaper-container"
             />
         }
     />

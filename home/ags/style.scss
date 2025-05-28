@@ -199,4 +199,13 @@ window.Bar {
 // Wallpaper styling
 window.Wallpaper {
     background: $nord0;
+    
+    .wallpaper-container {
+        background: $nord0;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        // You can set a static wallpaper here for testing:
+        // background-image: url('file:///home/danny/Pictures/Wallpapers/some-wallpaper.jpg');
+    }
 }
