@@ -281,6 +281,21 @@
     };
     Install = { WantedBy = [ "graphical-session.target" ]; };
   };
+  # SWWW Wallpaper Rotation Service
+  systemd.user.services.swww-rotate = {
+    Unit = {
+      Description = "SWWW Wallpaper Rotation";
+      After = [ "swww.service" "hyprland-session.target" ];
+      Wants = [ "swww.service" ];
+    };
+    Service = {
+      ExecStart = "%h/.config/swww/rotate.sh";
+      Restart = "always";
+      RestartSec = 5;
+    };
+    Install = { WantedBy = [ "hyprland-session.target" ]; };
+  };
+
   # AGS Bar Service
   systemd.user.services.ags = {
     Unit = {

@@ -2,6 +2,7 @@ use std::{cmp::Ordering, collections::{BinaryHeap, HashMap, HashSet}, env, path:
 use anyhow::{Context, Result};
 use rand::Rng;
 use tokio::{fs, time::{Duration, interval}};
+use tokio::process::Command;
 
 struct HeapItem {
     key: f64,
@@ -165,11 +166,30 @@ async fn main() -> Result<()> {
     let root = PathBuf::from(home).join("Pictures/Wallpapers");
 
     let mut sampler = WeightedSampler::new(root).await?;
-
-    for _ in 1..50 {
+    let mut interval = interval(Duration::from_secs(60));
+    loop {
+        interval.tick().await;
         match sampler.sample_one().await {
-            Ok(path) => println!("Chosen image: {}", path.display()),
-            Err(e) => eprintln!("Error sampling image: {:?}", e),
+            Ok(path) => {
+                println!("Selected image: {:?}", path);
+
+                // Run swww command, ignore success, print errors only
+                match Command::new("swww")
+                    .arg("img")
+                    .arg(&path)
+                    .arg("--transition-type")
+                    .arg("none")
+                    .output()
+                    .await
+                {
+                    Ok(output) if !output.status.success() =>
+                        eprintln!("swww error (exit {}): {}", output.status,
+                                  String::from_utf8_lossy(&output.stderr)),
+                    Err(e) => eprintln!("Failed to spawn swww: {}", e),
+                    _ => {}
+                }
+            }
+            Err(e) => eprintln!("Error sampling image: {}", e),
         }
     }
 
