@@ -50,9 +50,9 @@
       }
 
       general {
-        border_size = 0
-        gaps_in = 0
-        gaps_out = 0
+        border_size = 2
+        gaps_in = 8
+        gaps_out = 8
       }
 
       experimental {
