@@ -244,4 +244,3 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
     
     return window
 }
-}

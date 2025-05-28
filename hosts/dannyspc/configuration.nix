@@ -61,6 +61,11 @@
     nixfmt
     time
     nordzy-cursor-theme # Your cursor theme
+    # GTK4 and layer shell support
+    gtk4
+    gtk4-layer-shell
+    gobject-introspection
+    glib
   ];
   programs = {
     zsh = {

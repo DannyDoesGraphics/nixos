@@ -21,6 +21,17 @@
     size = 24;
   };
 
+  # GTK Configuration
+  gtk = {
+    enable = true;
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+  };
+
   # Hyprland
   wayland.windowManager.hyprland.systemd.enable = false;
   wayland.windowManager.hyprland = {
