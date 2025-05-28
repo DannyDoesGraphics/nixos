@@ -37,7 +37,6 @@
       # Disable title bars globally
       windowrulev2 = noblur,class:.*
       windowrulev2 = noshadow,class:.*
-      windowrulev2 = noborder,class:.*
 
       decoration {
         blur {
