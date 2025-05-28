@@ -74,9 +74,14 @@
         buildInputs = with astal.packages.${system}; [
           astal4
           io
-          hyprland
           # any other package
         ];
+
+        extraPackages = with astal.packages.${system};
+          [
+            hyprland
+
+          ];
 
         installPhase = ''
           mkdir -p $out/bin
