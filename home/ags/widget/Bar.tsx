@@ -23,12 +23,12 @@ const time = Variable("").poll(60 * 1000, () => {
 const activeWorkspace = Variable(hyprland.get_focused_workspace()?.get_id() || 1)
 
 // Update active workspace when it changes
-hyprland.connect("workspace-changed", () => {
+function updateActiveWorkspace() {
     const workspace = hyprland.get_focused_workspace()
     if (workspace) {
         activeWorkspace.set(workspace.get_id())
     }
-})
+}
 
 // Workspaces with windows using Hyprland API
 const workspacesWithWindows = Variable<number[]>([])
@@ -48,16 +48,6 @@ function updateWorkspaces() {
     workspacesWithWindows.set(allWorkspaces.sort((a: number, b: number) => a - b))
 }
 
-// Initial update
-updateWorkspaces()
-
-// Update workspaces when they change
-hyprland.connect("workspace-added", updateWorkspaces)
-hyprland.connect("workspace-removed", updateWorkspaces)
-hyprland.connect("client-added", updateWorkspaces)
-hyprland.connect("client-removed", updateWorkspaces)
-hyprland.connect("workspace-changed", updateWorkspaces)
-
 // Active window using Hyprland API
 const activeWindow = Variable("")
 
@@ -70,13 +60,63 @@ function updateActiveWindow() {
         activeWindow.set(`Workspace ${workspace?.get_id() || 1}`)
     }
 }
-
-// Initial update
+// initial update 
+updateActiveWorkspace()
 updateActiveWindow()
+updateWorkspaces()
 
-// Update active window when it changes
-hyprland.connect("client-changed", updateActiveWindow)
-hyprland.connect("workspace-changed", updateActiveWindow)
+// Listen for all relevant events
+hyprland.connect("event", (_: any, event: string, data: string) => {
+    if (event === "workspace") {
+        // Parse workspace ID from event data (format: "workspace>>ID")
+        const workspaceId = parseInt(data)
+        if (!isNaN(workspaceId)) {
+            activeWorkspace.set(workspaceId)
+        }
+        // Update workspaces and window info with retry logic
+        retryUpdate(() => {
+            updateWorkspaces()
+            updateActiveWindow()
+        })
+    } else if (event === "focusedmon" || event === "activewindow") {
+        // For these events, we need to query current state with retry
+        retryUpdate(() => {
+            updateActiveWorkspace()
+            updateActiveWindow()
+            updateWorkspaces()
+        })
+    }
+})
+
+// Robust retry function with exponential backoff
+function retryUpdate(updateFn: () => void, maxRetries: number = 3, delay: number = 5) {
+    let retries = 0
+    
+    function attempt() {
+        try {
+            const prevActiveWs = activeWorkspace.get()
+            updateFn()
+            
+            // If workspace didn't change when we expected it to, retry
+            if (retries < maxRetries) {
+                setTimeout(() => {
+                    const newActiveWs = activeWorkspace.get()
+                    if (prevActiveWs === newActiveWs && retries < maxRetries - 1) {
+                        retries++
+                        setTimeout(attempt, delay * Math.pow(2, retries))
+                    }
+                }, delay)
+            }
+        } catch (error) {
+            if (retries < maxRetries) {
+                retries++
+                setTimeout(attempt, delay * Math.pow(2, retries))
+            }
+        }
+    }
+    
+    attempt()
+}
 
 // System info
 const cpuUsage = Variable("0%").poll(1000, () => {

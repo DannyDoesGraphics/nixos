@@ -124,6 +124,7 @@
     inputs.ags.packages.${pkgs.system}.default
     inputs.astal.packages.${pkgs.system}.default
     inputs.astal.packages.${pkgs.system}.hyprland
+    inputs.astal.packages.${pkgs.system}.wireplumber
     #inputs.zen-browser.packages."x86_64-linux".default
   ];
   services.gnome-keyring.enable = true;
@@ -282,6 +283,8 @@
           inputs.astal.packages.${pkgs.system}.astal4
         }/lib/girepository-1.0:${
           inputs.astal.packages.${pkgs.system}.io
+        }/lib/girepository-1.0:${
+          inputs.astal.packages.${pkgs.system}.wireplumber
         }/lib/girepository-1.0"
       ];
     };
