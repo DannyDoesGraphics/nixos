@@ -4,34 +4,21 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    rust-overlay.url = "github:oxalica/rust-overlay";
   };
 
-  outputs = { self, nixpkgs, flake-utils, rust-overlay }:
+  outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        overlays = [ (import rust-overlay) ];
-        pkgs = import nixpkgs { inherit system overlays; };
+        pkgs = nixpkgs.legacyPackages.${system};
         # Read the file relative to the flake's root
-        overrides = (builtins.fromTOML
-          (builtins.readFile (self + "/rust-toolchain.toml")));
-        rustVersion = overrides.toolchain.channel;
-        rust = pkgs.rust-bin.${rustVersion}.latest.default.override {
-          extensions = [ "rust-src" ];
-        };
-
-        rustPlatform = pkgs.makeRustPlatform {
-          cargo = rust;
-          rustc = rust;
-        };
-
-        libPath = with pkgs;
-          lib.makeLibraryPath [
-            # load external libraries that you need in your rust project here
-          ];
-      in {
-        packages.default = rustPlatform.buildRustPackage rec {
-          pname = "rotate";
+        overrides = (builtins.fromTOML (builtins.readFile (self + "/rust-toolchain.toml")));
+        libPath = with pkgs; lib.makeLibraryPath [
+          # load external libraries that you need in your rust project here
+        ];
+      in
+      {
+        packages.default = pkgs.rustPlatform.buildRustPackage rec {
+          pname = "swww-rotate";
           version = "0.1.0";
 
           src = ./.;
@@ -40,50 +27,52 @@
 
           nativeBuildInputs = with pkgs; [ pkg-config ];
 
-          buildInputs = with pkgs;
-            [
-              # Add any runtime dependencies here
-            ];
+          buildInputs = with pkgs; [
+            # Add any runtime dependencies here
+          ];
 
           # Set any environment variables needed for compilation
-          RUSTC_VERSION = rustVersion;
+          RUSTC_VERSION = overrides.toolchain.channel;
         };
         devShells.default = pkgs.mkShell rec {
           nativeBuildInputs = [ pkgs.pkg-config ];
-          buildInputs = with pkgs; [ rust clang llvmPackages.bintools ];
+          buildInputs = with pkgs; [
+            clang
+            llvmPackages.bintools
+            rustup
+          ];
 
-          RUSTC_VERSION = rustVersion;
-
+          RUSTC_VERSION = overrides.toolchain.channel;
+          
           # https://github.com/rust-lang/rust-bindgen#environment-variables
-          LIBCLANG_PATH =
-            pkgs.lib.makeLibraryPath [ pkgs.llvmPackages_latest.libclang.lib ];
-
+          LIBCLANG_PATH = pkgs.lib.makeLibraryPath [ pkgs.llvmPackages_latest.libclang.lib ];
+          
           shellHook = ''
-            export PATH=$PATH:${rust}/bin
+            export PATH=$PATH:''${CARGO_HOME:-~/.cargo}/bin
+            export PATH=$PATH:''${RUSTUP_HOME:-~/.rustup}/toolchains/$RUSTC_VERSION-x86_64-unknown-linux-gnu/bin/
           '';
 
           # Add precompiled library to rustc search path
-          RUSTFLAGS = (builtins.map (a: "-L ${a}/lib") [
+          RUSTFLAGS = (builtins.map (a: ''-L ${a}/lib'') [
             # add libraries here (e.g. pkgs.libvmi)
           ]);
+          
+          LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (buildInputs ++ nativeBuildInputs);
 
-          LD_LIBRARY_PATH =
-            pkgs.lib.makeLibraryPath (buildInputs ++ nativeBuildInputs);
-
+          
           # Add glibc, clang, glib, and other headers to bindgen search path
           BINDGEN_EXTRA_CLANG_ARGS =
-            # Includes normal include path
-            (builtins.map (a: ''-I"${a}/include"'') [
-              # add dev libraries here (e.g. pkgs.libvmi.dev)
-              pkgs.glibc.dev
-            ])
-            # Includes with special directory paths
-            ++ [
-              ''
-                -I"${pkgs.llvmPackages_latest.libclang.lib}/lib/clang/${pkgs.llvmPackages_latest.libclang.version}/include"''
-              ''-I"${pkgs.glib.dev}/include/glib-2.0"''
-              "-I${pkgs.glib.out}/lib/glib-2.0/include/"
-            ];
+          # Includes normal include path
+          (builtins.map (a: ''-I"${a}/include"'') [
+            # add dev libraries here (e.g. pkgs.libvmi.dev)
+            pkgs.glibc.dev
+          ])
+          # Includes with special directory paths
+          ++ [
+            ''-I"${pkgs.llvmPackages_latest.libclang.lib}/lib/clang/${pkgs.llvmPackages_latest.libclang.version}/include"''
+            ''-I"${pkgs.glib.dev}/include/glib-2.0"''
+            ''-I${pkgs.glib.out}/lib/glib-2.0/include/''
+          ];
         };
       });
 }

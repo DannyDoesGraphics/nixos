@@ -289,7 +289,8 @@
       Wants = [ "swww.service" ];
     };
     Service = {
-      ExecStart = "%h/.config/swww/rotate.sh";
+      ExecStart =
+        "${inputs.swww-rotate.packages.${pkgs.system}.default}/bin/swww-rotate";
       Restart = "always";
       RestartSec = 5;
     };
