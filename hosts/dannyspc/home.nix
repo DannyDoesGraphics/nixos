@@ -275,9 +275,7 @@
       After = [ "graphical-session.target" ];
     };
     Service = {
-      ExecStart = "${
-          inputs.swww.packages.${pkgs.system}.swww
-        }/bin/swww-daemon --no-transition";
+      ExecStart = "${inputs.swww.packages.${pkgs.system}.swww}/bin/swww-daemon";
       Restart = "always";
     };
     Install = { WantedBy = [ "graphical-session.target" ]; };
