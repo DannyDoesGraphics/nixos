@@ -166,7 +166,7 @@ async fn main() -> Result<()> {
     let root = PathBuf::from(home).join("Pictures/Wallpapers");
 
     let mut sampler = WeightedSampler::new(root).await?;
-    let mut interval = interval(Duration::from_secs(60));
+    let mut interval = interval(Duration::from_secs(1));
     loop {
         interval.tick().await;
         match sampler.sample_one().await {
