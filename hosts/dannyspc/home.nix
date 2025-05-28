@@ -2,6 +2,7 @@
   imports = [
     ../../modules/colors/default.nix
     ../../home/wezterm/default.nix
+    ../../home/mako/default.nix
     #../../home/waybar/default.nix
     #zenModule
   ];
@@ -134,8 +135,6 @@
     pkgs.pavucontrol
     pkgs.jetbrains.rust-rover
     pkgs.code-cursor
-    pkgs.mako
-    pkgs.libnotify
     pkgs.gtk4
     pkgs.gtk4-layer-shell
     inputs.ags.packages.${pkgs.system}.default
@@ -148,7 +147,6 @@
   ];
   services.gnome-keyring.enable = true;
 
-  services = { mako = { enable = true; }; };
   programs = {
     firefox.enable = true;
     #zen-browser = {
