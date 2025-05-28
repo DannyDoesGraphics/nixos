@@ -1,4 +1,3 @@
-*.lock
 hardware-configuration.nix
 *.old
 result

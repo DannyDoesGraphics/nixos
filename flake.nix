@@ -39,6 +39,10 @@
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    swww-rotate = {
+      url = "path:./home/swww/rotate";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     swww = {
       url = "github:LGFae/swww";
       inputs.nixpkgs.follows = "nixpkgs";
