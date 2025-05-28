@@ -290,7 +290,7 @@
     };
     Service = {
       ExecStart =
-        "${inputs.swww-rotate.packages.${pkgs.system}.default}/bin/swww-rotate";
+        "${inputs.swww-rotate.packages.${pkgs.system}.default}/bin/rotate";
       Restart = "always";
       RestartSec = 5;
     };
