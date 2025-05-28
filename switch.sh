@@ -17,22 +17,20 @@ if nixos-rebuild build --flake /etc/nixos/#default; then
     echo "Build successful!"
     
     # Soft revert the commit but keep changes staged
-    echo "Temporarily reverting commit while keeping changes staged..."
     git reset --soft HEAD~1
     
     # Ask user if they want to re-commit and switch
-    echo "Do you want to re-commit these changes and switch to the new configuration? (y/n)"
+    echo "Do you want to re-commit these changes and switch to the new configuration? (Y/n) Default: Y"
     read -r response
     
-    if [[ "$response" =~ ^[Yy]$ ]]; then
+    if [[ "$response" =~ ^[Nn]$ ]]; then
+        echo "Changes remain staged but not committed. Configuration not switched."
+    else
         echo "Re-committing changes..."
         git commit -m "Update"
         echo "Switching to new configuration..."
         nixos-rebuild switch --flake /etc/nixos/#default
         echo "Switch completed successfully!"
-    else
-        echo "Changes remain staged but not committed. Configuration not switched."
-        echo "You can commit later with: git commit -m 'your message'"
     fi
 else
     echo "Build failed! Soft reverting commit but keeping code changes..."
