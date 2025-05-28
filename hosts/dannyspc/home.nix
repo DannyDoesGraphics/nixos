@@ -323,7 +323,7 @@
     Service = {
       ExecStart = "${
           inputs.hyprpolkitagent.packages.${pkgs.system}.default
-        }/bin/hyprpolkitagent";
+        }/libexec/hyprpolkitagent";
       Restart = "always";
     };
     Install = { WantedBy = [ "graphical-session.target" ]; };
