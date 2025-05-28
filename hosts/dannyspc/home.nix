@@ -49,12 +49,6 @@
         rounding = 0
       }
 
-      general {
-        border_size = 2
-        gaps_in = 8
-        gaps_out = 8
-      }
-
       experimental {
         xx_color_management_v4 = true
       }
