@@ -119,7 +119,7 @@
     pkgs.vesktop
     pkgs.bitwarden-desktop
     pkgs.gcr
-    pkgs.hyprpaper
+    # pkgs.hyprpaper  # Disabled wallpaper
     pkgs.hyprcursor
     pkgs.rclone
     pkgs.yazi
@@ -249,8 +249,8 @@
     ".config".recursive = true;
 
     # Override specific files if needed
-    ".config/hyprpaper/rotate.sh".source = ./scripts/hyprland/rotate.sh;
-    ".config/hyprpaper/rotate.sh".executable = true;
+    # ".config/hyprpaper/rotate.sh".source = ./scripts/hyprland/rotate.sh;  # Disabled wallpaper
+    # ".config/hyprpaper/rotate.sh".executable = true;  # Disabled wallpaper
 
     # Other files
     ".zshrc".source = ./.config/.zshrc;

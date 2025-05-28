@@ -1,6 +1,5 @@
 import { App } from "astal/gtk4"
 import style from "./style.scss"
-import Wallpaper from "./widget/Wallpaper"
 // Import GTK4 layer shell to ensure it's loaded
 import Gtk4LayerShell from "gi://Gtk4LayerShell"
 
@@ -13,6 +12,6 @@ App.start({
         } else {
             console.log("GTK4 Layer Shell is NOT supported")
         }
-        App.get_monitors().map(Wallpaper)
+        //App.get_monitors().map(Wallpaper)
     },
 })
