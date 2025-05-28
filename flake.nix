@@ -13,11 +13,6 @@
       url = "github:hyprwm/HyprUtils";
       inputs.nixpkgs.follows = "hyprland/nixpkgs";
     };
-    hyprpaper = {
-      url = "github:hyprwm/Hyprpaper";
-      inputs.nixpkgs.follows = "hyprland/nixpkgs";
-      inputs.hyprutils.follows = "hyprutils";
-    };
     hyprpolkitagent = {
       url = "github:hyprwm/HyprPolkitAgent";
       inputs.nixpkgs.follows = "hyprland/nixpkgs";
