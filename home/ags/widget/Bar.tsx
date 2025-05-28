@@ -141,15 +141,15 @@ const memoryUsage = Variable("0%").poll(1000, () => {
 
 const audioVolume = Variable({icon: "", volume: "0%"}).poll(100, () => {
     try {
-        const output = audio.default_speaker.volume
-        const volumeNumber = parseInt(output)
+        let output = parseFloat(audio.default_speaker.volume);
+        output = Math.round(output * 100); // Convert to percentage
         
         let icon = ""
-        if (volumeNumber === 0) {
+        if (output === 0) {
             icon = "" // No volume
-        } else if (volumeNumber <= 33) {
+        } else if (output <= 33) {
             icon = "" // Low volume
-        } else if (volumeNumber <= 66) {
+        } else if (output <= 66) {
             icon = "" // Medium volume
         } else {
             icon = "" // High volume
