@@ -287,8 +287,8 @@
         }/lib/girepository-1.0:${
           inputs.astal.packages.${pkgs.system}.wireplumber
         }/lib/girepository-1.0:${pkgs.gtk4-layer-shell}/lib/girepository-1.0"
-        #"LD_LIBRARY_PATH=${pkgs.gtk4-layer-shell}/lib"
-        #"LD_PRELOAD=${pkgs.gtk4-layer-shell}/lib/libgtk4-layer-shell.so"
+        "LD_LIBRARY_PATH=${pkgs.gtk4-layer-shell}/lib"
+        "LD_PRELOAD=${pkgs.gtk4-layer-shell}/lib/libgtk4-layer-shell.so"
         #"GTK_LAYER_SHELL=${pkgs.gtk4-layer-shell}/lib"
         #"GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas"
         #"GDK_BACKEND=wayland"
