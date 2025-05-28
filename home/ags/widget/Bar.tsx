@@ -1,6 +1,12 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
 import { Variable, exec, execAsync, bind } from "astal"
+import Hyprland from "gi://AstalHyprland"
 
+const hyprland = Hyprland.get_default()
+
+for (const client of hyprland.get_clients()) {
+    print(client.title)
+}
 
 // Time with microsecond precision  
 const time = Variable("").poll(60 * 1000, () => {
