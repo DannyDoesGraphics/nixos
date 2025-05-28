@@ -1,36 +1,65 @@
 {
-  description = "SWWW Wallpaper Rotation Tool";
+  description = "Rust development environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    rust-overlay.url = "github:oxalica/rust-overlay";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, rust-overlay }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        overlays = [ (import rust-overlay) ];
+        pkgs = import nixpkgs { inherit system overlays; };
         # Read the file relative to the flake's root
         overrides = (builtins.fromTOML
           (builtins.readFile (self + "/rust-toolchain.toml")));
+        rustVersion = overrides.toolchain.channel;
+        rust = pkgs.rust-bin.${rustVersion}.latest.default.override {
+          extensions = [ "rust-src" ];
+        };
+
+        rustPlatform = pkgs.makeRustPlatform {
+          cargo = rust;
+          rustc = rust;
+        };
+
         libPath = with pkgs;
           lib.makeLibraryPath [
             # load external libraries that you need in your rust project here
           ];
       in {
+        packages.default = rustPlatform.buildRustPackage rec {
+          pname = "rotate";
+          version = "0.1.0";
+
+          src = ./.;
+
+          cargoLock = { lockFile = ./Cargo.lock; };
+
+          nativeBuildInputs = with pkgs; [ pkg-config ];
+
+          buildInputs = with pkgs;
+            [
+              # Add any runtime dependencies here
+            ];
+
+          # Set any environment variables needed for compilation
+          RUSTC_VERSION = rustVersion;
+        };
         devShells.default = pkgs.mkShell rec {
           nativeBuildInputs = [ pkgs.pkg-config ];
-          buildInputs = with pkgs; [ clang llvmPackages.bintools rustup ];
+          buildInputs = with pkgs; [ rust clang llvmPackages.bintools ];
 
-          RUSTC_VERSION = overrides.toolchain.channel;
+          RUSTC_VERSION = rustVersion;
 
           # https://github.com/rust-lang/rust-bindgen#environment-variables
           LIBCLANG_PATH =
             pkgs.lib.makeLibraryPath [ pkgs.llvmPackages_latest.libclang.lib ];
 
           shellHook = ''
-            export PATH=$PATH:''${CARGO_HOME:-~/.cargo}/bin
-            export PATH=$PATH:''${RUSTUP_HOME:-~/.rustup}/toolchains/$RUSTC_VERSION-x86_64-unknown-linux-gnu/bin/
+            export PATH=$PATH:${rust}/bin
           '';
 
           # Add precompiled library to rustc search path
