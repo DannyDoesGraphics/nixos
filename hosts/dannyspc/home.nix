@@ -121,6 +121,7 @@
     pkgs.pavucontrol
     pkgs.jetbrains.rust-rover
     pkgs.code-cursor
+    pkgs.gtk4-layer-shell
     inputs.ags.packages.${pkgs.system}.default
     inputs.astal.packages.${pkgs.system}.default
     inputs.astal.packages.${pkgs.system}.astal4
@@ -277,7 +278,10 @@
           inputs.astal.packages.${pkgs.system}.io
         }/lib/girepository-1.0:${
           inputs.astal.packages.${pkgs.system}.wireplumber
+        }/lib/girepository-1.0:${
+          pkgs.gtk4-layer-shell
         }/lib/girepository-1.0"
+        "LD_LIBRARY_PATH=${pkgs.gtk4-layer-shell}/lib"
       ];
     };
     Install = { WantedBy = [ "graphical-session.target" ]; };
