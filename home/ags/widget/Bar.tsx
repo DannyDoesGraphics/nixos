@@ -1,6 +1,5 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
 import { Variable, exec, execAsync, bind } from "astal"
-import Hyprland from "gi://AstalHyprland"
 
 
 // Time with microsecond precision  
@@ -16,18 +15,6 @@ const time = Variable("").poll(60 * 1000, () => {
     const minutes = now.getMinutes().toString().padStart(2, '0')
 
     return `${day} ${month} ${date} ${hours}:${minutes}`
-})
-
-// Active workspace
-const hyprland = Hyprland.get_default()
-const activeWorkspace = Variable(1).poll(100, () => {
-    console.log("asdasd");
-    try {
-        const output = exec("hyprctl activeworkspace -j")
-        return JSON.parse(output).id
-    } catch {
-        return 1
-    }
 })
 
 // Workspaces with windows
