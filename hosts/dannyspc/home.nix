@@ -47,9 +47,6 @@
           # you can also tweak noise, contrast, brightness, etc.
         }
         rounding = 0
-        drop_shadow = false
-        shadow_range = 0
-        shadow_render_power = 0
       }
 
       general {
