@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }: {
   programs.waybar = {
-    enable = false;
+    enable = true;
     package = pkgs.waybar;
     settings = {
       mainBar = {

@@ -32,10 +32,10 @@
       inputs.nixpkgs.follows = "hyprland/nixpkgs";
       inputs.hyprutils.follows = "hyprutils";
     };
-    waybar = {
-      url = "github:alexays/waybar";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #waybar = {
+    #  url = "github:alexays/waybar";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
     astal = {
       url = "github:aylur/astal";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -2,7 +2,7 @@
   imports = [
     ../../modules/colors/default.nix
     ../../home/wezterm/default.nix
-    ../../home/waybar/default.nix
+    #../../home/waybar/default.nix
     #zenModule
   ];
 
