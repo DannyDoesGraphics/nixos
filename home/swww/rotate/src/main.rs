@@ -1,8 +1,16 @@
-use std::{cmp::Ordering, collections::{BinaryHeap, HashMap, HashSet}, env, path::PathBuf};
 use anyhow::{Context, Result};
 use rand::Rng;
-use tokio::{fs, time::{Duration, interval}};
+use std::{
+    cmp::Ordering,
+    collections::{BinaryHeap, HashMap, HashSet},
+    env,
+    path::PathBuf,
+};
 use tokio::process::Command;
+use tokio::{
+    fs,
+    time::{interval, Duration},
+};
 
 struct HeapItem {
     key: f64,
@@ -89,7 +97,13 @@ impl WeightedSampler {
             heap.push(HeapItem { key, path });
         }
 
-        Ok(Self { root, counts, weights, heap, last: None })
+        Ok(Self {
+            root,
+            counts,
+            weights,
+            heap,
+            last: None,
+        })
     }
 
     /// Refresh the active set: remove deleted and include new images
@@ -115,7 +129,10 @@ impl WeightedSampler {
         for (path, &w) in &self.weights {
             let u: f64 = rand::thread_rng().gen_range(0.0..1.0);
             let key = u.powf(1.0 / w);
-            self.heap.push(HeapItem { key, path: path.clone() });
+            self.heap.push(HeapItem {
+                key,
+                path: path.clone(),
+            });
         }
 
         Ok(())
@@ -132,7 +149,10 @@ impl WeightedSampler {
         } else {
             let first = self.heap.pop().context("sampling failed: heap empty")?;
             if self.last.as_ref().map(|p| p) == Some(&first.path) {
-                let second = self.heap.pop().context("sampling failed: need second item")?;
+                let second = self
+                    .heap
+                    .pop()
+                    .context("sampling failed: need second item")?;
                 // Put the first back
                 self.heap.push(first);
                 second
@@ -154,7 +174,10 @@ impl WeightedSampler {
         // Re-insert with new key
         let u: f64 = rand::thread_rng().gen_range(0.0..1.0);
         let new_key = u.powf(1.0 / new_w);
-        self.heap.push(HeapItem { key: new_key, path: path.clone() });
+        self.heap.push(HeapItem {
+            key: new_key,
+            path: path.clone(),
+        });
 
         Ok(path)
     }
@@ -182,9 +205,11 @@ async fn main() -> Result<()> {
                     .output()
                     .await
                 {
-                    Ok(output) if !output.status.success() =>
-                        eprintln!("swww error (exit {}): {}", output.status,
-                                  String::from_utf8_lossy(&output.stderr)),
+                    Ok(output) if !output.status.success() => eprintln!(
+                        "swww error (exit {}): {}",
+                        output.status,
+                        String::from_utf8_lossy(&output.stderr)
+                    ),
                     Err(e) => eprintln!("Failed to spawn swww: {}", e),
                     _ => {}
                 }
