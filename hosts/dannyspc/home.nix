@@ -113,6 +113,11 @@
 
       # Close window
       bind = $mainMod, Q, killactive
+
+      # Per-window volume controls
+      bind = $mainMod, V K, exec, pwvucontrol --increase 10
+      bind = $mainMod, V J, exec, pwvucontrol --decrease 10
+      bind = $mainMod, V, exec, pwvucontrol
     '';
   };
 
@@ -135,11 +140,12 @@
     pkgs.cargo
     pkgs.clippy
     pkgs.rustc
-    pkgs.pavucontrol
+    #pkgs.pavucontrol
     pkgs.jetbrains.rust-rover
     pkgs.code-cursor
     pkgs.gtk4
     pkgs.gtk4-layer-shell
+    pkgs.pwvucontrol
     inputs.ags.packages.${pkgs.system}.default
     inputs.astal.packages.${pkgs.system}.default
     inputs.astal.packages.${pkgs.system}.astal4
