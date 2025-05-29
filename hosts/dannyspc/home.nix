@@ -115,9 +115,8 @@
       bind = $mainMod, Q, killactive
 
       # Per-window volume controls
-      bind = $mainMod, V K, exec, pwvucontrol --increase 10
-      bind = $mainMod, V J, exec, pwvucontrol --decrease 10
-      bind = $mainMod, V, exec, pwvucontrol
+      bind = $mainMod SHIFT, V, exec, pwvucontrol --increase 10
+      bind = $mainMod, V, exec, pwvucontrol --decrease 10
     '';
   };
 
