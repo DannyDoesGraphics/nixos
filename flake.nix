@@ -33,6 +33,10 @@
       inputs.nixpkgs.follows = "hyprland/nixpkgs";
       inputs.hyprutils.follows = "hyprutils";
     };
+    nvchad4nix = {
+      url = "github:nix-community/nix4nvchad";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     #waybar = {
     #  url = "github:alexays/waybar";
     #  inputs.nixpkgs.follows = "nixpkgs";

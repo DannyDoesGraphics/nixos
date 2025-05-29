@@ -3,12 +3,19 @@
     ../../modules/colors/default.nix
     ../../home/wezterm/default.nix
     ../../home/mako/default.nix
+    inputs.nvchad4nix.homeManagerModule
     #../../home/waybar/default.nix
     #zenModule
   ];
 
   # Configure color scheme - change this to switch color schemes
   ui.colors.scheme = "nord";
+
+  # Configure NvChad
+  programs.nvchad = {
+    enable = true;
+    extraPackages = with pkgs; [ ];
+  };
 
   home.username = "danny";
   home.homeDirectory = "/home/danny";
