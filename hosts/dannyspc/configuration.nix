@@ -96,4 +96,10 @@
     namespace = "danny";
     home_file = ./home.nix;
   };
+
+  # OpenRGB service for RGB hardware control
+  services.hardware.openrgb = {
+    enable = true;
+    package = pkgs.openrgb-with-all-plugins;
+  };
 }

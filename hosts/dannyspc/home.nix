@@ -5,6 +5,7 @@
     ../../home/mako/default.nix
     ../../home/nvchad/default.nix
     ../../home/yazi/default.nix
+    ../../home/openrgb/default.nix
     inputs.nvchad4nix.homeManagerModule
     #../../home/waybar/default.nix
     #zenModule
