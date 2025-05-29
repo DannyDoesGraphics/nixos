@@ -971,28 +971,6 @@
         "type": "github"
       }
     },
-    "nix4nvchad": {
-      "inputs": {
-        "flake-utils": "flake-utils_3",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "nvchad-starter": "nvchad-starter"
-      },
-      "locked": {
-        "lastModified": 1748437889,
-        "narHash": "sha256-VOCQy/mTXCqkl09qCwLLIzJzZhkBgS15gcT1B7bCrXY=",
-        "owner": "nix-community",
-        "repo": "nix4nvchad",
-        "rev": "6af511ca832d670de0c465d8a675930ddd66976e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nix4nvchad",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1748026106,
@@ -1042,6 +1020,28 @@
         "type": "github"
       }
     },
+    "nvchad4nix": {
+      "inputs": {
+        "flake-utils": "flake-utils_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "nvchad-starter": "nvchad-starter"
+      },
+      "locked": {
+        "lastModified": 1748437889,
+        "narHash": "sha256-VOCQy/mTXCqkl09qCwLLIzJzZhkBgS15gcT1B7bCrXY=",
+        "owner": "nix-community",
+        "repo": "nix4nvchad",
+        "rev": "6af511ca832d670de0c465d8a675930ddd66976e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix4nvchad",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -1079,8 +1079,8 @@
         "hyprpolkitagent": "hyprpolkitagent",
         "hyprutils": "hyprutils_4",
         "nil": "nil",
-        "nix4nvchad": "nix4nvchad",
         "nixpkgs": "nixpkgs_2",
+        "nvchad4nix": "nvchad4nix",
         "swww": "swww",
         "swww-rotate": "swww-rotate",
         "zen-browser": "zen-browser"
