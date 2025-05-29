@@ -114,8 +114,10 @@
       # Close window
       bind = $mainMod, Q, killactive
 
-      # Per-window volume controls
-      bindl = $mainMod, M, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+      # Audio controls
+      bind = $mainMod, M, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+      bind = $mainMod, V, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+      bind = $mainMod SHIFT, V, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
     '';
   };
 
