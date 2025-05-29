@@ -5,6 +5,7 @@
     ../../home/mako/default.nix
     ../../home/nvchad/default.nix
     ../../home/yazi/default.nix
+    ../../home/ollama/default.nix
     inputs.nvchad4nix.homeManagerModule
     #../../home/waybar/default.nix
     #zenModule
@@ -140,6 +141,7 @@
     pkgs.cargo
     pkgs.clippy
     pkgs.rustc
+    pkgs.htop
     #pkgs.pavucontrol
     pkgs.jetbrains.rust-rover
     pkgs.code-cursor
