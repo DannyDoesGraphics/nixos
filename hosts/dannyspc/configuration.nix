@@ -12,6 +12,7 @@
     ../../modules/colors/default.nix
     ../../modules/system/autoupgrade.nix
     ../../modules/system/gc.nix
+    ../../modules/ollama/default.nix
     inputs.home-manager.nixosModules.default
   ];
 
@@ -94,15 +95,5 @@
     full_name = "Danny Le";
     namespace = "danny";
     home_file = ./home.nix;
-  };
-
-  # Ollama service with CUDA acceleration
-  services.ollama = {
-    enable = true;
-    acceleration = "cuda";
-    environmentVariables = {
-      CUDA_VISIBLE_DEVICES = "0";
-      NVIDIA_VISIBLE_DEVICES = "all";
-    };
   };
 }
