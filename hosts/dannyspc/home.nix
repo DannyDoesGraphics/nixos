@@ -4,6 +4,7 @@
     ../../home/wezterm/default.nix
     ../../home/mako/default.nix
     ../../home/nvchad/default.nix
+    ../../home/yazi/default.nix
     inputs.nvchad4nix.homeManagerModule
     #../../home/waybar/default.nix
     #zenModule
