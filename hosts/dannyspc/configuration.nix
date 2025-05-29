@@ -67,6 +67,8 @@
     gtk4-layer-shell
     gobject-introspection
     glib
+    openrgb-with-all-plugins
+    i2c-tools # needed for some controllers
   ];
   programs = {
     zsh = {
