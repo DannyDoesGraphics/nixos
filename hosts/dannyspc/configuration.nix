@@ -69,6 +69,8 @@
     glib
     openrgb-with-all-plugins
     i2c-tools # needed for some controllers
+    usbutils # for lsusb command
+    pciutils # for lspci command
   ];
   programs = {
     zsh = {
@@ -104,4 +106,22 @@
     enable = true;
     package = pkgs.openrgb-with-all-plugins;
   };
+
+  # Additional hardware support for RGB devices
+  hardware.i2c.enable = true;
+  
+  # Ensure your user is in the i2c group for hardware access
+  users.users.danny.extraGroups = [ "i2c" ];
+
+  # Enable USB access for RGB controllers
+  services.udev.extraRules = ''
+    # Lian Li RGB controllers
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="0c45", MODE="0666"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="3402", MODE="0666"
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="0c45", MODE="0666"
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3402", MODE="0666"
+    
+    # General HID device access for RGB controllers
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0666"
+  '';
 }
