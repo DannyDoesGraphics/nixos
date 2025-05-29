@@ -148,7 +148,7 @@ impl WeightedSampler {
             self.heap.pop().context("sampling failed: heap empty")?
         } else {
             let first = self.heap.pop().context("sampling failed: heap empty")?;
-            if self.last.as_ref().map(|p| p) == Some(&first.path) {
+            if self.last.as_ref() == Some(&first.path) {
                 let second = self
                     .heap
                     .pop()
@@ -217,6 +217,5 @@ async fn main() -> Result<()> {
             Err(e) => eprintln!("Error sampling image: {}", e),
         }
     }
-
-    Ok(())
+    unreachable!()
 }

@@ -3,7 +3,7 @@
   config = {
     programs.nvchad = {
       enable = true;
-      # Rust development packages
+      # Development packages
       extraPackages = with pkgs; [
         # Rust toolchain
         rustc
@@ -11,6 +11,11 @@
         clippy
         rustfmt
         rust-analyzer
+
+        # Nix development
+        nil # Nix language server
+        nixfmt-classic # Nix formatter
+        statix # Nix linter
 
         # Additional development tools
         gcc
@@ -78,6 +83,26 @@
               },
             }
           }
+        })
+
+        -- Configure Nix LSP (nil)
+        require('lspconfig').nil_ls.setup({
+          settings = {
+            ['nil'] = {
+              testSetting = 42,
+              formatting = {
+                command = { "nixfmt" },
+              },
+            },
+          },
+        })
+
+        -- Auto-format Nix files on save
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          pattern = "*.nix",
+          callback = function()
+            vim.lsp.buf.format({ async = false })
+          end,
         })
       '';
     };
