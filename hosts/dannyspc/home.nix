@@ -66,8 +66,11 @@
       env = XCURSOR_SIZE,24
       env = GBM_BACKEND,nvidia-drm
       env = __GLX_VENDOR_LIBRARY_NAME,nvidia
-      # Set wallpaper using hyprland
-      monitor = DP-6,5120x1440@239.76,0x0,1,bitdepth,10,cm,srgb
+      # HDR Support
+      env = WLR_DRM_NO_ATOMIC,1
+      env = ENABLE_HDR_WSI,1
+      # Set wallpaper using hyprland  
+      monitor = DP-6,5120x1440@239.76,0x0,1,bitdepth,10
 
       $mainMod = SUPER
 

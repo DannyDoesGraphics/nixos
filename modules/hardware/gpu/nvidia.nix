@@ -20,6 +20,9 @@
         nvidiaSettings = true;
         open = false; # Use proprietary drivers
         package = config.boot.kernelPackages.nvidiaPackages.production;
+        # HDR Support
+        powerManagement.enable = false;
+        powerManagement.finegrained = false;
       };
       nixpkgs.config.cudaSupport = true;
       environment.systemPackages = with pkgs; [
