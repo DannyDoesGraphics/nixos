@@ -119,6 +119,8 @@
       true; # Open ports for Source Dedicated Server
     gamescopeSession.enable =
       true; # Enable GameScope session for better Wayland support
+    package =
+      pkgs.steam.override { extraPkgs = pkgs: with pkgs; [ gamescope ]; };
   };
   programs.gamescope = {
     enable = true;
