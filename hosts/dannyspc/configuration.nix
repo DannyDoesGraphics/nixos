@@ -110,6 +110,8 @@
   hardware.i2c.enable = true;
 
   # Steam configuration
+  programs.steam.gamescopeSession.args =
+    [ "-w 5120" "-h 1440" "-r 240" "--xwayland-count 2" "-e" "--hdr-enabled" ];
   programs.steam = {
     enable = true;
     remotePlay.openFirewall =
@@ -119,7 +121,7 @@
     gamescopeSession.enable =
       true; # Enable GameScope session for better Wayland support
     package = pkgs.steam.override {
-      extraPkgs = pkgs: with pkgs; [ gamemode gamescope ];
+      extraPkgs = pkgs: with pkgs; [ gamemode gamescope-wsi ];
     };
   };
   programs.gamescope = {
