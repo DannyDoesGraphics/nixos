@@ -57,6 +57,10 @@
       experimental {
         xx_color_management_v4 = true
       }
+      render {
+        cm_fs_passthrough = 1
+        cm_enabled = true
+      }
       # Setup mouse
       env = XCURSOR_THEME,Nordzy-cursors
       env = XCURSOR_SIZE,24
