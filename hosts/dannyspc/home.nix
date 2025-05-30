@@ -114,7 +114,7 @@
       bind = $mainMod SHIFT, i, resizeactive, 0 40, exact
 
       # Close window
-      bind = $mainMod, Q, killactive
+      bind = $mainMod SHIFT, Q, killactive
 
       # Audio controls
       bind = $mainMod, M, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
