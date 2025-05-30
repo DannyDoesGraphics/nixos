@@ -5,10 +5,6 @@
       # Steam with all necessary components
       protonup
       lutris
-      # HDR and gaming tools
-      vulkan-tools
-      vulkan-loader
-      mesa-demos
     ];
 
     # Configure Steam environment variables
