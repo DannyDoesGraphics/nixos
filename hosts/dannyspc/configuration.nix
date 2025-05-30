@@ -109,4 +109,18 @@
 
   # Additional hardware support for RGB devices
   hardware.i2c.enable = true;
+
+  # Steam configuration
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall =
+      true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall =
+      true; # Open ports for Source Dedicated Server
+    gamescopeSession.enable =
+      true; # Enable GameScope session for better Wayland support
+  };
+
+  # GameMode service for gaming performance
+  programs.gamemode.enable = true;
 }
