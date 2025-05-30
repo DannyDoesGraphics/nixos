@@ -1,50 +1,16 @@
 # /etc/nixos/home/steam/default.nix
 { config, lib, pkgs, ... }: {
   config = {
-    home.packages = with pkgs; [
-      # Steam with all necessary components
-      steam
-      steam-run
-
-      # Proton and compatibility tools
-      protonup-qt # GUI tool for managing Proton versions
-
-      # Additional gaming utilities
-      mangohud # Performance overlay
-      gamemode # Optimize system for gaming
-      gamescope # Wayland compositor for games
-
-      # Steam Deck utilities (useful for any Steam setup)
-      steamtinkerlaunch # Advanced Steam launch options
-
-      # Wine and compatibility
-      winetricks
-      protontricks # Run Winetricks for Proton games
-
-      # Controller support
-      antimicrox # Map controller inputs to keyboard/mouse
-    ];
+    home.packages = with pkgs;
+      [
+        # Steam with all necessary components
+        protonup
+      ];
 
     # Configure Steam environment variables
     home.sessionVariables = {
-      # Enable Steam's native Wayland support (experimental)
-      STEAM_FORCE_DESKTOPUI_SCALING = "1.5"; # Adjust scaling as needed
-
-      # Proton configuration
-      STEAM_COMPAT_DATA_PATH = "$HOME/.steam/steam/steamapps/compatdata";
-      STEAM_COMPAT_CLIENT_INSTALL_PATH = "$HOME/.steam/steam";
-
-      # Enable Proton logs for debugging
-      PROTON_LOG = "1";
-      PROTON_DUMP_DEBUG_COMMANDS = "1";
-
-      # GameMode integration
-      GAMEMODERUNEXEC =
-        "env __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia";
-
-      # MangoHud configuration
-      MANGOHUD = "1";
-      MANGOHUD_DLSYM = "1";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+        "${config.home.homeDirectory}/.steam/root/compatibilitytools.d";
     };
 
     # XDG desktop entries for Steam
@@ -60,7 +26,7 @@
       steam-gamescope = {
         name = "Steam (Gamescope)";
         comment = "Launch Steam in Gamescope for better Wayland compatibility";
-        exec = "gamescope -W 1920 -H 1080 -f -- steam";
+        exec = "gamescope -W 5120 -H 1440 -f -- steam";
         icon = "steam";
         categories = [ "Game" ];
       };
