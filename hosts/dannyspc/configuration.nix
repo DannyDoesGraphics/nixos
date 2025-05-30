@@ -125,6 +125,8 @@
       extraPkgs = pkgs: with pkgs; [ gamemode gamescope-wsi ];
     };
   };
+  hardware.graphics.extraPackages = [ pkgs.gamescope-wsi ];
+  hardware.graphics.extraPackages32 = [ pkgs.gamescope-wsi ];
   programs.gamescope = {
     enable = true;
     capSysNice = true;
