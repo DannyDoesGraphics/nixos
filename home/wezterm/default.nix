@@ -41,13 +41,25 @@
             background = palette.color0;
 
             ansi = {
-              palette.color0,  palette.color1,  palette.color2,  palette.color3,
-              palette.color4,  palette.color5,  palette.color6,  palette.color7,
+              palette.color1,  -- black (dark grey)
+              palette.color11, -- red  
+              palette.color14, -- green
+              palette.color13, -- yellow
+              palette.color9,  -- blue
+              palette.color15, -- magenta
+              palette.color8,  -- cyan
+              palette.color5,  -- white
             };
 
             brights = {
-              palette.color8,  palette.color9,  palette.color10, palette.color11,
-              palette.color12, palette.color13, palette.color14, palette.color15,
+              palette.color3,  -- bright black (grey)
+              palette.color11, -- bright red
+              palette.color14, -- bright green  
+              palette.color13, -- bright yellow
+              palette.color10, -- bright blue
+              palette.color15, -- bright magenta
+              palette.color7,  -- bright cyan
+              palette.color6,  -- bright white
             };
 
             -- you can also remap things like cursor/bg/selection:
