@@ -62,6 +62,7 @@
     time
     nordzy-cursor-theme # Your cursor theme
     # GTK4 and layer shell support
+    gamescope
     gtk4
     gtk4-layer-shell
     gobject-introspection
