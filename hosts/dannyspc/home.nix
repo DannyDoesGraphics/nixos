@@ -61,6 +61,9 @@
         cm_fs_passthrough = 1
         cm_enabled = true
       }
+      debug {
+        full_cm_proto = true
+      }
       # Setup mouse
       env = XCURSOR_THEME,Nordzy-cursors
       env = XCURSOR_SIZE,24
