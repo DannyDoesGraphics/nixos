@@ -14,7 +14,7 @@
       };
       extra_groups = lib.mkOption {
         type = lib.types.listOf lib.types.str;
-        default = [ "wheel" "networkmanager" "audio" "plugdev" ];
+        default = [ "wheel" "networkmanager" "audio" "plugdev" "gamemode" ];
         description = "Extra groups to add to the user";
       };
       home_file = lib.mkOption {
