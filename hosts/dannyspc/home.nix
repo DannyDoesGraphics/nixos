@@ -149,6 +149,7 @@
     pkgs.gtk4
     pkgs.gtk4-layer-shell
     pkgs.pwvucontrol
+    pkgs.lm_sensors
     inputs.ags.packages.${pkgs.system}.default
     inputs.astal.packages.${pkgs.system}.default
     inputs.astal.packages.${pkgs.system}.astal4

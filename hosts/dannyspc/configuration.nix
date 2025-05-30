@@ -120,6 +120,10 @@
     gamescopeSession.enable =
       true; # Enable GameScope session for better Wayland support
   };
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+  };
 
   # GameMode service for gaming performance
   programs.gamemode.enable = true;
