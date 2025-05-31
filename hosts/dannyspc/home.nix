@@ -130,6 +130,12 @@
       bind = $mainMod, M, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
       bind = $mainMod, V, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
       bind = $mainMod SHIFT, V, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+
+      # Game settings
+      windowrulev2 = fullscreen,class:^steam_app\d+$
+      windowrulev2 = monitor 1,class:^steam_app_\d+$
+      windowrulev2 = workspace 10,class:^steam_app_\d+$
+      workspace = 10, border:false, rounding:false
     '';
   };
 
