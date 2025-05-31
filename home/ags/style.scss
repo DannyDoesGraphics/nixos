@@ -37,3 +37,20 @@ window.Wallpaper {
         min-height: 0; // Let it fill available space
     }
 }
+
+// Bar widget styling with Nord theme
+Bar {
+    background: transparent;
+    font-family: "JetBrainsMono Nerd Font Mono";
+}
+
+Clock {
+    background: $nord0;
+    min-width: auto;
+    min-height: auto;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    border-radius: 8px;
+}

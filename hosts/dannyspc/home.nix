@@ -44,6 +44,11 @@
       windowrulev2 = noblur,class:.*
       windowrulev2 = noshadow,class:.*
 
+      # AGS Bar rules - disable gaps and spacing
+      windowrulev2 = nogaps,cssName:Bar
+      windowrulev2 = noborder,cssName:Bar
+      windowrulev2 = noshadeoverdims,cssName:Bar
+
       decoration {
         blur {
           enabled = false   # master toggle
