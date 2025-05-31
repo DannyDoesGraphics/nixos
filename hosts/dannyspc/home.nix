@@ -160,7 +160,7 @@
     pkgs.clippy
     pkgs.rustc
     pkgs.htop
-    #pkgs.pavucontrol
+    pkgs.pavucontrol
     pkgs.jetbrains.rust-rover
     pkgs.code-cursor
     pkgs.gtk4
