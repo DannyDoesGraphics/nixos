@@ -132,10 +132,10 @@
       bind = $mainMod SHIFT, V, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
 
       # Game settings
-      windowrulev2 = fullscreen,initialClass:steam,class:^(?!steam$).*$
-      windowrulev2 = monitor 1,initialClass:steam,class:^(?!steam$).*$
-      windowrulev2 = workspace 10,initialClass:steam,class:^(?!steam$).*$
-      workspace = 10, border:false, rounding:false
+      #windowrulev2 = fullscreen,initialClass:steam,class:^(?!steam$).*$
+      #windowrulev2 = monitor 1,initialClass:steam,class:^(?!steam$).*$
+      #windowrulev2 = workspace 10,initialClass:steam,class:^(?!steam$).*$
+      #workspace = 10, border:false, rounding:false
       bind = $mainMod, F, fullscreen
     '';
   };

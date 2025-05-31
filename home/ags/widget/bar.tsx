@@ -23,7 +23,7 @@ export default function Bar(monitor: Gdk.Monitor) {
                 | Astal.WindowAnchor.RIGHT}
             application={App}
             heightRequest={32}
-            marginTop={12}
+            //marginTop={12}
             visible={true}
             child={
                 <centerbox
