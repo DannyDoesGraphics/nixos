@@ -13,6 +13,7 @@
     ../../modules/system/autoupgrade.nix
     ../../modules/system/gc.nix
     ../../modules/ollama/default.nix
+    ../../modules/gaming/steam.nix
     inputs.home-manager.nixosModules.default
   ];
 
@@ -21,6 +22,14 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Add kernel parameters for better GPU stability and performance
+  boot.kernelParams = [
+    "nvidia-drm.modeset=1"
+    "nvidia-drm.fbdev=1"
+    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+    "nvidia.NVreg_TemporaryFilePath=/var/tmp"
+  ];
 
   # Multi-threaded
   nix.settings = {
@@ -42,6 +51,9 @@
   # GPU config
   nvidia.xserver = true;
 
+  # Gaming configuration
+  gaming.steam.enable = true;
+
   # Programs
   environment.systemPackages = with pkgs; [
     vim
@@ -62,7 +74,7 @@
     time
     nordzy-cursor-theme # Your cursor theme
     # GTK4 and layer shell support
-    gamescope
+    # gamescope - moved to gaming module
     gtk4
     gtk4-layer-shell
     gobject-introspection
@@ -109,29 +121,4 @@
 
   # Additional hardware support for RGB devices
   hardware.i2c.enable = true;
-
-  # Steam configuration
-  programs.steam.gamescopeSession.args =
-    [ "-w 5120" "-h 1440" "-r 240" "--xwayland-count 2" "-e" "--hdr-enabled" ];
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall =
-      true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall =
-      true; # Open ports for Source Dedicated Server
-    gamescopeSession.enable =
-      true; # Enable GameScope session for better Wayland support
-    package = pkgs.steam.override {
-      extraPkgs = pkgs: with pkgs; [ gamemode gamescope-wsi ];
-    };
-  };
-  hardware.graphics.extraPackages = [ pkgs.gamescope-wsi ];
-  hardware.graphics.extraPackages32 = [ pkgs.gamescope-wsi ];
-  programs.gamescope = {
-    enable = true;
-    capSysNice = true;
-  };
-
-  # GameMode service for gaming performance
-  programs.gamemode.enable = true;
 }

@@ -1,24 +1,18 @@
 # /etc/nixos/home/steam/default.nix
+# User-specific Steam configuration (system config in modules/gaming/steam.nix)
 { config, lib, pkgs, ... }: {
   config = {
-    home.packages = with pkgs; [
-      # Steam with all necessary components
-      protonup
-      lutris
-    ];
+    # User-specific packages only (system packages now in gaming module)
+    home.packages = with pkgs;
+      [
+        # User-specific gaming tools if needed
+        # Most Steam/gaming packages are now at system level
+      ];
 
-    # Configure Steam environment variables
+    # User-specific Steam environment overrides (if needed)
     home.sessionVariables = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-        "\\\${config.home.homeDirectory}/.steam/root/compatibilitytools.d";
-      # HDR Support
-      PROTON_USE_NTSYNC = "1";
-      ENABLE_HDR_WSI = "1";
-      DXVK_HDR = "1";
-      PROTON_ENABLE_AMD_AGS = "1";
-      PROTON_ENABLE_NVAPI = "1";
-      ENABLE_GAMESCOPE_WSI = "1";
-      STEAM_MULTIPLE_XWAYLANDS = "1";
+      # Only user-specific overrides here
+      # Most environment variables are now set at system level
     };
   };
 }
