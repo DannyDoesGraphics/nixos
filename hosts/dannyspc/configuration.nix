@@ -42,6 +42,8 @@
   networking = {
     hostName = "dannyspc";
     networkmanager.enable = true;
+    networkmanager.ensureProfiles.environmentFiles =
+      [ "../../secrets/wireless.env" ];
   };
   time.timeZone = "America/Toronto";
   i18n.defaultLocale = "en_CA.UTF-8";

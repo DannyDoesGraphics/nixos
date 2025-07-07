@@ -2,3 +2,4 @@ hardware-configuration.nix
 *.old
 **/result
 **/target
+secrets/*
